@@ -3,6 +3,8 @@ const api = express();
 const cors = require("cors");
 const port = 8080;
 
+mongoose.connect("mongodb://localhost:8080");
+
 api.use(cors());
 
 api.get("/", (req, res) => {
