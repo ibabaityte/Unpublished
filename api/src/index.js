@@ -3,7 +3,12 @@ const api = express();
 const cors = require("cors");
 const port = 8080;
 const mongoose = require("mongoose");
-const entryRoutes = require("./routes/entries.js");
+const bodyParser = require("body-parser");
+// const entryRoutes = require("./routes/entries.js");
+
+api.use(cors());
+api.use(bodyParser.urlencoded({extended: true}));
+api.use(bodyParser.json());
 
 mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
    if(err){
@@ -13,21 +18,11 @@ mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true, useUnified
    }
 });
 
-// mongoose.connect("mongodb://localhost:27017", {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true
-// }).then(() => {
-//    console.log("Successfully connected to the database");
-// }).catch(err => {
-//    console.log('Could not connect to the database. Exiting now...', err);
-//    process.exit();
-// });
-
-api.use(cors());
-
 api.get("/", (req, res) => {
    res.send("test");
 });
+
+require('./routes/entries.js')(api);
 
 api.listen(port, () => {
    console.log("API running on port " + port);
