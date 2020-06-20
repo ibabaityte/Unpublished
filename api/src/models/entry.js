@@ -1,10 +1,12 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
-const entrySchema = new mongoose.Schema({
+const entrySchema = new Schema({
     title: String,
     content: String
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model("Entry", entrySchema);
+const Entries = mongoose.model("Entry", entrySchema);
+
+module.exports = Entries;
