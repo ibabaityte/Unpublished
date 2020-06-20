@@ -5,8 +5,8 @@ const router = Router();
 
 router.post("/entries", EntryController.create);
 router.get("/entries", EntryController.list);
-router.get("/entries/:entryId", EntryController.get);
-router.put("/notes/:noteId", EntryController.update);
-router.delete("/notes/:noteId", EntryController.remove);
+router.get("/entries/:id", EntryController.get);
+router.put("/entries/:id", EntryController.update);
+router.delete("/entries/:id", EntryController.remove);
 
 module.exports = router;
