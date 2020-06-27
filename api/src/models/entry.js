@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const entrySchema = new Schema({
     title: String,
-    content: String
+    content: String,
 }, {
     timestamps: true
 });
