@@ -1,4 +1,4 @@
-import Entries from "../models/entry";
+import Entry from "../models/entry";
 
 //Create and save a new entry
 const create = (req, res) => {
@@ -10,14 +10,15 @@ const create = (req, res) => {
     }
 
     //Create an entry
-    const newEntry = {
-        title: req.body.title || "Untitled",
-        content: req.body.content,
-    };
+    const newEntry = new Entry({
+        title: req.body.title || "Untitled note",
+        content: req.body.content
+    });
 
     //Save entry in the database
-    Entries.save(newEntry).then(data => {
+    newEntry.save().then(data => {
         res.status(200).send(data);
+        console.log("User registered");
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating your entry"
@@ -27,7 +28,7 @@ const create = (req, res) => {
 
 //Retrieve and return all entries from the db
 const list = (req, res) => {
-    Entries.find().then(data => {
+    Entry.find().then(data => {
         res.status(200).send(data);
     }).catch(err => {
         res.status(500).send({
@@ -38,7 +39,7 @@ const list = (req, res) => {
 
 //Find a single entry with entryId
 const get = (req, res) => {
-    Entries.findById(req.params.id).then(entry => {
+    Entry.findById(req.params.id).then(entry => {
         if (!entry) {
             return res.status(404).send({
                 message: "Entry not found with id" + req.params.id
@@ -66,7 +67,7 @@ const update = (req, res) => {
     }
 
     //Find note and update it with the request body
-    Entries.findByIdAndUpdate(req.params.id, {
+    Entry.findByIdAndUpdate(req.params.id, {
         title: req.body.title || "Untitled",
         content: req.body.content
     }, {new: true}).then(entry => {
@@ -90,7 +91,7 @@ const update = (req, res) => {
 
 //Delete a note with the specified entryId in the request
 const remove = (req, res) => {
-    Entries.findByIdAndRemove(req.params.id).then(entry => {
+    Entry.findByIdAndRemove(req.params.id).then(entry => {
         if (!entry) {
             return res.status(404).send({
                 message: "Entry not found with id " + req.params.id
