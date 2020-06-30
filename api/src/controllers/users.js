@@ -1,14 +1,17 @@
 import User from "../models/user";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const secret_key = "secret_key46536";
 
 const register = (req, res) => {
-    // if(!req.body.username || !req.body.password) {
-    //     return res.status(400).send({
-    //         message: "Username and password can not be empty"
-    //     });
-    // }
+    if(!req.body.username || !req.body.password) {
+        return res.status(400).send({
+            message: "Username and password can not be empty"
+        });
+    }
 
-    User.find({username: req.body.username}).then(user => {
+    User.findOne({username: req.body.username}).then(user => {
        if(user.length >= 1) {
            return res.status(409).send({
                message: "Username already exists"
@@ -39,9 +42,39 @@ const register = (req, res) => {
     });
 };
 
-// const auth = (req, res) => {
-//
-// };
+const auth = (req, res) => {
+    User.findOne({username: req.body.username}).then(user => {
+        if (user == null) {
+            return res.status(401).send({
+                message: "Auth failed"
+            });
+        } else {
+            bcrypt.compare(req.body.password, user.password, (err, result) => {
+                if (err) {
+                    return res.status(401).send({
+                        message: "Auth failed"
+                    });
+                }
+                if (result) {
+                    const token = jwt.sign({
+                        username:  user.username,
+                        userId: user._id
+                    }, secret_key, {
+                        expiresIn: "1h"
+                    });
+                    return res.status(200).send({
+                        message: "Auth successful",
+                        token: token
+                    });
+                }
+                res.status(401).send({
+                    message: "Auth failed"
+                });
+            });
+        }
+
+    });
+};
 
 const get = (req, res) => {
     User.findById(req.params.id).then(user =>  {
@@ -83,5 +116,5 @@ const remove = (req, res) => {
 };
 
 module.exports = {
-  register, get, remove
+  register, auth, get, remove
 };

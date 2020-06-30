@@ -19,6 +19,7 @@ const port = 8081;
 api.use(cors());
 api.use(bodyParser.urlencoded({extended: true}));
 api.use(bodyParser.json());
+api.use(express.json());
 api.use(EntryRoutes);
 api.use(UserRoutes);
 
