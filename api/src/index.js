@@ -9,6 +9,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+dotenv.config();
+// console.log(process.env.JWT_SECRET);
 
 import EntryRoutes from "./routes/entries";
 import UserRoutes from "./routes/users";

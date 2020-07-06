@@ -1,9 +1,10 @@
 import User from "../models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
-const secret_key = "secret_key46536";
-
+const secretKey = process.env.JWT_SECRET;
 const register = (req, res) => {
     if(!req.body.username || !req.body.password) {
         return res.status(400).send({
@@ -12,7 +13,7 @@ const register = (req, res) => {
     }
 
     User.findOne({username: req.body.username}).then(user => {
-       if(user.length >= 1) {
+       if(user) {
            return res.status(409).send({
                message: "Username already exists"
            });
@@ -44,33 +45,29 @@ const register = (req, res) => {
 
 const auth = (req, res) => {
     User.findOne({username: req.body.username}).then(user => {
-        if (user == null) {
+        if (!user) {
             return res.status(401).send({
                 message: "Auth failed"
             });
-        } else {
-            bcrypt.compare(req.body.password, user.password, (err, result) => {
-                if (err) {
-                    return res.status(401).send({
-                        message: "Auth failed"
-                    });
-                }
+        }
+        else {
+            bcrypt.compare(req.body.password, user.password).then(result => {
                 if (result) {
                     const token = jwt.sign({
                         username:  user.username,
                         userId: user._id
-                    }, secret_key, {
+                    }, secretKey, {
                         expiresIn: "1h"
                     });
                     return res.status(200).send({
                         message: "Auth successful",
                         token: token
                     });
-                }
+                } else
                 res.status(401).send({
                     message: "Auth failed"
                 });
-            });
+            }).catch(err => console.log(err));
         }
 
     });
