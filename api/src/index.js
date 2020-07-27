@@ -12,7 +12,6 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
 import session from "express-session";
-// console.log(process.env.JWT_SECRET);
 
 import EntryRoutes from "./routes/entries";
 import UserRoutes from "./routes/users";
@@ -23,7 +22,7 @@ const sessionSecret = process.env.SESSION_SECRET;
 
 api.use(cors());
 api.use(session({
-   secret: sessionSecret || "secret",
+   secret: sessionSecret,
    resave: false,
    saveUninitialized: false,
    cookie: {
@@ -36,7 +35,7 @@ api.use(express.json());
 api.use(EntryRoutes);
 api.use(UserRoutes);
 
-mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}, (err) => {
    if(err){
       console.log(err);
    } else {
