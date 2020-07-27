@@ -32,7 +32,6 @@ const register = (req, res) => {
                    });
                    //save user in database
                    newUser.save().then(data => {
-                       console.log(req.session);
                        res.send(data);
                    }).catch(err => {
                        res.send({
@@ -65,10 +64,11 @@ const auth = (req, res) => {
                         message: "Auth successful",
                         token: token
                     });
-                } else
-                res.status(401).send({
-                    message: "Auth failed"
-                });
+                } else {
+                    res.status(401).send({
+                        message: "Auth failed"
+                    });
+                }
             }).catch(err => console.log(err));
         }
 
@@ -76,7 +76,7 @@ const auth = (req, res) => {
 };
 
 const get = (req, res) => {
-        User.findById(req.params.id).then(user =>  {
+        User.findById(req.params.userId).then(user =>  {
             if(!user) {
                 return res.status(404).send({
                     message: "User not found"
@@ -95,7 +95,7 @@ const get = (req, res) => {
 // };
 
 const remove = (req, res) => {
-        User.findByIdAndRemove(req.params.id).then(user => {
+        User.findByIdAndRemove(req.params.userId).then(user => {
             if(!user) {
                 return res.status(404).send({
                     message: "User not found"
