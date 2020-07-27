@@ -11,6 +11,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
+import session from "express-session";
 // console.log(process.env.JWT_SECRET);
 
 import EntryRoutes from "./routes/entries";
@@ -18,8 +19,17 @@ import UserRoutes from "./routes/users";
 
 const api = express();
 const port = 8081;
+const sessionSecret = process.env.SESSION_SECRET;
 
 api.use(cors());
+api.use(session({
+   secret: sessionSecret || "secret",
+   resave: false,
+   saveUninitialized: false,
+   cookie: {
+      maxAge: 600000
+   }
+}));
 api.use(bodyParser.urlencoded({extended: true}));
 api.use(bodyParser.json());
 api.use(express.json());
@@ -37,8 +47,6 @@ mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true, useUnified
 // api.get("/", (req, res) => {
 //    res.send("test");
 // });
-
-// require('./routes/entries.js')(api);
 
 api.listen(port, () => {
    console.log("API running on port " + port);

@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const secretKey = process.env.JWT_SECRET;
+
 const register = (req, res) => {
     if(!req.body.username || !req.body.password) {
         return res.status(400).send({
@@ -31,6 +32,7 @@ const register = (req, res) => {
                    });
                    //save user in database
                    newUser.save().then(data => {
+                       console.log(req.session);
                        res.send(data);
                    }).catch(err => {
                        res.send({
@@ -74,18 +76,18 @@ const auth = (req, res) => {
 };
 
 const get = (req, res) => {
-    User.findById(req.params.id).then(user =>  {
-        if(!user) {
-            return res.status(404).send({
-                message: "User not found"
+        User.findById(req.params.id).then(user =>  {
+            if(!user) {
+                return res.status(404).send({
+                    message: "User not found"
+                });
+            }
+            res.status(200).send(user);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "An error occurred while retrieving user"
             });
-        }
-        res.status(200).send(user);
-    }).catch(err => {
-       res.status(500).send({
-           message: err.message || "An error occurred while retrieving user"
-       });
-    });
+        });
 };
 
 // const update = (req, res) => {
@@ -93,23 +95,23 @@ const get = (req, res) => {
 // };
 
 const remove = (req, res) => {
-    User.findByIdAndRemove(req.params.id).then(user => {
-        if(!user) {
-            return res.status(404).send({
-                message: "User not found"
+        User.findByIdAndRemove(req.params.id).then(user => {
+            if(!user) {
+                return res.status(404).send({
+                    message: "User not found"
+                });
+            }
+            res.status(200).send({message: "User profile deleted successfully"});
+        }).catch(err => {
+            if (err.kind === "ObjectId" || err.name === "NotFound") {
+                return res.status(404).send({
+                    message: "User not found"
+                });
+            }
+            return res.status(500).send({
+                message: "Could not delete this user profile"
             });
-        }
-        res.status(200).send({message: "User profile deleted successfully"});
-    }).catch(err => {
-        if (err.kind === "ObjectId" || err.name === "NotFound") {
-            return res.status(404).send({
-                message: "User not found"
-            });
-        }
-        return res.status(500).send({
-            message: "Could not delete this user profile"
         });
-    });
 };
 
 module.exports = {
