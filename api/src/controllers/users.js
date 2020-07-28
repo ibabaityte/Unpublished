@@ -95,25 +95,38 @@ const get = (req, res) => {
 // };
 
 const remove = (req, res) => {
-        User.findByIdAndRemove(req.params.userId).then(user => {
-            if(!user) {
-                return res.status(404).send({
-                    message: "User not found"
-                });
-            }
-            res.status(200).send({message: "User profile deleted successfully"});
-        }).catch(err => {
-            if (err.kind === "ObjectId" || err.name === "NotFound") {
-                return res.status(404).send({
-                    message: "User not found"
-                });
-            }
-            return res.status(500).send({
-                message: "Could not delete this user profile"
+    User.findByIdAndRemove(req.params.userId).then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "User not found"
             });
+        }
+        res.status(200).send({message: "User profile deleted successfully"});
+    }).catch(err => {
+        if (err.kind === "ObjectId" || err.name === "NotFound") {
+            return res.status(404).send({
+                message: "User not found"
+            });
+        }
+        return res.status(500).send({
+            message: "Could not delete this user profile"
         });
+    });
+};
+
+const logout = (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send({
+                message: "Could not successfully logout"
+            });
+        }
+        return res.status(200).send({
+            message: "Successfully logged out"
+        });
+    });
 };
 
 module.exports = {
-  register, auth, get, remove
+  register, auth, get, remove, logout
 };
