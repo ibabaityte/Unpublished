@@ -9,18 +9,17 @@ const create = (req, res) => {
             });
         }
 
-        console.log(req.session);
-
         //Create an entry
         const newEntry = new Entry({
             title: req.body.title || "Untitled note",
-            content: req.body.content
+            content: req.body.content,
+            author: req.params.userId
         });
 
         //Save entry in the database
         newEntry.save().then(data => {
             res.status(200).send(data);
-            console.log("User registered");
+            console.log("Entry created");
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while creating your entry"
@@ -30,7 +29,7 @@ const create = (req, res) => {
 
 //Retrieve and return all entries from the db
 const list = (req, res) => {
-        Entry.find().then(data => {
+        Entry.find({'author': req.params.userId}).then(data => {
             res.status(200).send(data);
         }).catch(err => {
             res.status(500).send({
