@@ -11,7 +11,10 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
-import session from "express-session";
+import connectMongo from 'connect-mongo';
+import session from 'express-session';
+
+const MongoStore = connectMongo(session);
 
 import EntryRoutes from "./routes/entries";
 import UserRoutes from "./routes/users";
@@ -23,6 +26,7 @@ const sessionSecret = process.env.SESSION_SECRET;
 api.use(cors());
 api.use(session({
    secret: sessionSecret,
+   store: new MongoStore({ mongooseConnection: mongoose.connection }),
    resave: false,
    saveUninitialized: false,
    cookie: {
