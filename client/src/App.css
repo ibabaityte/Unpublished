@@ -1,4 +1,35 @@
-* {
-  margin: 0;
-  padding: 0;
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.background {
+    background-image: url("public/images/landing images/asymetry.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(4px);
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bgBlur {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.content {
+    position: fixed;
+    top: 35%;
+    left: 44%;
+    margin-top: -50px;
+    margin-left: -100px;
+    text-align: center;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
 }

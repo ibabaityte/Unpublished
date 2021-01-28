@@ -22,7 +22,7 @@ const register = (req, res) => {
            bcrypt.hash(req.body.password, 10, (err, hash) => {
                if (err) {
                    return res.status(500).send({
-                       message: err.message
+                       message: err.message + "1"
                    });
                } else {
                    //create new user
@@ -35,7 +35,7 @@ const register = (req, res) => {
                        res.send(data);
                    }).catch(err => {
                        res.send({
-                           message: err.message
+                           message: err.message + "2"
                        });
                    });
                }
@@ -60,11 +60,13 @@ const auth = (req, res) => {
                     }, secretKey, {
                         expiresIn: "1h"
                     });
+                    console.log(token);
                     return res.status(200).send({
                         message: "Auth successful",
                         token: token
                     });
-                } else {
+                }
+                else {
                     res.status(401).send({
                         message: "Auth failed"
                     });

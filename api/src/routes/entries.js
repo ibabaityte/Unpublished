@@ -1,12 +1,13 @@
 import { Router } from "express";
 import EntryController from "../controllers/entries";
+import checkAuth from "../middleware/check.auth";
 
 const router = Router();
 
-router.post("/:userId/entries", EntryController.create);
-router.get("/:userId/entries", EntryController.list);
-router.get("/:userId/entries/:id", EntryController.get);
-router.put("/:userId/entries/:id", EntryController.update);
-router.delete("/userId/entries/:id", EntryController.remove);
+router.post("/entries", checkAuth, EntryController.create);
+router.get("/entries", checkAuth, EntryController.list);
+router.get("/entries/:id", checkAuth, EntryController.get);
+router.put("/entries/:id", checkAuth, EntryController.update);
+router.delete("/entries/:id", checkAuth, EntryController.remove);
 
 module.exports = router;
