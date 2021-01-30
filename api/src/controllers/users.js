@@ -22,7 +22,7 @@ const register = (req, res) => {
            bcrypt.hash(req.body.password, 10, (err, hash) => {
                if (err) {
                    return res.status(500).send({
-                       message: err.message + "1"
+                       message: err.message
                    });
                } else {
                    //create new user
@@ -35,7 +35,7 @@ const register = (req, res) => {
                        res.send(data);
                    }).catch(err => {
                        res.send({
-                           message: err.message + "2"
+                           message: err.message
                        });
                    });
                }
@@ -62,7 +62,7 @@ const auth = (req, res) => {
                     });
                     console.log(token);
                     return res.status(200).send({
-                        message: "Auth successful",
+                        message: "Auth successful nx",
                         token: token
                     });
                 }

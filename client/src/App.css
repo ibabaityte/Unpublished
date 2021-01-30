@@ -4,7 +4,7 @@ body {
 }
 
 .background {
-    background-image: url("public/images/landing images/asymetry.jpeg");
+    background-image: url("/images/landing images/asymetry.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(4px);
@@ -12,6 +12,7 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
+    position: fixed;
 }
 
 .bgBlur {
@@ -32,4 +33,14 @@ body {
 button {
     margin: 10px;
     padding: 10px;
+}
+
+.header {
+    width: 100vw;
+    height: 10vh;
+    background-color: green;
+}
+
+.header h1 {
+    margin: 0;
 }
