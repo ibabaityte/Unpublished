@@ -23,7 +23,7 @@ class Register extends React.Component{
         const { username, password } = this.state;
         axios.post('http://localhost:8081/register', { username, password })
             .then((result) => {
-                console.log(result.data.message);
+                console.log(result);
             });
     }
 
@@ -31,6 +31,7 @@ class Register extends React.Component{
         const { username, password } = this.state;
         return (
             <div>
+                <div>Register</div>
                 <form onSubmit={this.handleSubmit}>
                     <input
                         type = "text"

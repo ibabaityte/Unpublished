@@ -8,7 +8,7 @@ const secretKey = process.env.JWT_SECRET;
 
 const register = (req, res) => {
     if(!req.body.username || !req.body.password) {
-        return res.status(400).send({
+        return res.status(400).json({
             message: "Username and password can not be empty"
         });
     }

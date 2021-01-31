@@ -2,7 +2,7 @@ import { Router } from "express";
 import EntryController from "../controllers/entries";
 import checkAuth from "../middleware/check.auth";
 
-const router = Router();
+const router = Router()
 
 router.post("/entries", checkAuth, EntryController.create);
 router.get("/entries", checkAuth, EntryController.list);
