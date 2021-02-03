@@ -18,7 +18,7 @@ const create = (req, res) => {
 
     //Save entry in the database
     newEntry.save().then(data => {
-        res.status(200).send(data);
+        res.status(200).send({message: "all is good"});
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating your entry"

@@ -1,6 +1,10 @@
 import React from "react";
 // import axios from "axios";
 import { Button } from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Login from "./Login";
+import Register from "./Register";
+
 
 class Landing extends React.Component {
     constructor(props) {
@@ -21,6 +25,7 @@ class Landing extends React.Component {
 
     render() {
         return(
+            <Router>
             <div>
                 <div className = "background"/>
                 <div className = "bgOverlay">
@@ -33,7 +38,9 @@ class Landing extends React.Component {
                         <Button variant="contained" className = "button">Signup</Button>
                     </div>
                 </div>
+
             </div>
+            </Router>
         );
     }
 }

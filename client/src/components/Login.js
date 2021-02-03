@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
+
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -20,9 +21,10 @@ class Login extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { username, password } = this.state;
-        axios.post('http://localhost:8081/auth', { username, password })
+        axios.post('http://localhost:8081/auth', { username, password})
             .then((result) => {
-                console.log(result.data.message);
+                // console.log(result.data.message);
+                localStorage.setItem('LoginToken', result.data.token);
             });
     }
 
@@ -30,6 +32,7 @@ class Login extends React.Component {
         const { username, password } = this.state;
         return (
             <div>
+                <div>Login</div>
                 <form onSubmit = {this.handleSubmit}>
                     <input
                         type = "text"

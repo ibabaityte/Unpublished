@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 
-module.exports = (req, res, next) => {
+
+module.exports = async (req, res, next) => {
     try {
-        req.decodedToken = jwt.verify(req.header('Authorization'), process.env.JWT_SECRET);
+        req.decodedToken = jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
         next();
     } catch(error) {
         return res.status(401).send({

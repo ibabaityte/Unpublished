@@ -60,7 +60,7 @@ const auth = (req, res) => {
                     }, secretKey, {
                         expiresIn: "1h"
                     });
-                    console.log(token);
+                    // console.log(token);
                     return res.status(200).send({
                         message: "Auth successful nx",
                         token: token
