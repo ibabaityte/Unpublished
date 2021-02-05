@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-let loginToken = localStorage.getItem('LoginToken');
-
 class CreateEntry extends React.Component {
     constructor(props) {
         super(props);
@@ -20,13 +18,23 @@ class CreateEntry extends React.Component {
     }
 
     handleSubmit = (e) => {
+        let loginToken = localStorage.getItem('LoginToken');
         e.preventDefault();
         const { title, content } = this.state;
-        axios.post('http://localhost:8081/entries', { title, content}, { headers: {'Content-Type' : 'application/json','Accept' : 'application/json',
-            'Authorization' : loginToken }})
-            .then((result) => {
-                console.log(result.data.message);
-            });
+        const { currentStateEntries, updateEntries } = this.props;
+        axios.post('http://localhost:8081/entries', { title, content}, {
+            headers: {
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json',
+                'Authorization' : loginToken
+            }
+        }).then((result) => {
+            console.log(result);
+            currentStateEntries.push(result.data.data);
+            updateEntries(currentStateEntries);
+        }).catch(err => {
+            console.log(err.response.data.message);
+        });
     }
 
     render() {
