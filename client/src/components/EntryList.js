@@ -1,16 +1,21 @@
 import React from "react";
 import axios from "axios";
 import CreateEntry from "./CreateEntry";
+import UpdateEntry from "./UpdateEntry";
 
 class EntryList extends React.Component {
     constructor() {
         super();
         this.state = {
-            entries: []
+            entries: [],
+            displayUpdate: false,
+            entryId: ""
         }
     }
 
     updateEntries = entries => this.setState({entries});
+
+    displayUpdateToggle = () => this.setState({displayUpdate: !this.state.displayUpdate});
 
     componentDidMount() {
         let loginToken = localStorage.getItem('LoginToken');
@@ -47,10 +52,25 @@ class EntryList extends React.Component {
                             <div>{entry.title}</div>
                             <div>{entry.content}</div>
                             <button onClick = {() => this.handleDelete(entry._id)}>Delete</button>
+                            <button onClick={() => this.setState({
+                                UpdateEntryOpen: true,
+                                entryId: entry._id,
+                                selectedEntry: entry,
+                                displayUpdate: true})
+                            }>
+                                Update
+                            </button>
                         </div>
                     ))}
                 </div>
                 <CreateEntry currentStateEntries={this.state.entries} updateEntries={this.updateEntries}/>
+                {this.state.displayUpdate ?<UpdateEntry
+                    id = {this.state.entryId}
+                    entry={this.state.selectedEntry}
+                    currentStateEntries={this.state.entries}
+                    updateEntries={this.updateEntries}
+                    displayUpdateToggle={this.displayUpdateToggle}
+                /> : null}
             </div>
         );
     }
