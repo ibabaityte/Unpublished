@@ -38,9 +38,10 @@ button {
 .header {
     width: 100vw;
     height: 10vh;
-    background-color: green;
 }
 
-.header h1 {
-    margin: 0;
+.username {
+    width: auto;
+    margin: 5px;
+    display: inline;
 }

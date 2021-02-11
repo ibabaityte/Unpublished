@@ -4,17 +4,17 @@ import Landing from "./components/Landing";
 import Header from "./components/Header";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Home from "./components/Home";
+import EntryList from "./components/EntryList";
 
 class App extends React.Component {
     render() {
         return (
             <div className="App">
-                {/*<Header/>*/}
+                <Header/>
                 {/*<Landing/>*/}
                 {/*<Register/>*/}
                 {/*<Login/>*/}
-                <Home/>
+                {/*<EntryList/>*/}
             </div>
         );
     }

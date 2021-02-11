@@ -9,7 +9,8 @@ class EntryList extends React.Component {
         this.state = {
             entries: [],
             displayUpdate: false,
-            entryId: ""
+            entryId: "",
+            selectedEntry: null
         }
     }
 
@@ -53,7 +54,6 @@ class EntryList extends React.Component {
                             <div>{entry.content}</div>
                             <button onClick = {() => this.handleDelete(entry._id)}>Delete</button>
                             <button onClick={() => this.setState({
-                                UpdateEntryOpen: true,
                                 entryId: entry._id,
                                 selectedEntry: entry,
                                 displayUpdate: true})
@@ -66,7 +66,7 @@ class EntryList extends React.Component {
                 <CreateEntry currentStateEntries={this.state.entries} updateEntries={this.updateEntries}/>
                 {this.state.displayUpdate ?<UpdateEntry
                     id = {this.state.entryId}
-                    entry={this.state.selectedEntry}
+                    selectedEntry={this.state.selectedEntry}
                     currentStateEntries={this.state.entries}
                     updateEntries={this.updateEntries}
                     displayUpdateToggle={this.displayUpdateToggle}

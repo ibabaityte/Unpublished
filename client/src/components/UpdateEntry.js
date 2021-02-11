@@ -5,26 +5,24 @@ class UpdateEntry extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            entryId: this.props.id,
-            title: this.props.entry.title,
-            content: this.props.entry.content
+            title: this.props.selectedEntry.title,
+            content: this.props.selectedEntry.content
         }
     }
 
     handleChange = (e) => {
         e.preventDefault();
         this.setState({ [e.currentTarget.name]: e.currentTarget.value }, () => {
-            // console.log(this.state);
+            console.log(this.state);
         });
     }
 
     handleSubmit = (e) => {
         let loginToken = localStorage.getItem('LoginToken');
         e.preventDefault();
-        // console.log(this.props);
-        const { entryId, title, content } = this.state;
-        const { currentStateEntries, updateEntries, displayUpdateToggle } = this.props;
-        axios.put(`http://localhost:8081/entries/${entryId}`, { title: title, content: content }, {
+        const { title, content } = this.state;
+        const { id, currentStateEntries, updateEntries, displayUpdateToggle  } = this.props;
+        axios.put(`http://localhost:8081/entries/${id}`, { title: title, content: content }, {
             headers: {
                 'Content-Type' : 'application/json',
                 'Accept' : 'application/json',
