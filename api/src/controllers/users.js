@@ -60,10 +60,12 @@ const auth = (req, res) => {
                     }, secretKey, {
                         expiresIn: "1h"
                     });
+
                     // console.log(token);
                     return res.status(200).send({
-                        message: "Auth successful nx",
-                        token: token
+                        message: "Auth successful",
+                        token: token,
+                        userId: user._id
                     });
                 }
                 else {
@@ -119,6 +121,7 @@ const remove = (req, res) => {
 const logout = (req, res) => {
     req.session.destroy(err => {
         if (err) {
+            console.log(req.session);
             return res.status(500).send({
                 message: "Could not successfully logout"
             });
@@ -129,6 +132,22 @@ const logout = (req, res) => {
     });
 };
 
+/*
+* TODO
+* Fill with the following logic:
+* 1. If no ADMIN user exists(search in DB for users with ADMIN userType(count of such users should be 1))
+* 2. Then create an ADMIN user
+* 3. Else do nothing
+* 4. Nice to have: have a config with default ADMIN user login/password with preset values
+* 4.1 Second nice to have: Force that user to change their password upon first login to the system(should implement lastLogin date field)
+* 4.1.1 Second nice to have additional notes: Expand login functionality to store lastLogin field
+* 4.2 Based on lastLogin the system should determine if the user needs to change their password
+* 4.2.1 I.E. if lastLogin === null then force password change; else do nothing;
+* */
+const init = (req, res) => {
+
+}
+
 module.exports = {
-  register, auth, get, remove, logout
+  register, auth, get, remove, logout, init
 };
