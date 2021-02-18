@@ -1,7 +1,7 @@
 import React from "react";
 
 const UpdateEntry = (props) => {
-    const {entry, handleChange, handleSubmit} = props;
+    const {entry, handleChange, handleSubmit, handleRedirect } = props;
 
     return (
         <div>
@@ -19,7 +19,7 @@ const UpdateEntry = (props) => {
                     name="content"
                     onChange={e => handleChange(e, entry)}
                 />
-                <input type="submit"/>
+                <input type="submit" onClick = {() => handleRedirect()}/>
             </form>
         </div>
     );

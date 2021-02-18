@@ -1,8 +1,7 @@
 import React from "react";
-// import router from "react-router-dom";
 
 const Register = (props) => {
-    const {newUser, handleChange, handleSubmit} = props;
+    const {newUser, handleChange, handleSubmit } = props;
 
     return (
         <div>

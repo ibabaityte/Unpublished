@@ -1,48 +1,23 @@
 import React from "react";
-// import axios from "axios";
-import { Button } from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Login from "./Login";
-import Register from "./Register";
+import { Link } from 'react-router-dom';
 
 
-class Landing extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            message: undefined
-        };
-    }
+const Landing = () => {
 
-    // componentDidMount() {
-    //     axios.get("http://localhost:8081/").then(res => {
-    //         console.log("hello");
-    //         this.setState({
-    //             message: res.data
-    //         });
-    //     });
-    // };
-
-    render() {
-        return(
-            <Router>
-            <div>
-                <div className = "background"/>
-                <div className = "bgOverlay">
-                    <div className="content">
-                        <h1>Unpublished</h1>
-                        <h2>Your personal online Diary</h2>
-                        <h3>So many great stories that are left Unpublished</h3>
-                        <h1>{this.state.message}</h1>
-                        <Button variant="contained" className = "button">Login</Button>
-                        <Button variant="contained" className = "button">Signup</Button>
-                    </div>
+    return(
+        <div>
+            <div className = "background"/>
+            <div className = "bgOverlay">
+                <div className="content">
+                    <h1>Unpublished</h1>
+                    <h2>Your personal online Diary</h2>
+                    <h3>So many great stories that are left Unpublished</h3>
+                    <Link to = "/auth">Login</Link>
+                    <Link to = "/register">Register</Link>
                 </div>
-
             </div>
-            </Router>
-        );
-    }
+        </div>
+    );
 }
 
 export default Landing;

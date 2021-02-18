@@ -1,7 +1,7 @@
 import React from 'react';
+import {BrowserRouter, Route } from "react-router-dom";
 import './App.css';
 import Landing from "./components/Landing";
-import Header from "./components/users/Header";
 import Register from "./components/users/Register";
 import Login from "./components/users/Login";
 import EntryList from "./components/entries/EntryList";
@@ -19,13 +19,17 @@ class App extends React.Component {
                 username: "",
                 password: ""
             },
-            username: ""
+            isAuthenticated: false
         }
-        this.getUsername();
     }
 
     updateUser = user => this.setState({user});
     updateNewUser = newUser => this.setState({newUser});
+    checkAuth = status => {
+        if(status === 200) {
+            this.setState({isAuthenticated: true})
+        }
+    }
 
 
     login = (user) => {
@@ -38,6 +42,7 @@ class App extends React.Component {
                 console.log(result);
                 localStorage.setItem('LoginToken', result.data.token);
                 localStorage.setItem('UserId', result.data.userId);
+                this.checkAuth(result.status);
             });
     }
 
@@ -49,55 +54,8 @@ class App extends React.Component {
             .then((result) => {
                 console.log(result);
                 this.updateNewUser(newUser);
+                window.location.href="/auth"
             });
-    }
-
-    getUsername = () => {
-
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = `http://localhost:8081/${userId}`;
-        const headers = {
-            'Content-Type' : 'application/json',
-            'Accept' : 'application/json',
-            'Authorization' : loginToken
-        }
-
-        axios.get(url, {headers}).then((response) => {
-            this.setState({username: response.data.username})
-            console.log(response);
-        });
-    }
-
-    logout = () => {
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = `http://localhost:8081/${userId}/logout`;
-        const headers = {
-            'Content-Type' : 'application/json',
-            'Accept' : 'application/json',
-            'Authorization' : loginToken
-        }
-        axios.get(url, {headers}).then((response ) => {
-            console.log(response);
-            localStorage.removeItem("LoginToken");
-        });
-    }
-
-    deleteProfile = () => {
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = `http://localhost:8081/${userId}`;
-        const headers = {
-            'Content-Type' : 'application/json',
-            'Accept' : 'application/json',
-            'Authorization' : loginToken
-        }
-        axios.delete(url, { headers }).then((response) => {
-            console.log(response);
-            localStorage.removeItem("LoginToken");
-        });
-
     }
 
     handleChangeLogin = (e, user) => {
@@ -125,23 +83,28 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <Header
-                    username = {this.state.username}
-                    handleLogout = {this.logout}
-                    handleProfileDelete = {this.deleteProfile}
-                />
-                {/*<Landing/>*/}
-                <Register
-                    newUser = {this.state.newUser}
-                    handleChange = {this.handleChangeRegister}
-                    handleSubmit = {this.handleRegister}
-                />
-                <Login
-                    user = {this.state.user}
-                    handleChange = {this.handleChangeLogin}
-                    handleSubmit = {this.handleLogin}
-                />
-                {/*<EntryList/>*/}
+                    <div>
+                        <BrowserRouter>
+                        <Route path = "/" exact component = {Landing}/>
+                        <Route path = "/auth" render={() => (
+                            <Login
+                                user = {this.state.user}
+                                handleChange = {this.handleChangeLogin}
+                                handleSubmit = {this.handleLogin}
+                                isAuthenticated = {this.state.isAuthenticated}
+                            />
+                        )}/>
+                        <Route path = "/register" render={() => (
+                            <Register
+                                newUser = {this.state.newUser}
+                                handleChange = {this.handleChangeRegister}
+                                handleSubmit = {this.handleRegister}
+                                isAuthenticated = {this.state.isAuthenticated}
+                            />
+                        )}/>
+                        <Route path = "/entries" component = {EntryList}/>
+                        </BrowserRouter>
+                    </div>
             </div>
         );
     }

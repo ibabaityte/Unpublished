@@ -1,8 +1,12 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 
 const Login = (props) => {
-    const {user, handleChange, handleSubmit} = props;
-    console.log(user);
+    const {user, handleChange, handleSubmit, isAuthenticated} = props;
+
+    if(isAuthenticated) {
+        return <Redirect to = "/entries" />
+    }
 
     return (
         <div>
@@ -20,7 +24,7 @@ const Login = (props) => {
                     name = "password"
                     onChange = {e => handleChange(e, user)}
                 />
-                <input type = "submit"/>
+                <input type = "submit" />
             </form>
         </div>
     );

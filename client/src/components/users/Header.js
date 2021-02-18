@@ -1,11 +1,12 @@
 import React from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
     const {username, handleLogout, handleProfileDelete} = props;
 
     return (
         <div className = "header">
+            <Link to = "/entries">Unpublished</Link>
             <div className = "username" >{username}</div>
             <button onClick = {handleLogout}>Logout</button>
             <button onClick = {handleProfileDelete}>Delete profile</button>

@@ -40,6 +40,12 @@ button {
     height: 10vh;
 }
 
+.header h3 {
+    width: auto;
+    margin: 5px;
+    display: inline;
+}
+
 .username {
     width: auto;
     margin: 5px;
