@@ -217,6 +217,7 @@ class EntryList extends React.Component {
                             key={this.selectedEntry._id}
                             entry={this.state.selectedEntry}
                             selectedEntry={this.state.selectedEntry}
+                            selectEntry={this.selectedEntry}
                             deleteEntry={this.deleteEntry}
                         />
                     </Route>
