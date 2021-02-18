@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import CreateEntry from "./CreateEntry";
 import UpdateEntry from "./UpdateEntry";
+import ViewEntry from "./ViewEntry";
 import Entry from "./Entry";
 import Header from "../users/Header";
 import { BrowserRouter, Route, Link } from "react-router-dom";
@@ -115,6 +116,7 @@ class EntryList extends React.Component {
         axios.delete(url, {headers}).then(() => {
             const updatedEntries = currentEntries.filter(entry => entry._id !== id);
             this.updateEntries(updatedEntries);
+            window.location.href="/entries"
         }).catch(err => {
             console.log(err);
         });
@@ -209,6 +211,16 @@ class EntryList extends React.Component {
                             handleRedirect = {this.handleRedirect}
                         />
                     )}/>
+
+                    <Route path = "/viewEntry">
+                        <ViewEntry
+                            key={this.selectedEntry._id}
+                            entry={this.state.selectedEntry}
+                            selectedEntry={this.state.selectedEntry}
+                            deleteEntry={this.deleteEntry}
+                        />
+                    </Route>
+
 
                     <Route path = "/entries">
                         {this.state.entries.map((entry) => (
