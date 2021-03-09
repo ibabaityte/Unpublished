@@ -4,21 +4,20 @@ import Entry from "../models/entry";
 const create = (req, res) => {
     //Validate request
     if (!req.body.content) {
-        return res.status(400).send({
-            message: "Content can not be empty"
-        });
+        return res.status(400).send({message: "Content can not be empty"});
     }
 
     //Create an entry
     const newEntry = new Entry({
         title: req.body.title || "Untitled note",
         content: req.body.content,
-        author: req.decodedToken.userId
+        author: req.decodedToken.userId,
+        authorType: req.decodedToken.userType
     });
 
     //Save entry in the database
     newEntry.save().then(data => {
-        res.status(200).send({message: "all is good"});
+        res.status(200).send({message: "all is good", data: data});
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating your entry"
@@ -26,13 +25,24 @@ const create = (req, res) => {
     });
 };
 
-//Retrieve and return all entries from the db
+//Retrieve and return all entries which belong to logged in user from the db
 const list = (req, res) => {
     Entry.find({'author': req.decodedToken.userId}).then(data => {
         res.status(200).send(data);
     }).catch(err => {
         res.status(500).send({
             message: err.message || "An error occurred while retrieving your entries"
+        });
+    });
+};
+
+//Retrieve and return all entries from the db for admin
+const listAll = (req, res) => {
+    Entry.find({authorType: "USER"}).then(data => {
+        res.status(200).send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "An error occurred while retrieving all entries"
         });
     });
 };
@@ -97,7 +107,7 @@ const remove = (req, res) => {
                 message: "Entry not found with id " + req.params.id
             });
         }
-        res.status(200).send({message: "Entry deleted successfully"});
+        res.status(200).send(entry);
     }).catch(err => {
         if (err.kind === "ObjectId" || err.name === "NotFound") {
             return res.status(404).send({
@@ -113,6 +123,7 @@ const remove = (req, res) => {
 module.exports = {
     create,
     list,
+    listAll,
     get,
     update,
     remove

@@ -56,7 +56,8 @@ const auth = (req, res) => {
                 if (result) {
                     const token = jwt.sign({
                         username:  user.username,
-                        userId: user._id
+                        userId: user._id,
+                        userType: user.userType
                     }, secretKey, {
                         expiresIn: "1h"
                     });
@@ -65,7 +66,8 @@ const auth = (req, res) => {
                     return res.status(200).send({
                         message: "Auth successful",
                         token: token,
-                        userId: user._id
+                        userId: user._id,
+                        userType: user.userType
                     });
                 }
                 else {
@@ -93,10 +95,6 @@ const get = (req, res) => {
             });
         });
 };
-
-// const update = (req, res) => {
-//
-// };
 
 const remove = (req, res) => {
     User.findByIdAndRemove(req.params.userId).then(user => {
@@ -145,9 +143,46 @@ const logout = (req, res) => {
 * 4.2.1 I.E. if lastLogin === null then force password change; else do nothing;
 * */
 const init = (req, res) => {
-
+    User.findOne({userType: "ADMIN"}).then(user => {
+        if(!user) {
+            bcrypt.hash("ADMIN123", 10, (err, hash) => {
+                if (err) {
+                    return res.status(500).send({
+                        message: err.message
+                    });
+                } else {
+                    //create new user
+                    const newUser = new User({
+                        username: "ADMIN123",
+                        password: hash,
+                        userType: "ADMIN"
+                    });
+                    //save user in database
+                    newUser.save().then(data => {
+                        res.send(data);
+                    }).catch(err => {
+                        res.send({
+                            message: err.message
+                        });
+                    });
+                }
+            });
+        }
+    });
 }
 
+const listAll = (req, res) => {
+    User.find({userType: "USER"}).then(user => {
+        res.status(200).send(user);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "An error occurred while retrieving all user entries"
+        });
+    });
+}
+
+
+
 module.exports = {
-  register, auth, get, remove, logout, init
+  register, auth, get, listAll, remove, logout, init
 };

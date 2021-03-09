@@ -6,7 +6,8 @@ const entrySchema = new Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    authorType: String
 }, {
     timestamps: true
 });

@@ -12,8 +12,8 @@ const Landing = () => {
                     <h1>Unpublished</h1>
                     <h2>Your personal online Diary</h2>
                     <h3>So many great stories that are left Unpublished</h3>
-                    <Link to = "/auth">Login</Link>
-                    <Link to = "/register">Register</Link>
+                    <Link to = "/auth"><a>Login</a></Link>
+                    <Link to = "/register"><a>Register</a></Link>
                 </div>
             </div>
         </div>

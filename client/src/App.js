@@ -5,6 +5,7 @@ import Landing from "./components/Landing";
 import Register from "./components/users/Register";
 import Login from "./components/users/Login";
 import EntryList from "./components/entries/EntryList";
+import Init from "./components/admin/Admin";
 import axios from "axios";
 
 class App extends React.Component {
@@ -13,7 +14,7 @@ class App extends React.Component {
         this.state = {
             user: {
                 username: "",
-                password: ""
+                password: "",
             },
             newUser: {
                 username: "",
@@ -39,10 +40,11 @@ class App extends React.Component {
         axios.post(url, { username, password })
             .then((result) => {
                 this.updateUser(user);
-                console.log(result);
+                this.setState({...this.state.user, userType: result.data.userType});
                 localStorage.setItem('LoginToken', result.data.token);
                 localStorage.setItem('UserId', result.data.userId);
                 this.checkAuth(result.status);
+                console.log(this.state.user);
             });
     }
 
@@ -54,7 +56,7 @@ class App extends React.Component {
             .then((result) => {
                 console.log(result);
                 this.updateNewUser(newUser);
-                window.location.href="/auth"
+                // window.location.href="/auth"
             });
     }
 
@@ -103,6 +105,7 @@ class App extends React.Component {
                             />
                         )}/>
                         <Route path = "/entries" component = {EntryList}/>
+                        <Route path = "/init" component = {Init} />
                         </BrowserRouter>
                     </div>
             </div>
