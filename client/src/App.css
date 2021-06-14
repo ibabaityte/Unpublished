@@ -1,10 +1,11 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Zilla Slab', serif;
 }
 
-.background {
-    background-image: url("/images/landing images/asymetry.jpeg");
+.landingBackground {
+    background-image: url("/images/landing images/asymetry.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(4px);
@@ -15,24 +16,66 @@ body {
     position: fixed;
 }
 
-.bgBlur {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-}
-
 .content {
-    position: fixed;
-    top: 35%;
-    left: 44%;
-    margin-top: -50px;
-    margin-left: -100px;
+    position: relative;
     text-align: center;
 }
 
-button {
-    margin: 10px;
-    padding: 10px;
+.content h1 {
+    text-shadow: 5px -1px 4px rgb(110, 110, 110);
+    color: white;
+    font-size: 6em;
+    margin: 20px;
+    letter-spacing: 8px;
+}
+
+.content h2 {
+    font-size: 2.5em;
+    color: rgb(240, 240, 240);
+    text-shadow: 5px -1px 4px rgb(110, 110, 110);
+}
+
+.content h3 {
+    font-size: 2.1em;
+    color: rgb(240, 240, 240);
+    text-shadow: 5px -1px 4px rgb(110, 110, 110);
+}
+
+.content a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
+    margin: 5px;
+}
+
+.container {
+    position: absolute;
+    top: 20%;
+}
+
+.MuiButton-root {
+    width: 110px;
+    height: 60px;
+    background-color: black;
+    margin: 30px;
+}
+
+.MuiButton-label {
+    font-size: 1.2rem;
+}
+
+.MuiButtonBase-root {
+    background-color: rgba(230, 230, 230, 0.1) !important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    border-radius: 20px !important;
+}
+
+.MuiButtonBase-root:hover {
+    background-color: transparent !important;
+}
+
+.MuiButton-outlined {
+    margin-inline-start: 30px !important;
 }
 
 .header {
@@ -46,8 +89,43 @@ button {
     display: inline;
 }
 
+/*in the header*/
 .username {
     width: auto;
     margin: 5px;
     display: inline;
+}
+
+.userForm {
+    position: relative;
+    height: 400px;
+    width: 500px;
+    background-color: rgba(230, 230, 230, 0.35);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.userForm .label {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.8em;
+    color: rgb(87, 87, 87);
+    font-weight: 600;
+}
+
+.userForm .inputs {
+    margin-left: 35%;
+}
+
+.userForm input {
+    margin-left: 45%;
+}
+
+.MuiFormControl-root {
+    display: block !important;
+}
+
+.MuiFormLabel-root {
+    font-size: large;
 }

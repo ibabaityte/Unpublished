@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route } from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import Landing from "./components/Landing";
 import Register from "./components/users/Register";
@@ -9,7 +9,7 @@ import Init from "./components/admin/Admin";
 import axios from "axios";
 
 class App extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             user: {
@@ -27,17 +27,17 @@ class App extends React.Component {
     updateUser = user => this.setState({user});
     updateNewUser = newUser => this.setState({newUser});
     checkAuth = status => {
-        if(status === 200) {
+        if (status === 200) {
             this.setState({isAuthenticated: true})
         }
     }
 
 
     login = (user) => {
-        const { username, password } = user;
+        const {username, password} = user;
         const url = "http://localhost:8081/auth";
 
-        axios.post(url, { username, password })
+        axios.post(url, {username, password})
             .then((result) => {
                 this.updateUser(user);
                 this.setState({...this.state.user, userType: result.data.userType});
@@ -49,10 +49,10 @@ class App extends React.Component {
     }
 
     register = (newUser) => {
-        const { username, password } = newUser;
+        const {username, password} = newUser;
         const url = "http://localhost:8081/register";
 
-        axios.post(url, { username, password })
+        axios.post(url, {username, password})
             .then((result) => {
                 console.log(result);
                 this.updateNewUser(newUser);
@@ -85,29 +85,24 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                    <div>
-                        <BrowserRouter>
-                        <Route path = "/" exact component = {Landing}/>
-                        <Route path = "/auth" render={() => (
-                            <Login
-                                user = {this.state.user}
-                                handleChange = {this.handleChangeLogin}
-                                handleSubmit = {this.handleLogin}
-                                isAuthenticated = {this.state.isAuthenticated}
-                            />
-                        )}/>
-                        <Route path = "/register" render={() => (
-                            <Register
-                                newUser = {this.state.newUser}
-                                handleChange = {this.handleChangeRegister}
-                                handleSubmit = {this.handleRegister}
-                                isAuthenticated = {this.state.isAuthenticated}
-                            />
-                        )}/>
-                        <Route path = "/entries" component = {EntryList}/>
-                        <Route path = "/init" component = {Init} />
-                        </BrowserRouter>
-                    </div>
+                <div>
+                    <BrowserRouter>
+                        <Route path = "/" render = {(location) => ["/", "/auth", "/register"].includes(location.location.pathname) ?
+                            <Landing
+                                user={this.state.user}
+                                handleLoginChange={this.handleChangeLogin}
+                                handleLoginSubmit={this.handleLogin}
+                                isAuthenticated={this.state.isAuthenticated}
+                                newUser={this.state.newUser}
+                                handleRegisterChange={this.handleChangeRegister}
+                                handleRegisterSubmit={this.handleRegister}
+                            /> : null
+                        }>
+                        </Route>
+                        <Route path="/entries" component={EntryList}/>
+                        <Route path="/init" component={Init}/>
+                    </BrowserRouter>
+                </div>
             </div>
         );
     }

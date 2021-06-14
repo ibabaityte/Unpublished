@@ -8,7 +8,7 @@ import Header from "../users/Header";
 import Admin from "../admin/Admin"
 import AdminUserList from "../admin/AdminUserList";
 import AdminEntryList from "../admin/AdminEntryList";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import {Route, Link} from "react-router-dom";
 
 
 class EntryList extends React.Component {
@@ -45,7 +45,7 @@ class EntryList extends React.Component {
         const loginToken = localStorage.getItem('LoginToken');
         const url = `http://localhost:8081/${userId}`;
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
 
         axios.get(url, {headers}).then((response) => {
@@ -55,16 +55,16 @@ class EntryList extends React.Component {
 
 
     createEntry = (entry) => {
-        const { title, content } = entry;
+        const {title, content} = entry;
         const entries = this.state.entries;
 
         const loginToken = localStorage.getItem('LoginToken');
         const url = "http://localhost:8081/entries";
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
 
-        axios.post(url, { title, content }, { headers }).then((result) => {
+        axios.post(url, {title, content}, {headers}).then((result) => {
             console.log(result);
             entries.push(result.data.data);
             this.updateEntries(entries);
@@ -75,20 +75,20 @@ class EntryList extends React.Component {
 
 
     updateEntry = (id, entry) => {
-        const { title, content } = entry;
+        const {title, content} = entry;
 
         const loginToken = localStorage.getItem('LoginToken');
         const url = `http://localhost:8081/entries/${id}`;
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
 
-        axios.put(url, { title, content }, { headers }).then((result) => {
+        axios.put(url, {title, content}, {headers}).then((result) => {
             console.log(result);
             const entries = this.state.entries;
 
-            for(let i = 0; i < entries.length; i++) {
-                if(entries[i]._id === result.data._id) {
+            for (let i = 0; i < entries.length; i++) {
+                if (entries[i]._id === result.data._id) {
                     entries[i] = result.data;
                     this.updateEntries(entries);
                     this.displayUpdateToggle();
@@ -109,7 +109,7 @@ class EntryList extends React.Component {
 
     deleteEntry = (id) => {
         var currentEntries;
-        if(this.state.userType === "USER") {
+        if (this.state.userType === "USER") {
             currentEntries = this.state.entries;
         } else {
             currentEntries = this.state.adminEntries;
@@ -122,7 +122,7 @@ class EntryList extends React.Component {
         axios.delete(url, {headers}).then(() => {
             const updatedEntries = currentEntries.filter(entry => entry._id !== id);
             this.updateEntries(updatedEntries);
-            window.location.href="/entries"
+            window.location.href = "/entries"
         }).catch(err => {
             console.log(err);
         });
@@ -138,10 +138,9 @@ class EntryList extends React.Component {
 
     handleSubmit = (e, entry) => {
         e.preventDefault();
-        if(entry._id) {
+        if (entry._id) {
             this.updateEntry(entry._id, entry);
-        }
-        else {
+        } else {
             this.createEntry(entry);
         }
     }
@@ -151,16 +150,16 @@ class EntryList extends React.Component {
         const loginToken = localStorage.getItem('LoginToken');
         const url = "http://localhost:8081/entries";
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
 
-        axios.get(url, { headers }).then((response) => {
-                this.updateEntries(response.data);
-            });
+        axios.get(url, {headers}).then((response) => {
+            this.updateEntries(response.data);
+        });
     }
 
     handleRedirect = () => {
-        window.location.href="/entries"
+        window.location.href = "/entries"
     }
 
     logout = () => {
@@ -168,12 +167,12 @@ class EntryList extends React.Component {
         const loginToken = localStorage.getItem('LoginToken');
         const url = `http://localhost:8081/${userId}/logout`;
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
-        axios.get(url, {headers}).then((response ) => {
+        axios.get(url, {headers}).then((response) => {
             console.log(response);
             localStorage.removeItem("LoginToken");
-            window.location.href="/"
+            window.location.href = "/"
         });
     }
 
@@ -182,12 +181,12 @@ class EntryList extends React.Component {
         const loginToken = localStorage.getItem('LoginToken');
         var url = `http://localhost:8081/${userId}`;
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
-        axios.delete(url, { headers }).then((response) => {
+        axios.delete(url, {headers}).then((response) => {
             console.log(response);
             localStorage.removeItem("LoginToken");
-            window.location.href="/"
+            window.location.href = "/"
         });
     }
 
@@ -195,9 +194,9 @@ class EntryList extends React.Component {
         var url = `http://localhost:8081/${id}`;
         const loginToken = localStorage.getItem('LoginToken');
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
-        axios.delete(url, { headers }).then((response) => {
+        axios.delete(url, {headers}).then((response) => {
             console.log(response);
         });
     }
@@ -205,10 +204,10 @@ class EntryList extends React.Component {
     getAdminUserList = () => {
         const loginToken = localStorage.getItem('LoginToken');
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
         const url = "http://localhost:8081/admin/allUsers";
-        axios.get(url, { headers } ).then((response) => {
+        axios.get(url, {headers}).then((response) => {
             this.setState({adminUsers: response.data});
         });
     }
@@ -216,10 +215,10 @@ class EntryList extends React.Component {
     getAdminEntryList = () => {
         const loginToken = localStorage.getItem('LoginToken');
         const headers = {
-            'Authorization' : loginToken
+            'Authorization': loginToken
         }
         const url = "http://localhost:8081/admin/allEntries";
-        axios.get(url, { headers } ).then((response) => {
+        axios.get(url, {headers}).then((response) => {
             this.setState({adminEntries: response.data});
         })
     }
@@ -228,75 +227,72 @@ class EntryList extends React.Component {
     render() {
         return (
             <div>
-                <BrowserRouter>
-                    <Header
-                        username = {this.state.username}
-                        userType = {this.state.userType}
-                        handleLogout = {this.logout}
-                        handleProfileDelete = {this.deleteProfile}
-                    />
+                <Header
+                    username={this.state.username}
+                    userType={this.state.userType}
+                    handleLogout={this.logout}
+                    handleProfileDelete={this.deleteProfile}
+                />
 
-                    <Route path = "/createEntry" render={() => (
-                        <CreateEntry
-                            entry={this.state.newEntry}
+                <Route path="/createEntry" render={() => (
+                    <CreateEntry
+                        entry={this.state.newEntry}
+                        handleChange={this.handleChange}
+                        handleSubmit={this.handleSubmit}
+                        handleRedirect={this.handleRedirect}
+                    />
+                )}/>
+
+                <Route path="/viewEntry" render={() => (
+                    <ViewEntry
+                        key={this.selectedEntry._id}
+                        entry={this.state.selectedEntry}
+                        selectedEntry={this.state.selectedEntry}
+                        selectEntry={this.selectedEntry}
+                        deleteEntry={this.deleteEntry}
+                    />
+                )}/>
+
+
+                <Route path="/entries">
+                    {this.state.entries.map((entry) => (
+                        <Entry
+                            key={entry._id}
+                            entry={entry}
+                            selectedEntry={this.selectedEntry}
+                            deleteEntry={this.deleteEntry}
+                        />
+                    ))}
+                    <Link to="/createEntry">
+                        <button type="button">Create a new Entry</button>
+                    </Link>
+                </Route>
+
+                <Route path="/updateEntry">
+                    {this.state.displayUpdate ?
+                        <UpdateEntry
+                            entry={this.state.selectedEntry}
                             handleChange={this.handleChange}
                             handleSubmit={this.handleSubmit}
-                            handleRedirect = {this.handleRedirect}
-                        />
-                    )}/>
+                            handleRedirect={this.handleRedirect}
+                        /> : null
+                    }
+                </Route>
 
-                    <Route path = "/viewEntry" render={() => (
-                        <ViewEntry
-                            key={this.selectedEntry._id}
-                            entry={this.state.selectedEntry}
-                            selectedEntry={this.state.selectedEntry}
-                            selectEntry={this.selectedEntry}
-                            deleteEntry={this.deleteEntry}
-                        />
-                    )}/>
+                <Route path="/admin" component={Admin}/>
+                <Route path="/admin/allUsers" render={() => (
+                    <AdminUserList
+                        adminUsers={this.state.adminUsers}
+                        handleProfileDelete={this.adminDeleteProfile}
+                    />
+                )}/>
 
-
-                    <Route path = "/entries">
-                        {this.state.entries.map((entry) => (
-                            <Entry
-                                key={entry._id}
-                                entry={entry}
-                                selectedEntry={this.selectedEntry}
-                                deleteEntry={this.deleteEntry}
-                            />
-                        ))}
-                        <Link to = "/createEntry">
-                            <button type = "button">Create a new Entry</button>
-                        </Link>
-                    </Route>
-
-                    <Route path = "/updateEntry" >
-                        {this.state.displayUpdate ?
-                            <UpdateEntry
-                                entry={this.state.selectedEntry}
-                                handleChange={this.handleChange}
-                                handleSubmit={this.handleSubmit}
-                                handleRedirect = {this.handleRedirect}
-                            /> : null
-                        }
-                    </Route>
-
-                    <Route path = "/admin" component = {Admin}/>
-                    <Route path = "/admin/allUsers" render={() => (
-                        <AdminUserList
-                            adminUsers = {this.state.adminUsers}
-                            handleProfileDelete = {this.adminDeleteProfile}
-                        />
-                    )}/>
-
-                    <Route path = "/admin/allEntries" render={() => (
-                        <AdminEntryList
-                            adminEntries = {this.state.adminEntries}
-                            deleteEntry={this.deleteEntry}
-                        />
-                    )}/>
-
-                </BrowserRouter>
+                <Route path="/admin/allEntries" render={() => (
+                    <AdminEntryList
+                        adminEntries={this.state.adminEntries}
+                        deleteEntry={this.deleteEntry}
+                    />
+                )}/>
             </div>
         );
     }
