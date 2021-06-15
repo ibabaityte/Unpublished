@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = (props) => {
-    const {username, handleLogout, handleProfileDelete, userType} = props;
-
+    const {username, handleLogout, handleProfileDelete} = props;
+    const userType = localStorage.getItem('UserType');
     return (
         <div className = "header">
             <Link to = "/entries">Unpublished</Link>
