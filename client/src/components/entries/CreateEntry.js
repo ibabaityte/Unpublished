@@ -3,7 +3,6 @@ import React from "react";
 const CreateEntry = (props) => {
     const {entry, handleChange, handleSubmit, handleRedirect } = props;
 
-
     return (
         <div>
             <div>Create Entry</div>

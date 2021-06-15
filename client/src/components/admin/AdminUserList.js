@@ -4,9 +4,9 @@ const AdminUserList = (props) => {
     const {adminUsers, handleProfileDelete} = props;
     return (
         adminUsers.map((user) => (
-            <div key = {user.username}>
+            <div key={user.username}>
                 <div>{user.username}</div>
-                <button  onClick={() => handleProfileDelete(user._id)}>Delete profile</button>
+                <button onClick={() => handleProfileDelete(user._id)}>Delete profile</button>
             </div>
         ))
     );

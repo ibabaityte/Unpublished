@@ -37,7 +37,7 @@ const list = (req, res) => {
 };
 
 //Retrieve and return all entries from the db for admin
-const listAll = (req, res) => {
+const listAllEntries = (req, res) => {
     Entry.find({authorType: "USER"}).then(data => {
         res.status(200).send(data);
     }).catch(err => {
@@ -123,7 +123,7 @@ const remove = (req, res) => {
 module.exports = {
     create,
     list,
-    listAll,
+    listAllEntries,
     get,
     update,
     remove
