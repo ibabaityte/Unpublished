@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {Route, Link, BrowserRouter} from "react-router-dom";
+import sanitizeHtml from "sanitize-html";
 
 import CreateEntry from "./CreateEntry";
 import UpdateEntry from "./UpdateEntry";
@@ -28,7 +29,6 @@ class EntryList extends React.Component {
             selectedEntry: null,
             userType: "",
             username: ""
-
         }
     }
 
@@ -48,7 +48,6 @@ class EntryList extends React.Component {
             'Authorization': loginToken
         }
         axios.get(url, {headers}).then((response) => {
-            console.log(response.data.userType);
             this.setState({username: response.data.username, userType: response.data.userType})
         });
     }
@@ -130,10 +129,19 @@ class EntryList extends React.Component {
 
 
     handleChange = (e, entry) => {
-        e.preventDefault();
-        entry[e.currentTarget.name] = e.currentTarget.value;
+        // e.preventDefault();
+        entry[e.currentTarget.tagName.toLowerCase()] = e.target.value;
         this.setState({entry});
     }
+
+    sanitizeConf = {
+        allowedTags: ["b", "i", "em", "strong", "a", "p", "h1"],
+        allowedAttributes: { a: ["href"] }
+    };
+
+    sanitize = (entry) => {
+        this.setState({ entry: sanitizeHtml(entry, this.sanitizeConf) });
+    };
 
 
     handleSubmit = (e, entry) => {
