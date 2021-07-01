@@ -17,12 +17,12 @@ const App = () => {
             setIsAuthenticated(true);
         }
     }
+
     const login = () => {
         const {username, password} = user;
         const url = "http://localhost:8081/auth";
         axios.post(url, {username, password})
             .then((result) => {
-                console.log(result);
                 setUser(user);
                 // setState({...user, userType: result.data.userType});
                 localStorage.setItem('LoginToken', result.data.token);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Route, Link, BrowserRouter} from "react-router-dom";
 import sanitizeHtml from "sanitize-html";
@@ -13,34 +13,59 @@ import AdminEntryList from "../admin/AdminEntryList";
 import AdminPanelComponent from "../admin/Admin";
 
 
-class EntryList extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            entries: [],
-            newEntry: {
-                title: "",
-                content: ""
-            },
-            adminEntries: [],
-            adminUsers: [],
-            displayUpdate: false,
-            entryId: "",
-            selectedEntry: null,
-            userType: "",
-            username: ""
+const EntryList = () => {
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         entries: [],
+    //         newEntry: {
+    //             title: "",
+    //             content: ""
+    //         },
+    //         adminEntries: [],
+    //         adminUsers: [],
+    //         displayUpdate: false,
+    //         entryId: "",
+    //         selectedEntry: null,
+    //         userType: "",
+    //         username: ""
+    //     }
+    // }
+
+    const [entries, setEntries] = useState([]);
+    const [adminEntries, setAdminEntries] = useState([]);
+    const [adminUsers, setAdminUsers] = useState([]);
+    const [newEntry, setNewEntry] = useState({});
+    const [selectedEntry, setSelectedEntry] = useState(null);
+    const [displayUpdate, setDisplayUpdate] = useState(false);
+    const [userType, setUserType] = useState("");
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        const init = () => {
+            const loginToken = localStorage.getItem('LoginToken');
+            const url = "http://localhost:8081/entries";
+            const headers = {
+                'Authorization': loginToken
+            }
+            axios.get(url, {headers}).then((response) => {
+                updateEntries(response.data);
+            });
         }
-    }
+        init();
+        getUsernameAndType();
+        getAdminUserList();
+        getAdminEntryList();
+    }, []);
 
+    // componentDidMount() {
+    //     this.init();
+    //     this.getUsernameAndType();
+    //     this.getAdminUserList();
+    //     this.getAdminEntryList();
+    // }
 
-    componentDidMount() {
-        this.init();
-        this.getUsernameAndType();
-        this.getAdminUserList();
-        this.getAdminEntryList();
-    }
-
-    getUsernameAndType = () => {
+    const getUsernameAndType = () => {
         const userId = localStorage.getItem('UserId');
         const loginToken = localStorage.getItem('LoginToken');
         const url = `http://localhost:8081/${userId}`;
@@ -48,35 +73,36 @@ class EntryList extends React.Component {
             'Authorization': loginToken
         }
         axios.get(url, {headers}).then((response) => {
-            this.setState({username: response.data.username, userType: response.data.userType})
+            // this.setState({username: response.data.username, userType: response.data.userType});
+            setUsername(response.data.username);
+            setUserType(response.data.userType);
         });
     }
 
-    updateEntries = entries => this.setState({entries});
+    // const updateEntries = entries => this.setState({entries});
+    const updateEntries = entries => setEntries(entries);
 
+    // const displayUpdateToggle = () => this.setState({displayUpdate: !this.state.displayUpdate});
+    const displayUpdateToggle = () => setDisplayUpdate(!displayUpdate);
 
-    displayUpdateToggle = () => this.setState({displayUpdate: !this.state.displayUpdate});
-
-
-    createEntry = (entry) => {
+    const createEntry = (entry) => {
         const {title, content} = entry;
-        const entries = this.state.entries;
         const loginToken = localStorage.getItem('LoginToken');
         const url = "http://localhost:8081/entries";
         const headers = {
             'Authorization': loginToken
         }
         axios.post(url, {title, content}, {headers}).then((result) => {
-            console.log(result);
             entries.push(result.data.data);
-            this.updateEntries(entries);
+            updateEntries(entries);
+
         }).catch(err => {
             console.log(err.response.data.message);
         });
     }
 
 
-    updateEntry = (id, entry) => {
+    const updateEntry = (id, entry) => {
         const {title, content} = entry;
         const loginToken = localStorage.getItem('LoginToken');
         const url = `http://localhost:8081/entries/${id}`;
@@ -85,13 +111,11 @@ class EntryList extends React.Component {
         }
         axios.put(url, {title, content}, {headers}).then((result) => {
             console.log(result);
-            const entries = this.state.entries;
-
             for (let i = 0; i < entries.length; i++) {
                 if (entries[i]._id === result.data._id) {
                     entries[i] = result.data;
-                    this.updateEntries(entries);
-                    this.displayUpdateToggle();
+                    updateEntries(entries);
+                    // displayUpdateToggle();
                 }
             }
         }).catch(err => {
@@ -100,19 +124,23 @@ class EntryList extends React.Component {
     }
 
 
-    selectedEntry = entry => this.setState({
-        entryId: entry._id,
-        selectedEntry: entry,
-        displayUpdate: true
-    })
+    // const selectedEntry = entry => this.setState({
+    //     entryId: entry._id,
+    //     selectedEntry: entry,
+    //     displayUpdate: true
+    // })
 
+    const getSelectedEntry = (entry) => {
+        setSelectedEntry(entry);
+        setDisplayUpdate(true);
+    }
 
-    deleteEntry = (id) => {
+    const deleteEntry = (id) => {
         var currentEntries;
-        if (this.state.userType === "USER") {
-            currentEntries = this.state.entries;
+        if (userType === "USER") {
+            currentEntries = entries;
         } else {
-            currentEntries = this.state.adminEntries;
+            currentEntries = adminEntries;
         }
         const url = `http://localhost:8081/entries/${id}`;
         const headers = {
@@ -120,58 +148,71 @@ class EntryList extends React.Component {
         };
         axios.delete(url, {headers}).then(() => {
             const updatedEntries = currentEntries.filter(entry => entry._id !== id);
-            this.updateEntries(updatedEntries);
+            updateEntries(updatedEntries);
             window.location.href = "/entries"
         }).catch(err => {
             console.log(err);
         });
     }
 
-
-    handleChange = (e, entry) => {
-        // e.preventDefault();
-        entry[e.currentTarget.tagName.toLowerCase()] = e.target.value;
-        this.setState({entry});
-    }
-
-    sanitizeConf = {
-        allowedTags: ["b", "i", "em", "strong", "a", "p", "h1"],
-        allowedAttributes: { a: ["href"] }
-    };
-
-    sanitize = (entry) => {
-        this.setState({ entry: sanitizeHtml(entry, this.sanitizeConf) });
-    };
-
-
-    handleSubmit = (e, entry) => {
+    const handleChange = (e, entry) => {
         e.preventDefault();
-        if (entry._id) {
-            this.updateEntry(entry._id, entry);
+        console.log(e.target);
+        if(entry._id) {
+            setSelectedEntry({
+                ...selectedEntry,
+                [e.target.className]: e.target.value}
+            );
         } else {
-            this.createEntry(entry);
+            setNewEntry({
+                ...newEntry,
+                [e.target.className]: e.target.value}
+            );
         }
     }
 
-
-    init = () => {
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = "http://localhost:8081/entries";
-        const headers = {
-            'Authorization': loginToken
+    const handleSubmit = (e, entry) => {
+        e.preventDefault();
+        console.log(entry);
+        if (entry._id) {
+            updateEntry(entry._id, entry);
+            displayUpdateToggle();
+        } else {
+            createEntry(entry);
         }
-        axios.get(url, {headers}).then((response) => {
-            this.updateEntries(response.data);
-            console.log(response);
-        });
     }
 
-    handleRedirect = () => {
+    const sanitizeConf = {
+        allowedTags: ["b", "i", "em", "strong", "a", "p", "h1"],
+        allowedAttributes: {a: ["href"]}
+    };
+
+//////////// ?????????????????????????
+    const sanitize = (entry) => {
+        // this.setState({entry: sanitizeHtml(entry, this.sanitizeConf)});
+        setNewEntry(sanitizeHtml(entry, sanitizeConf));
+        setSelectedEntry(sanitizeHtml(entry, sanitizeConf));
+        // updateEntry(entry._id, sanitizeHtml(entry, sanitizeConf));
+    };
+
+
+    // const init = () => {
+    //     const loginToken = localStorage.getItem('LoginToken');
+    //     const url = "http://localhost:8081/entries";
+    //     const headers = {
+    //         'Authorization': loginToken
+    //     }
+    //     axios.get(url, {headers}).then((response) => {
+    //         updateEntries(response.data);
+    //     });
+    // }
+
+    const handleRedirect = () => {
         window.location.href = "/entries"
     }
 
 
-    logout = () => {
+    const logout = () => {
         const userId = localStorage.getItem('UserId');
         const loginToken = localStorage.getItem('LoginToken');
         const url = `http://localhost:8081/${userId}/logout`;
@@ -186,7 +227,7 @@ class EntryList extends React.Component {
     }
 
 
-    deleteProfile = () => {
+    const deleteProfile = () => {
         const userId = localStorage.getItem('UserId');
         const loginToken = localStorage.getItem('LoginToken');
         var url = `http://localhost:8081/${userId}`;
@@ -201,7 +242,7 @@ class EntryList extends React.Component {
     }
 
 
-    adminDeleteProfile = (id) => {
+    const adminDeleteProfile = (id) => {
         var url = `http://localhost:8081/${id}`;
         const loginToken = localStorage.getItem('LoginToken');
         const headers = {
@@ -213,23 +254,22 @@ class EntryList extends React.Component {
     }
 
 
-    getAdminUserList = () => {
+    const getAdminUserList = () => {
         const loginToken = localStorage.getItem('LoginToken');
         const headers = {
             'Authorization': loginToken
         }
         const url = "http://localhost:8081/admin/allUsers";
-        const userType = localStorage.getItem('UserType');
-        console.log(userType);
         axios.get(url, {headers}).then((response) => {
-            this.setState({adminUsers: response.data});
+            // this.setState({adminUsers: response.data});
+            setAdminUsers(response.data);
         }).catch((error) => {
             console.log(error);
         });
     }
 
 
-    getAdminEntryList = () => {
+    const getAdminEntryList = () => {
         const loginToken = localStorage.getItem('LoginToken');
         const headers = {
             'Authorization': loginToken
@@ -237,94 +277,93 @@ class EntryList extends React.Component {
         const url = "http://localhost:8081/admin/allEntries";
         axios.get(url, {headers}).then((response) => {
             console.log(response);
-            this.setState({adminEntries: response.data});
+            // this.setState({adminEntries: response.data});
+            setAdminEntries(response.data);
         }).catch((error) => {
             console.log(error);
         });
     }
 
+    return (
+        <div>
+            <BrowserRouter>
+                <Header
+                    username={username}
+                    userType={userType}
+                    handleLogout={logout}
+                    handleProfileDelete={deleteProfile}
+                />
 
-    render() {
-        return (
-            <div>
-                <BrowserRouter>
-                    <Header
-                        username={this.state.username}
-                        userType={this.state.userType}
-                        handleLogout={this.logout}
-                        handleProfileDelete={this.deleteProfile}
+
+                <Route path="/viewEntry" render={() => (
+                    <ViewEntry
+                        key={selectedEntry._id}
+                        // entry={this.state.selectedEntry}
+                        selectedEntry={selectedEntry}
+                        selectEntry={getSelectedEntry}
+                        deleteEntry={deleteEntry}
                     />
+                )}/>
 
 
-                    <Route path="/viewEntry" render={() => (
-                        <ViewEntry
-                            key={this.selectedEntry._id}
-                            entry={this.state.selectedEntry}
-                            selectedEntry={this.state.selectedEntry}
-                            selectEntry={this.selectedEntry}
-                            deleteEntry={this.deleteEntry}
+                <Route path="/createEntry" render={() => (
+                    <CreateEntry
+                        entry={newEntry}
+                        handleChange={handleChange}
+                        handleSubmit={handleSubmit}
+                        handleRedirect={handleRedirect}
+                    />
+                )}/>
+
+
+                <Route path="/entries">
+                    {entries.map((entry) => (
+                        <Entry
+                            key={entry._id}
+                            entry={entry}
+                            selectedEntry={getSelectedEntry}
+                            deleteEntry={deleteEntry}
                         />
-                    )}/>
+                    ))}
+                    <Link to="/createEntry">
+                        <button type="button">Create a new Entry</button>
+                    </Link>
+                </Route>
 
 
-                    <Route path="/createEntry" render={() => (
-                        <CreateEntry
-                            entry={this.state.newEntry}
-                            handleChange={this.handleChange}
-                            handleSubmit={this.handleSubmit}
-                            handleRedirect={this.handleRedirect}
-                        />
-                    )}/>
+                <Route path="/updateEntry">
+                    {displayUpdate ?
+                        <UpdateEntry
+                            selectedEntry={selectedEntry}
+                            sanitize={sanitize}
+                            handleChange={handleChange}
+                            handleSubmit={handleSubmit}
+                            handleRedirect={handleRedirect}
+                        /> : null
+                    }
+                </Route>
+
+                <Route path="/admin">
+                    <AdminPanelComponent/>
+                </Route>
+
+                <Route path="/admin/allUsers" render={() => (
+                    <AdminUserList
+                        adminUsers={adminUsers}
+                        handleProfileDelete={adminDeleteProfile}
+                    />
+                )}/>
 
 
-                    <Route path="/entries">
-                        {this.state.entries.map((entry) => (
-                            <Entry
-                                key={entry._id}
-                                entry={entry}
-                                selectedEntry={this.selectedEntry}
-                                deleteEntry={this.deleteEntry}
-                            />
-                        ))}
-                        <Link to="/createEntry">
-                            <button type="button">Create a new Entry</button>
-                        </Link>
-                    </Route>
-
-
-                    <Route path="/updateEntry">
-                        {this.state.displayUpdate ?
-                            <UpdateEntry
-                                entry={this.state.selectedEntry}
-                                handleChange={this.handleChange}
-                                handleSubmit={this.handleSubmit}
-                                handleRedirect={this.handleRedirect}
-                            /> : null
-                        }
-                    </Route>
-
-                    <Route path="/admin">
-                        <AdminPanelComponent/>
-                    </Route>
-
-                    <Route path="/admin/allUsers" render={() => (
-                        <AdminUserList
-                            adminUsers={this.state.adminUsers}
-                            handleProfileDelete={this.adminDeleteProfile}
-                        />
-                    )}/>
-
-
-                    <Route path="/admin/allEntries" render={() => (
-                        <AdminEntryList
-                            adminEntries={this.state.adminEntries}
-                            deleteEntry={this.deleteEntry}
-                        />
-                    )}/>
-                </BrowserRouter>
-            </div>
-        );
-    }
+                <Route path="/admin/allEntries" render={() => (
+                    <AdminEntryList
+                        adminEntries={adminEntries}
+                        deleteEntry={deleteEntry}
+                    />
+                )}/>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default EntryList;

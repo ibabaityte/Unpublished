@@ -1,34 +1,19 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import ContentEditable from "react-contenteditable";
+// import ContentEditable from "react-contenteditable";
 
-const TextEditor = (props) => {
+const TextEditor = () => {
 
-    const {entry, handleChange} = props;
+    // const {entry, handleChange, sanitize} = props;
+    console.log(entry.content);
 
     return (
         <div>
-            {/*<div className="sample-toolbar">*/}
-            {/*    <div><span className="fa fa-bold fa-fw"></span></div>*/}
-            {/*    <div><span className="fa fa-italic fa-fw"></span></div>*/}
-            {/*    <div><span className="fa fa-list fa-fw"></span></div>*/}
-            {/*</div>*/}
-
-            {/*<input*/}
-            {/*    type="text"*/}
-            {/*    value={entry.content}*/}
-            {/*    name="content"*/}
-            {/*    onChange={e => handleChange(e, entry)}*/}
+            {/*<ContentEditable*/}
+            {/*    className="content"*/}
+            {/*    html={entry.content} // innerHTML of the editable div*/}
+            {/*    onKeyPress={e => handleChange(e, entry)} // handle innerHTML change*/}
+            {/*    onBlur={sanitize}*/}
             {/*/>*/}
-
-            <ContentEditable
-                // className="editable"
-                tagName="content"
-                html={entry.content} // innerHTML of the editable div
-                // disabled={!this.state.editable} // use true to disable edition
-                onChange={e => handleChange(e, entry)} // handle innerHTML change
-                // onBlur={this.sanitize}
-            />
 
             <h3>actions</h3>
             <EditButton cmd="italic" />
