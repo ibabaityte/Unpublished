@@ -1,43 +1,58 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBold } from '@fortawesome/free-solid-svg-icons'
-import { faItalic } from '@fortawesome/free-solid-svg-icons'
-import { faList } from '@fortawesome/free-solid-svg-icons'
-// import { faLink } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faBold,
+    faItalic,
+    faList
+} from '@fortawesome/free-solid-svg-icons';
 
-const bold = <FontAwesomeIcon icon={faBold} />
-const italic = <FontAwesomeIcon icon={faItalic} />
-const list = <FontAwesomeIcon icon={faList} />
+const bold = <FontAwesomeIcon icon={faBold} />;
+const italic = <FontAwesomeIcon icon={faItalic} />;
+const list = <FontAwesomeIcon icon={faList} />;
 
 const TextEditor = (props) => {
 
-    const {entry, handleChange} = props;
+    const {entry, handleChange, setSelectedEntry} = props;
+
+    const format = (command) => {
+        let selection = window.getSelection().toString();
+        let fullContent = entry.content;
+        let entryCopy = entry;
+        let modifiedSelection = '';
+
+        if(command === 'bold') {
+            modifiedSelection = '<b>' + selection + '</b>';
+        }
+        else if(command === 'italic') {
+
+        }
+        else if(command === 'unorderedList') {
+
+        }
+
+        entryCopy.content = fullContent.replace(selection, modifiedSelection);
+        setSelectedEntry(entryCopy);
+    }
 
     return (
         <div>
 
             <h3>actions</h3>
             <div className = "toolbar">
-                <button onClick={format('bold', entry.content)}><span>{bold}</span></button>
-                <button onClick={format('italic', entry.content)}><span>{italic}</span></button>
-                <button onClick={format('insertunorderedlist', entry.content)}><span>{list}</span></button>
+                <button onClick={() => format('bold', entry.content)}><span>{bold}</span></button>
+                <button type="button" onClick={() => format('italic', entry.content)}><span>{italic}</span></button>
+                <button type="button" onClick={() => format('unorderedList', entry.content)}><span>{list}</span></button>
             </div>
 
-            <input
-                type="text"
-                value={entry.content || ""}
+            <textarea
+                value={entry.content}
                 className="content"
                 name="content"
                 onChange={e => handleChange(e, entry)}
-                contentEditable="true"
             />
 
         </div>
     )
-}
-
-function format(command, value) {
-    document.execCommand(command, false, value);
 }
 
 export default TextEditor;

@@ -17,7 +17,7 @@ const EntryList = () => {
     const [adminEntries, setAdminEntries] = useState([]);
     const [adminUsers, setAdminUsers] = useState([]);
     const [newEntry, setNewEntry] = useState({});
-    const [selectedEntry, setSelectedEntry] = useState(null);
+    const [selectedEntry, setSelectedEntry] = useState({});
     const [displayUpdate, setDisplayUpdate] = useState(false);
     const [userType, setUserType] = useState("");
     const [username, setUsername] = useState("");
@@ -33,6 +33,7 @@ const EntryList = () => {
                 updateEntries(response.data);
             });
         }
+
         init();
         getUsernameAndType();
         getAdminUserList();
@@ -81,10 +82,13 @@ const EntryList = () => {
         }
         axios.put(url, {title, content}, {headers}).then((result) => {
             console.log(result);
+            const updatedEntry = result.data;
+            setSelectedEntry(updatedEntry);
             for (let i = 0; i < entries.length; i++) {
                 if (entries[i]._id === result.data._id) {
                     entries[i] = result.data;
                     updateEntries(entries);
+                    console.log(selectedEntry);
                     // displayUpdateToggle();
                 }
             }
@@ -258,14 +262,13 @@ const EntryList = () => {
                 </Route>
 
                 <Route path="/updateEntry">
-                    {displayUpdate ?
                         <UpdateEntry
                             selectedEntry={selectedEntry}
+                            setSelectedEntry={setSelectedEntry}
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
                             handleRedirect={handleRedirect}
-                        /> : null
-                    }
+                        />
                 </Route>
 
                 <Route path="/admin">

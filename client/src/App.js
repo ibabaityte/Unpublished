@@ -90,13 +90,6 @@ const App = () => {
                            }>
                     </Route>
 
-                    {/*<Route path="/entries" render={() => (*/}
-                    {/*    <EntryList*/}
-                    {/*        userType={userType}*/}
-                    {/*        username={username}*/}
-                    {/*    />*/}
-                    {/*)}/>*/}
-
                     <Route path="/entries" component={EntryList}/>
 
                     <Route path="/init" component={Init}/>

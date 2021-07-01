@@ -10,7 +10,6 @@ const Register = (props) => {
                 <form onSubmit={e => handleSubmit(e, newUser)}>
                     <TextField
                         id="standard-basic"
-                        id="standard-uncontrolled"
                         type = "text"
                         value = {newUser.username}
                         label = "username"

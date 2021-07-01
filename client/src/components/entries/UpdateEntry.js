@@ -2,7 +2,7 @@ import React from "react";
 import TextEditor from "../TextEditor";
 
 const UpdateEntry = (props) => {
-    const {selectedEntry, handleChange, handleSubmit, handleRedirect } = props;
+    const {selectedEntry, handleChange, handleSubmit, handleRedirect, setSelectedEntry } = props;
 
     return (
         <div>
@@ -26,6 +26,7 @@ const UpdateEntry = (props) => {
                 <TextEditor
                     entry = {selectedEntry}
                     handleChange = {handleChange}
+                    setSelectedEntry={setSelectedEntry}
                 />
                 <input type="submit" onClick = {() => handleRedirect()}/>
             </form>
