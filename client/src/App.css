@@ -16,11 +16,12 @@ body {
     position: fixed;
 }
 
-.content {
+.landingContent {
     position: relative;
+    text-align: center;
 }
 
-.content h1 {
+.landingContent h1 {
     text-shadow: 5px -1px 4px rgb(110, 110, 110);
     color: white;
     font-size: 6em;
@@ -28,19 +29,19 @@ body {
     letter-spacing: 8px;
 }
 
-.content h2 {
+.landingContent h2 {
     font-size: 2.5em;
     color: rgb(240, 240, 240);
     text-shadow: 5px -1px 4px rgb(110, 110, 110);
 }
 
-.content h3 {
+.landingContent h3 {
     font-size: 2.1em;
     color: rgb(240, 240, 240);
     text-shadow: 5px -1px 4px rgb(110, 110, 110);
 }
 
-.content a {
+.landingContent a {
     text-decoration: none;
     color: black;
     font-size: 1.5em;
@@ -129,7 +130,7 @@ body {
     font-size: large;
 }
 
-.sample-toolbar
+.toolbar
 {
     border:solid 1px #ddd;
     background:#f4f4f4;
@@ -137,13 +138,12 @@ body {
     border-radius:3px;
 }
 
-.sample-toolbar *
+.toolbar > span
 {
     cursor:pointer;
-    display: inline;
 }
 
-.sample-toolbar > span:hover
+.toolbar > span:hover
 {
     text-decoration:underline;
 }

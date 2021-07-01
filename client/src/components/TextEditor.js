@@ -1,45 +1,43 @@
 import React from "react";
-// import ContentEditable from "react-contenteditable";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBold } from '@fortawesome/free-solid-svg-icons'
+import { faItalic } from '@fortawesome/free-solid-svg-icons'
+import { faList } from '@fortawesome/free-solid-svg-icons'
+// import { faLink } from '@fortawesome/free-solid-svg-icons'
 
-const TextEditor = () => {
+const bold = <FontAwesomeIcon icon={faBold} />
+const italic = <FontAwesomeIcon icon={faItalic} />
+const list = <FontAwesomeIcon icon={faList} />
 
-    // const {entry, handleChange, sanitize} = props;
-    console.log(entry.content);
+const TextEditor = (props) => {
+
+    const {entry, handleChange} = props;
 
     return (
         <div>
-            {/*<ContentEditable*/}
-            {/*    className="content"*/}
-            {/*    html={entry.content} // innerHTML of the editable div*/}
-            {/*    onKeyPress={e => handleChange(e, entry)} // handle innerHTML change*/}
-            {/*    onBlur={sanitize}*/}
-            {/*/>*/}
 
             <h3>actions</h3>
-            <EditButton cmd="italic" />
-            <EditButton cmd="bold" />
-            <EditButton cmd="formatBlock" arg="h1" name="heading" />
-            <EditButton
-                cmd="createLink"
-                arg="https://github.com/lovasoa/react-contenteditable"
-                name="hyperlink"
+            <div className = "toolbar">
+                <button onClick={format('bold', entry.content)}><span>{bold}</span></button>
+                <button onClick={format('italic', entry.content)}><span>{italic}</span></button>
+                <button onClick={format('insertunorderedlist', entry.content)}><span>{list}</span></button>
+            </div>
+
+            <input
+                type="text"
+                value={entry.content || ""}
+                className="content"
+                name="content"
+                onChange={e => handleChange(e, entry)}
+                contentEditable="true"
             />
+
         </div>
     )
 }
 
-function EditButton(props) {
-    return (
-        <button
-            key={props.cmd}
-            onMouseDown={evt => {
-                evt.preventDefault(); // Avoids loosing focus from the editable area
-                document.execCommand(props.cmd, false, props.arg); // Send the command to the browser
-            }}
-        >
-            {props.name || props.cmd}
-        </button>
-    );
+function format(command, value) {
+    document.execCommand(command, false, value);
 }
 
 export default TextEditor;

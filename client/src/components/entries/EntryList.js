@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Route, Link, BrowserRouter} from "react-router-dom";
-import sanitizeHtml from "sanitize-html";
 
 import CreateEntry from "./CreateEntry";
 import UpdateEntry from "./UpdateEntry";
@@ -12,25 +11,7 @@ import AdminUserList from "../admin/AdminUserList";
 import AdminEntryList from "../admin/AdminEntryList";
 import AdminPanelComponent from "../admin/Admin";
 
-
 const EntryList = () => {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         entries: [],
-    //         newEntry: {
-    //             title: "",
-    //             content: ""
-    //         },
-    //         adminEntries: [],
-    //         adminUsers: [],
-    //         displayUpdate: false,
-    //         entryId: "",
-    //         selectedEntry: null,
-    //         userType: "",
-    //         username: ""
-    //     }
-    // }
 
     const [entries, setEntries] = useState([]);
     const [adminEntries, setAdminEntries] = useState([]);
@@ -58,13 +39,6 @@ const EntryList = () => {
         getAdminEntryList();
     }, []);
 
-    // componentDidMount() {
-    //     this.init();
-    //     this.getUsernameAndType();
-    //     this.getAdminUserList();
-    //     this.getAdminEntryList();
-    // }
-
     const getUsernameAndType = () => {
         const userId = localStorage.getItem('UserId');
         const loginToken = localStorage.getItem('LoginToken');
@@ -73,16 +47,13 @@ const EntryList = () => {
             'Authorization': loginToken
         }
         axios.get(url, {headers}).then((response) => {
-            // this.setState({username: response.data.username, userType: response.data.userType});
             setUsername(response.data.username);
             setUserType(response.data.userType);
         });
     }
 
-    // const updateEntries = entries => this.setState({entries});
     const updateEntries = entries => setEntries(entries);
 
-    // const displayUpdateToggle = () => this.setState({displayUpdate: !this.state.displayUpdate});
     const displayUpdateToggle = () => setDisplayUpdate(!displayUpdate);
 
     const createEntry = (entry) => {
@@ -100,7 +71,6 @@ const EntryList = () => {
             console.log(err.response.data.message);
         });
     }
-
 
     const updateEntry = (id, entry) => {
         const {title, content} = entry;
@@ -122,13 +92,6 @@ const EntryList = () => {
             console.log(err);
         });
     }
-
-
-    // const selectedEntry = entry => this.setState({
-    //     entryId: entry._id,
-    //     selectedEntry: entry,
-    //     displayUpdate: true
-    // })
 
     const getSelectedEntry = (entry) => {
         setSelectedEntry(entry);
@@ -157,7 +120,6 @@ const EntryList = () => {
 
     const handleChange = (e, entry) => {
         e.preventDefault();
-        console.log(e.target);
         if(entry._id) {
             setSelectedEntry({
                 ...selectedEntry,
@@ -173,7 +135,6 @@ const EntryList = () => {
 
     const handleSubmit = (e, entry) => {
         e.preventDefault();
-        console.log(entry);
         if (entry._id) {
             updateEntry(entry._id, entry);
             displayUpdateToggle();
@@ -182,35 +143,9 @@ const EntryList = () => {
         }
     }
 
-    const sanitizeConf = {
-        allowedTags: ["b", "i", "em", "strong", "a", "p", "h1"],
-        allowedAttributes: {a: ["href"]}
-    };
-
-//////////// ?????????????????????????
-    const sanitize = (entry) => {
-        // this.setState({entry: sanitizeHtml(entry, this.sanitizeConf)});
-        setNewEntry(sanitizeHtml(entry, sanitizeConf));
-        setSelectedEntry(sanitizeHtml(entry, sanitizeConf));
-        // updateEntry(entry._id, sanitizeHtml(entry, sanitizeConf));
-    };
-
-
-    // const init = () => {
-    //     const loginToken = localStorage.getItem('LoginToken');
-    //     const url = "http://localhost:8081/entries";
-    //     const headers = {
-    //         'Authorization': loginToken
-    //     }
-    //     axios.get(url, {headers}).then((response) => {
-    //         updateEntries(response.data);
-    //     });
-    // }
-
     const handleRedirect = () => {
         window.location.href = "/entries"
     }
-
 
     const logout = () => {
         const userId = localStorage.getItem('UserId');
@@ -226,7 +161,6 @@ const EntryList = () => {
         window.location.href = "/"
     }
 
-
     const deleteProfile = () => {
         const userId = localStorage.getItem('UserId');
         const loginToken = localStorage.getItem('LoginToken');
@@ -241,7 +175,6 @@ const EntryList = () => {
         });
     }
 
-
     const adminDeleteProfile = (id) => {
         var url = `http://localhost:8081/${id}`;
         const loginToken = localStorage.getItem('LoginToken');
@@ -252,7 +185,6 @@ const EntryList = () => {
             console.log(response);
         });
     }
-
 
     const getAdminUserList = () => {
         const loginToken = localStorage.getItem('LoginToken');
@@ -267,7 +199,6 @@ const EntryList = () => {
             console.log(error);
         });
     }
-
 
     const getAdminEntryList = () => {
         const loginToken = localStorage.getItem('LoginToken');
@@ -294,17 +225,14 @@ const EntryList = () => {
                     handleProfileDelete={deleteProfile}
                 />
 
-
                 <Route path="/viewEntry" render={() => (
                     <ViewEntry
                         key={selectedEntry._id}
-                        // entry={this.state.selectedEntry}
                         selectedEntry={selectedEntry}
                         selectEntry={getSelectedEntry}
                         deleteEntry={deleteEntry}
                     />
                 )}/>
-
 
                 <Route path="/createEntry" render={() => (
                     <CreateEntry
@@ -314,7 +242,6 @@ const EntryList = () => {
                         handleRedirect={handleRedirect}
                     />
                 )}/>
-
 
                 <Route path="/entries">
                     {entries.map((entry) => (
@@ -330,12 +257,10 @@ const EntryList = () => {
                     </Link>
                 </Route>
 
-
                 <Route path="/updateEntry">
                     {displayUpdate ?
                         <UpdateEntry
                             selectedEntry={selectedEntry}
-                            sanitize={sanitize}
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
                             handleRedirect={handleRedirect}
@@ -353,7 +278,6 @@ const EntryList = () => {
                         handleProfileDelete={adminDeleteProfile}
                     />
                 )}/>
-
 
                 <Route path="/admin/allEntries" render={() => (
                     <AdminEntryList

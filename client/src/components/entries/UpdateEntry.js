@@ -1,5 +1,5 @@
 import React from "react";
-// import TextEditor from "../TextEditor";
+import TextEditor from "../TextEditor";
 
 const UpdateEntry = (props) => {
     const {selectedEntry, handleChange, handleSubmit, handleRedirect } = props;
@@ -15,23 +15,23 @@ const UpdateEntry = (props) => {
                     name="title"
                     onChange={e => handleChange(e, selectedEntry)}
                 />
-                <input
-                    type="text"
-                    value={selectedEntry.content}
-                    className="content"
-                    name="content"
-                    onChange={e => handleChange(e, selectedEntry)}
-                    // contentEditable="true"
-                />
-                {/*<TextEditor*/}
-                {/*    entry = {selectedEntry}*/}
-                {/*    handleChange = {(e) => handleChange(e, selectedEntry)}*/}
-                {/*    sanitize={sanitize}*/}
+                {/*<input*/}
+                {/*    type="text"*/}
+                {/*    value={selectedEntry.content}*/}
+                {/*    className="content"*/}
+                {/*    name="content"*/}
+                {/*    onChange={e => handleChange(e, selectedEntry)}*/}
+                {/*    contentEditable="true"*/}
                 {/*/>*/}
+                <TextEditor
+                    entry = {selectedEntry}
+                    handleChange = {handleChange}
+                />
                 <input type="submit" onClick = {() => handleRedirect()}/>
             </form>
         </div>
     );
 }
+
 
 export default UpdateEntry;
