@@ -12,8 +12,8 @@ const Entry = (props) => {
             <div>Created at: {moment(entry.createdAt).format("L")}</div>
             <div>
                 Last updated at: {
-                moment(selectedEntry.updatedAt).format("L") +
-                moment(selectedEntry.updatedAt).format(" LT")
+                moment(entry.updatedAt).format("L") +
+                moment(entry.updatedAt).format(" LT")
             }
             </div>
             <Link to = "/viewEntry">

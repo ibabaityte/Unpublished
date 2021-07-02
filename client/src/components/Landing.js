@@ -19,7 +19,7 @@ const Landing = (props) => {
         <div>
             <div className = "landingBackground"/>
                 <Grid container className = "container">
-                    <Grid item lg = {6} className = "content">
+                    <Grid item lg = {6} className = "landingContent">
                         <h1>Unpublished</h1>
                         <h2>Your personal online Diary</h2>
                         <h3>So many great stories that are left Unpublished</h3>
