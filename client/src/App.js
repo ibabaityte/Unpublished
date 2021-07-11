@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import axios from "axios";
 
@@ -6,11 +6,23 @@ import './App.css';
 import Landing from "./components/Landing";
 import EntryList from "./components/entries/EntryList";
 import Init from "./components/admin/Admin";
+import Login from "./components/users/Login";
 
 const App = () => {
+    const { LoginToken, UserId, UserType } = localStorage;
+
     const [user, setUser] = useState({});
     const [newUser, setNewUser] = useState({});
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    // will need useEffect hook to init state with user details and isAuthenticated
+    useEffect(() => {
+        setIsAuthenticated(!!LoginToken);
+        setUser({
+            UserId,
+            UserType
+        });
+    }, []);
 
     const checkAuth = status => {
         if (status === 200) {
@@ -89,9 +101,11 @@ const App = () => {
                                /> : null
                            }>
                     </Route>
-
+                    {/*// layout component should start wrapping here*/}
                     <Route path="/entries" component={EntryList}/>
-
+                    {/*// all other major routes, like user list, etc, should go here*/}
+                    {/*// admin panel component*/}
+                    {/*// should end here*/}
                     <Route path="/init" component={Init}/>
 
                 </BrowserRouter>

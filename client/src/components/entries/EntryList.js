@@ -6,9 +6,14 @@ import CreateEntry from "./CreateEntry";
 import UpdateEntry from "./UpdateEntry";
 import ViewEntry from "./ViewEntry";
 import Entry from "./Entry";
+
+//should go into the layout component
 import Header from "../users/Header";
+// These should go into the panel
 import AdminUserList from "../admin/AdminUserList";
 import AdminEntryList from "../admin/AdminEntryList";
+
+// Admin panel should be its own major route in app.js
 import AdminPanelComponent from "../admin/Admin";
 
 const EntryList = () => {
@@ -103,7 +108,7 @@ const EntryList = () => {
     }
 
     const deleteEntry = (id) => {
-        var currentEntries;
+        let currentEntries;
         if (userType === "USER") {
             currentEntries = entries;
         } else {
@@ -151,6 +156,7 @@ const EntryList = () => {
         window.location.href = "/entries"
     }
 
+    // logout should go to app.js
     const logout = () => {
         const userId = localStorage.getItem('UserId');
         const loginToken = localStorage.getItem('LoginToken');
@@ -165,10 +171,12 @@ const EntryList = () => {
         window.location.href = "/"
     }
 
+
+    // app.js method
     const deleteProfile = () => {
         const userId = localStorage.getItem('UserId');
         const loginToken = localStorage.getItem('LoginToken');
-        var url = `http://localhost:8081/${userId}`;
+        let url = `http://localhost:8081/${userId}`;
         const headers = {
             'Authorization': loginToken
         }
@@ -179,8 +187,9 @@ const EntryList = () => {
         });
     }
 
+    // admin panel method
     const adminDeleteProfile = (id) => {
-        var url = `http://localhost:8081/${id}`;
+        let url = `http://localhost:8081/${id}`;
         const loginToken = localStorage.getItem('LoginToken');
         const headers = {
             'Authorization': loginToken
