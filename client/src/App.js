@@ -45,7 +45,6 @@ const App = () => {
                 localStorage.setItem('UserId', result.data.userId);
                 localStorage.setItem('UserType', result.data.userType);
                 localStorage.setItem('Username', result.data.username);
-                console.log(user);
                 checkAuth(result.status);
             });
     }
@@ -144,10 +143,12 @@ const App = () => {
 
                     <Route path="/admin">
                         <AdminPanelComponent
-                            UserType={UserType}
+                            username={Username}
+                            userType={UserType}
+                            handleLogout={logout}
+                            handleProfileDelete={deleteProfile}
                         />
                     </Route>
-
                 </BrowserRouter>
             </div>
         </div>

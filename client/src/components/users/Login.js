@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 
 const Login = (props) => {
     const {user, handleChange, handleSubmit} = props;
-    console.log(user);
 
     if(user.UserType === "ADMIN") {
         return <Redirect to = "/admin" />

@@ -3,10 +3,11 @@ import {Link, Route} from "react-router-dom";
 import axios from "axios";
 import AdminUserList from "./AdminUserList";
 import AdminEntryList from "./AdminEntryList";
+import Header from "../users/Header";
 
 const AdminPanelComponent = (props) => {
 
-    const { UserType } = props;
+    const {username, userType, handleLogout, handleProfileDelete} = props;
 
     const [adminEntries, setAdminEntries] = useState([]);
     const [adminUsers, setAdminUsers] = useState([]);
@@ -58,6 +59,13 @@ const AdminPanelComponent = (props) => {
 
     return (
         <div>
+            <Header
+                username={username}
+                userType={userType}
+                handleLogout={handleLogout}
+                handleProfileDelete={handleProfileDelete}
+            />
+
             <div>ADMIN PANEL</div>
             <Link to={"/admin/allUsers"}>
                 <button>See all users</button>
@@ -75,7 +83,7 @@ const AdminPanelComponent = (props) => {
 
             <Route path="/admin/allEntries" render={() => (
                 <AdminEntryList
-                    userType={UserType}
+                    userType={userType}
                     adminEntries={adminEntries}
                     setEntries={setAdminEntries}
                 />

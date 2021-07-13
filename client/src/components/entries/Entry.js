@@ -17,11 +17,11 @@ const Entry = (props) => {
                 moment(entry.updatedAt).format(" LT")
             }
             </div>
-            <Link to = "/viewEntry">
+            <Link to = "/entries/viewEntry">
                 <button onClick={() => selectedEntry(entry)}>View</button>
             </Link>
             <button onClick={() => deleteEntry(entry._id, entries, setEntries)}>Delete</button>
-            <Link to = "/updateEntry">
+            <Link to = "/entries/updateEntry">
                 <button onClick={() => selectedEntry(entry)}>Update</button>
             </Link>
         </div>
