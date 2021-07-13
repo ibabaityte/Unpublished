@@ -4,7 +4,9 @@ import axios from "axios";
 import AdminUserList from "./AdminUserList";
 import AdminEntryList from "./AdminEntryList";
 
-const AdminPanelComponent = () => {
+const AdminPanelComponent = (props) => {
+
+    const { UserType } = props;
 
     const [adminEntries, setAdminEntries] = useState([]);
     const [adminUsers, setAdminUsers] = useState([]);
@@ -49,6 +51,8 @@ const AdminPanelComponent = () => {
         }
         axios.delete(url, {headers}).then((response) => {
             console.log(response);
+            const updatedUsers = adminUsers.filter(user => user._id !== id);
+            setAdminUsers(updatedUsers);
         });
     }
 
@@ -71,8 +75,8 @@ const AdminPanelComponent = () => {
 
             <Route path="/admin/allEntries" render={() => (
                 <AdminEntryList
+                    userType={UserType}
                     adminEntries={adminEntries}
-                    // deleteEntry={deleteEntry}
                     setEntries={setAdminEntries}
                 />
             )}/>

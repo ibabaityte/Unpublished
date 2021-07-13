@@ -139,7 +139,9 @@ const App = () => {
                     </Route>
 
                     <Route path="/admin">
-                        <AdminPanelComponent/>
+                        <AdminPanelComponent
+                            UserType={UserType}
+                        />
                     </Route>
 
                 </BrowserRouter>
