@@ -4,13 +4,11 @@ import axios from "axios";
 
 import './App.css';
 import Landing from "./components/Landing";
-// import Layout from "./components/Layout";
-import EntryList from "./components/entries/EntryList";
+import Layout from "./components/Layout";
 import AdminPanelComponent from "./components/admin/Admin";
 
-
 const App = () => {
-    const { LoginToken, UserId, UserType, Username } = localStorage;
+    const {LoginToken, UserId, UserType, Username} = localStorage;
 
     const [user, setUser] = useState({});
     const [newUser, setNewUser] = useState({});
@@ -24,7 +22,7 @@ const App = () => {
             UserType,
             Username
         });
-    }, [LoginToken, UserId, UserType]);
+    }, [LoginToken, UserId, UserType, Username]);
 
     const checkAuth = status => {
         if (status === 200) {
@@ -58,7 +56,7 @@ const App = () => {
             .then((result) => {
                 console.log(result);
                 setNewUser(newUser);
-                window.location.href="/auth"
+                window.location.href = "/auth"
             });
     }
 
@@ -96,9 +94,9 @@ const App = () => {
         }
         axios.get(url, {headers}).then((response) => {
             console.log(response);
-            localStorage.removeItem("LoginToken");
+            localStorage.clear();
+            window.location.href = "/"
         });
-        window.location.href = "/"
     }
 
     // will go to Header.js from props
@@ -135,7 +133,12 @@ const App = () => {
                     </Route>
 
                     <Route path="/entries">
-                        <EntryList/>
+                        <Layout
+                            username={Username}
+                            userType={UserType}
+                            handleLogout={logout}
+                            handleProfileDelete={deleteProfile}
+                        />
                     </Route>
 
                     <Route path="/admin">
