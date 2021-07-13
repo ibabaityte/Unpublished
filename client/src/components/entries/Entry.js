@@ -4,7 +4,7 @@ import moment from "moment";
 import {deleteEntry} from "../../utils/entryListUtils";
 
 const Entry = (props) => {
-    const { entry, entries, setEntries, selectedEntry } = props;
+    const { entry, entries, setEntries, setSelectedEntry } = props;
 
     return (
         <div>
@@ -18,11 +18,11 @@ const Entry = (props) => {
             }
             </div>
             <Link to = "/entries/viewEntry">
-                <button onClick={() => selectedEntry(entry)}>View</button>
+                <button onClick={() => setSelectedEntry(entry)}>View</button>
             </Link>
             <button onClick={() => deleteEntry(entry._id, entries, setEntries)}>Delete</button>
             <Link to = "/entries/updateEntry">
-                <button onClick={() => selectedEntry(entry)}>Update</button>
+                <button onClick={() => setSelectedEntry(entry)}>Update</button>
             </Link>
         </div>
     );

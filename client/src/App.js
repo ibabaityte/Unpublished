@@ -1,6 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
-import axios from "axios";
+
+import {
+    checkAuth,
+    login,
+    register,
+    logout,
+    deleteProfile
+} from "./utils/userUtils";
 
 import './App.css';
 
@@ -25,41 +32,6 @@ const App = () => {
         });
     }, [LoginToken, UserId, UserType, Username]);
 
-    const checkAuth = status => {
-        if (status === 200) {
-            setIsAuthenticated(true);
-        }
-    }
-
-    const login = () => {
-        const {username, password} = user;
-        const url = "http://localhost:8081/auth";
-        axios.post(url, {username, password})
-            .then((result) => {
-                setUser({
-                    UserId,
-                    UserType,
-                    Username
-                });
-                localStorage.setItem('LoginToken', result.data.token);
-                localStorage.setItem('UserId', result.data.userId);
-                localStorage.setItem('UserType', result.data.userType);
-                localStorage.setItem('Username', result.data.username);
-                checkAuth(result.status);
-            });
-    }
-
-    const register = (newUser) => {
-        const {username, password} = newUser;
-        const url = "http://localhost:8081/register";
-        axios.post(url, {username, password})
-            .then((result) => {
-                console.log(result);
-                setNewUser(newUser);
-                window.location.href = "/auth"
-            });
-    }
-
     const handleChangeLogin = (e) => {
         e.preventDefault();
         const userCopy = user;
@@ -76,42 +48,12 @@ const App = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        login();
+        login(user, setUser, checkAuth, setIsAuthenticated);
     }
 
     const handleRegister = (e, newUser) => {
         e.preventDefault();
-        register(newUser);
-    }
-
-    // will go to Header.js from props
-    const logout = () => {
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = `http://localhost:8081/${userId}/logout`;
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.get(url, {headers}).then((response) => {
-            console.log(response);
-            localStorage.clear();
-            window.location.href = "/"
-        });
-    }
-
-    // will go to Header.js from props
-    const deleteProfile = () => {
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        let url = `http://localhost:8081/${userId}`;
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.delete(url, {headers}).then((response) => {
-            console.log(response);
-            localStorage.removeItem("LoginToken");
-            window.location.href = "/"
-        });
+        register(newUser, setNewUser);
     }
 
     return (

@@ -16,7 +16,7 @@ const Login = (props) => {
     return (
         <div className = "userForm">
                 <div className = "label">Sign In to your account</div>
-                <form onSubmit = {e => handleSubmit(e)}>
+                <form onSubmit={e => handleSubmit(e)}>
                     <div className = "inputs">
                         <TextField
                             type = "text"
@@ -33,7 +33,7 @@ const Login = (props) => {
                             onChange = {e => handleChange(e)}
                         />
                     </div>
-                    <input type = "submit"/>
+                    <input type="submit" value="Login"/>
                 </form>
         </div>
     );

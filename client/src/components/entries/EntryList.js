@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Link, Route} from "react-router-dom";
 
+import {
+    createEntry,
+    updateEntry
+} from "../../utils/entryListUtils";
+
 import Entry from "./Entry";
 import CreateEntry from "./CreateEntry";
 import UpdateEntry from "./UpdateEntry";
@@ -27,48 +32,6 @@ const EntryList = () => {
 
         init();
     }, []);
-
-    const getSelectedEntry = (entry) => {
-        setSelectedEntry(entry);
-    }
-
-    const createEntry = (entry) => {
-        const {title, content} = entry;
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = "http://localhost:8081/entries";
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.post(url, {title, content}, {headers}).then((result) => {
-            entries.push(result.data.data);
-            setEntries(entries);
-        }).catch(err => {
-            console.log(err.response.data.message);
-        });
-    }
-
-    const updateEntry = (id, entry) => {
-        const {title, content} = entry;
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = `http://localhost:8081/entries/${id}`;
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.put(url, {title, content}, {headers}).then((result) => {
-            console.log(result);
-            const updatedEntry = result.data;
-            setSelectedEntry(updatedEntry);
-            for (let i = 0; i < entries.length; i++) {
-                if (entries[i]._id === result.data._id) {
-                    entries[i] = result.data;
-                    setEntries(entries);
-                    console.log(selectedEntry);
-                }
-            }
-        }).catch(err => {
-            console.log(err);
-        });
-    }
 
     const handleChange = (e, entry) => {
         e.preventDefault();
@@ -107,7 +70,7 @@ const EntryList = () => {
                         entry={entry}
                         entries={entries}
                         setEntries={setEntries}
-                        selectedEntry={getSelectedEntry}
+                        setSelectedEntry={setSelectedEntry}
                     />
                 ))}
                 <Link to="/entries/createEntry">
@@ -140,7 +103,6 @@ const EntryList = () => {
                     selectedEntry={selectedEntry}
                     entries={entries}
                     setEntries={setEntries}
-                    selectEntry={getSelectedEntry}
                 />
             )}/>
         </div>

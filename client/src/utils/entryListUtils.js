@@ -1,14 +1,10 @@
 import axios from "axios";
 
-const ENTRIES_URL = "http://localhost:8081/entries";
+import {
+    generateRequestConfig
+} from "./headerUtils";
 
-const generateRequestConfig = () => {
-    return {
-        'headers': {
-            'Authorization': localStorage.getItem('LoginToken')
-        }
-    };
-};
+const ENTRIES_URL = "http://localhost:8081/entries";
 
 const createEntry = (entry, entries, setEntries) => {
     const {title, content} = entry;

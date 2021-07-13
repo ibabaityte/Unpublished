@@ -15,20 +15,12 @@ const UpdateEntry = (props) => {
                     name="title"
                     onChange={e => handleChange(e, selectedEntry)}
                 />
-                {/*<input*/}
-                {/*    type="text"*/}
-                {/*    value={selectedEntry.content}*/}
-                {/*    className="content"*/}
-                {/*    name="content"*/}
-                {/*    onChange={e => handleChange(e, selectedEntry)}*/}
-                {/*    contentEditable="true"*/}
-                {/*/>*/}
                 <TextEditor
                     entry = {selectedEntry}
                     handleChange = {handleChange}
                     setSelectedEntry={setSelectedEntry}
                 />
-                <input type="submit" onClick = {() => handleRedirect()}/>
+                <input type="submit" value="Update" onClick = {() => handleRedirect()}/>
             </form>
         </div>
     );

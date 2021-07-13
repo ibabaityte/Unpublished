@@ -4,11 +4,11 @@ import moment from "moment";
 
 import {deleteEntry} from "../../utils/entryListUtils";
 
-const Header = (props) => {
-    const { selectedEntry, entries, setEntries, selectEntry } = props;
+const ViewEntry = (props) => {
+    const { selectedEntry, entries, setEntries, setSelectedEntry } = props;
 
     return (
-        <div className = "header">
+        <div className = "viewEntry">
             <div>{selectedEntry.title}</div>
             <div>{selectedEntry.content}</div>
             <div>
@@ -21,11 +21,11 @@ const Header = (props) => {
             }
             </div>
             <button onClick={() => deleteEntry(selectedEntry._id, entries, setEntries)}>Delete</button>
-            <Link to = "/updateEntry">
-                <button onClick={() => selectEntry(selectedEntry)}>Update</button>
+            <Link to = "/entries/updateEntry">
+                <button onClick={() => setSelectedEntry(selectedEntry)}>Update</button>
             </Link>
         </div>
     );
 }
 
-export default Header;
+export default ViewEntry;
