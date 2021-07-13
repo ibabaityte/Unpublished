@@ -27,14 +27,14 @@ const Landing = (props) => {
                         <Link to = "/auth"><Button variant="outlined">Sign in</Button></Link>
                     </Grid>
                     <Grid item lg = {6}>
-                        <Route path = "/auth" render={() => {
-                            return <Login
+                        <Route path = "/auth" render={() => (
+                            <Login
                                 user={user}
                                 handleChange={handleLoginChange}
                                 handleSubmit={handleLoginSubmit}
                                 isAuthenticated={isAuthenticated}
                             />
-                        }}/>
+                        )}/>
                         <Route path = "/register" render={() => (
                             <Register
                                 newUser = {newUser}

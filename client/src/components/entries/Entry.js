@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import deleteEntry from "../../utils/entryListUtils";
 
 const Entry = (props) => {
-    const { entry, selectedEntry, deleteEntry } = props;
+    const { entry, entries, setEntries, selectedEntry } = props;
 
     return (
         <div>
@@ -19,7 +20,7 @@ const Entry = (props) => {
             <Link to = "/viewEntry">
                 <button onClick={() => selectedEntry(entry)}>View</button>
             </Link>
-            <button onClick={() => deleteEntry(entry._id)}>Delete</button>
+            <button onClick={() => deleteEntry(entry._id, entries, setEntries)}>Delete</button>
             <Link to = "/updateEntry">
                 <button onClick={() => selectedEntry(entry)}>Update</button>
             </Link>

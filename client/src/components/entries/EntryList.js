@@ -7,25 +7,12 @@ import UpdateEntry from "./UpdateEntry";
 import ViewEntry from "./ViewEntry";
 import Entry from "./Entry";
 
-//should go into the layout component
-import Header from "../users/Header";
-// These should go into the panel
-import AdminUserList from "../admin/AdminUserList";
-import AdminEntryList from "../admin/AdminEntryList";
-
-// Admin panel should be its own major route in app.js
-import AdminPanelComponent from "../admin/Admin";
-
 const EntryList = () => {
 
     const [entries, setEntries] = useState([]);
-    const [adminEntries, setAdminEntries] = useState([]);
-    const [adminUsers, setAdminUsers] = useState([]);
     const [newEntry, setNewEntry] = useState({});
     const [selectedEntry, setSelectedEntry] = useState({});
     const [displayUpdate, setDisplayUpdate] = useState(false);
-    const [userType, setUserType] = useState("");
-    const [username, setUsername] = useState("");
 
     useEffect(() => {
         const init = () => {
@@ -35,30 +22,12 @@ const EntryList = () => {
                 'Authorization': loginToken
             }
             axios.get(url, {headers}).then((response) => {
-                updateEntries(response.data);
+                setEntries(response.data);
             });
         }
 
         init();
-        getUsernameAndType();
-        getAdminUserList();
-        getAdminEntryList();
     }, []);
-
-    const getUsernameAndType = () => {
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = `http://localhost:8081/${userId}`;
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.get(url, {headers}).then((response) => {
-            setUsername(response.data.username);
-            setUserType(response.data.userType);
-        });
-    }
-
-    const updateEntries = entries => setEntries(entries);
 
     const displayUpdateToggle = () => setDisplayUpdate(!displayUpdate);
 
@@ -71,7 +40,8 @@ const EntryList = () => {
         }
         axios.post(url, {title, content}, {headers}).then((result) => {
             entries.push(result.data.data);
-            updateEntries(entries);
+            // updateEntries(entries);
+            setEntries(entries);
 
         }).catch(err => {
             console.log(err.response.data.message);
@@ -92,7 +62,8 @@ const EntryList = () => {
             for (let i = 0; i < entries.length; i++) {
                 if (entries[i]._id === result.data._id) {
                     entries[i] = result.data;
-                    updateEntries(entries);
+                    // updateEntries(entries);
+                    setEntries(entries);
                     console.log(selectedEntry);
                     // displayUpdateToggle();
                 }
@@ -105,26 +76,6 @@ const EntryList = () => {
     const getSelectedEntry = (entry) => {
         setSelectedEntry(entry);
         setDisplayUpdate(true);
-    }
-
-    const deleteEntry = (id) => {
-        let currentEntries;
-        if (userType === "USER") {
-            currentEntries = entries;
-        } else {
-            currentEntries = adminEntries;
-        }
-        const url = `http://localhost:8081/entries/${id}`;
-        const headers = {
-            Authorization: localStorage.getItem('LoginToken')
-        };
-        axios.delete(url, {headers}).then(() => {
-            const updatedEntries = currentEntries.filter(entry => entry._id !== id);
-            updateEntries(updatedEntries);
-            window.location.href = "/entries"
-        }).catch(err => {
-            console.log(err);
-        });
     }
 
     const handleChange = (e, entry) => {
@@ -157,93 +108,47 @@ const EntryList = () => {
     }
 
     // logout should go to app.js
-    const logout = () => {
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        const url = `http://localhost:8081/${userId}/logout`;
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.get(url, {headers}).then((response) => {
-            console.log(response);
-            localStorage.removeItem("LoginToken");
-        });
-        window.location.href = "/"
-    }
+    // const logout = () => {
+    //     const userId = localStorage.getItem('UserId');
+    //     const loginToken = localStorage.getItem('LoginToken');
+    //     const url = `http://localhost:8081/${userId}/logout`;
+    //     const headers = {
+    //         'Authorization': loginToken
+    //     }
+    //     axios.get(url, {headers}).then((response) => {
+    //         console.log(response);
+    //         localStorage.removeItem("LoginToken");
+    //     });
+    //     window.location.href = "/"
+    // }
 
 
-    // app.js method
-    const deleteProfile = () => {
-        const userId = localStorage.getItem('UserId');
-        const loginToken = localStorage.getItem('LoginToken');
-        let url = `http://localhost:8081/${userId}`;
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.delete(url, {headers}).then((response) => {
-            console.log(response);
-            localStorage.removeItem("LoginToken");
-            window.location.href = "/"
-        });
-    }
-
-    // admin panel method
-    const adminDeleteProfile = (id) => {
-        let url = `http://localhost:8081/${id}`;
-        const loginToken = localStorage.getItem('LoginToken');
-        const headers = {
-            'Authorization': loginToken
-        }
-        axios.delete(url, {headers}).then((response) => {
-            console.log(response);
-        });
-    }
-
-    const getAdminUserList = () => {
-        const loginToken = localStorage.getItem('LoginToken');
-        const headers = {
-            'Authorization': loginToken
-        }
-        const url = "http://localhost:8081/admin/allUsers";
-        axios.get(url, {headers}).then((response) => {
-            // this.setState({adminUsers: response.data});
-            setAdminUsers(response.data);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
-
-    const getAdminEntryList = () => {
-        const loginToken = localStorage.getItem('LoginToken');
-        const headers = {
-            'Authorization': loginToken
-        }
-        const url = "http://localhost:8081/admin/allEntries";
-        axios.get(url, {headers}).then((response) => {
-            console.log(response);
-            // this.setState({adminEntries: response.data});
-            setAdminEntries(response.data);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+    // // app.js method
+    // const deleteProfile = () => {
+    //     const userId = localStorage.getItem('UserId');
+    //     const loginToken = localStorage.getItem('LoginToken');
+    //     let url = `http://localhost:8081/${userId}`;
+    //     const headers = {
+    //         'Authorization': loginToken
+    //     }
+    //     axios.delete(url, {headers}).then((response) => {
+    //         console.log(response);
+    //         localStorage.removeItem("LoginToken");
+    //         window.location.href = "/"
+    //     });
+    // }
 
     return (
         <div>
             <BrowserRouter>
-                <Header
-                    username={username}
-                    userType={userType}
-                    handleLogout={logout}
-                    handleProfileDelete={deleteProfile}
-                />
 
                 <Route path="/viewEntry" render={() => (
                     <ViewEntry
                         key={selectedEntry._id}
                         selectedEntry={selectedEntry}
+                        entries={entries}
+                        setEntries={setEntries}
                         selectEntry={getSelectedEntry}
-                        deleteEntry={deleteEntry}
                     />
                 )}/>
 
@@ -261,8 +166,9 @@ const EntryList = () => {
                         <Entry
                             key={entry._id}
                             entry={entry}
+                            entries={entries}
+                            setEntries={setEntries}
                             selectedEntry={getSelectedEntry}
-                            deleteEntry={deleteEntry}
                         />
                     ))}
                     <Link to="/createEntry">
@@ -280,23 +186,6 @@ const EntryList = () => {
                         />
                 </Route>
 
-                <Route path="/admin">
-                    <AdminPanelComponent/>
-                </Route>
-
-                <Route path="/admin/allUsers" render={() => (
-                    <AdminUserList
-                        adminUsers={adminUsers}
-                        handleProfileDelete={adminDeleteProfile}
-                    />
-                )}/>
-
-                <Route path="/admin/allEntries" render={() => (
-                    <AdminEntryList
-                        adminEntries={adminEntries}
-                        deleteEntry={deleteEntry}
-                    />
-                )}/>
             </BrowserRouter>
         </div>
     );

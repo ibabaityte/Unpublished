@@ -3,7 +3,6 @@ import {Link, Route} from "react-router-dom";
 import axios from "axios";
 import AdminUserList from "./AdminUserList";
 import AdminEntryList from "./AdminEntryList";
-import deleteEntry from "../../utils/entryListUtils";
 
 const AdminPanelComponent = () => {
 
@@ -73,7 +72,7 @@ const AdminPanelComponent = () => {
             <Route path="/admin/allEntries" render={() => (
                 <AdminEntryList
                     adminEntries={adminEntries}
-                    deleteEntry={deleteEntry}
+                    // deleteEntry={deleteEntry}
                     setEntries={setAdminEntries}
                 />
             )}/>

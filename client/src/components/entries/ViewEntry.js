@@ -2,8 +2,10 @@ import React from "react";
 import {Link} from "react-router-dom";
 import moment from "moment";
 
+import deleteEntry from "../../utils/entryListUtils";
+
 const Header = (props) => {
-    const { selectedEntry, deleteEntry, selectEntry } = props;
+    const { selectedEntry, entries, setEntries, selectEntry } = props;
 
     return (
         <div className = "header">
@@ -18,7 +20,7 @@ const Header = (props) => {
                 moment(selectedEntry.updatedAt).format(" LT")
             }
             </div>
-            <button onClick={() => deleteEntry(selectedEntry._id)}>Delete</button>
+            <button onClick={() => deleteEntry(selectedEntry._id, entries, setEntries)}>Delete</button>
             <Link to = "/updateEntry">
                 <button onClick={() => selectEntry(selectedEntry)}>Update</button>
             </Link>

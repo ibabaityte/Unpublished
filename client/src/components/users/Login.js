@@ -3,9 +3,14 @@ import {Redirect} from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 
 const Login = (props) => {
-    const {user, handleChange, handleSubmit, isAuthenticated} = props;
+    const {user, handleChange, handleSubmit} = props;
+    console.log(user);
 
-    if(isAuthenticated) {
+    if(user.UserType === "ADMIN") {
+        return <Redirect to = "/admin" />
+    }
+
+    if (user.UserType === "USER") {
         return <Redirect to = "/entries" />
     }
 

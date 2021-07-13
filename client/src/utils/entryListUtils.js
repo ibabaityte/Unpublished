@@ -8,7 +8,7 @@ const deleteEntry = (entryId, entries, setEntries) => {
     axios.delete(url, {headers}).then(() => {
         const updatedEntries = entries.filter(entry => entry._id !== entryId);
         setEntries(updatedEntries);
-        // window.location.href = "/entries"
+        window.location.href = "/entries"
     }).catch(err => {
         console.log(err);
     });

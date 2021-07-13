@@ -67,7 +67,8 @@ const auth = (req, res) => {
                         message: "Auth successful",
                         token: token,
                         userId: user._id,
-                        userType: user.userType
+                        userType: user.userType,
+                        username: user.username
                     });
                 } else {
                     res.status(401).send({
