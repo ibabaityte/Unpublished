@@ -3,6 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import axios from "axios";
 
 import './App.css';
+
 import Landing from "./components/Landing";
 import Layout from "./components/Layout";
 import AdminPanelComponent from "./components/admin/Admin";

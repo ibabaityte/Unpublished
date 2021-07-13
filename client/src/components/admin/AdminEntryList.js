@@ -1,5 +1,5 @@
 import React from "react";
-import deleteEntry from "../../utils/entryListUtils";
+import {deleteEntry} from "../../utils/entryListUtils";
 
 const AdminEntryList = (props) => {
     const {userId, adminEntries, setEntries} = props;

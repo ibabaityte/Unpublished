@@ -102,7 +102,7 @@ const EntryList = () => {
     }
 
     const handleRedirect = () => {
-        window.location.href = "/entries"
+        window.location.href = "/entries";
     }
 
     return (

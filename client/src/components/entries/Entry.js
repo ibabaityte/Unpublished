@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import deleteEntry from "../../utils/entryListUtils";
+import {deleteEntry} from "../../utils/entryListUtils";
 
 const Entry = (props) => {
     const { entry, entries, setEntries, selectedEntry } = props;

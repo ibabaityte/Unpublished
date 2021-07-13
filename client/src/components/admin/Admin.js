@@ -59,7 +59,7 @@ const AdminPanelComponent = (props) => {
     return (
         <div>
             <div>ADMIN PANEL</div>
-            <Link to="/admin/allUsers">
+            <Link to={"/admin/allUsers"}>
                 <button>See all users</button>
             </Link>
             <Link to="/admin/allEntries">

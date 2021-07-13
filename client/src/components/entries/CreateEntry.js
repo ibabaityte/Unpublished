@@ -24,8 +24,8 @@ const CreateEntry = (props) => {
                 {/*    contentEditable="true"*/}
                 {/*/>*/}
                 <TextEditor
-                    entry = {entry}
-                    handleChange = {handleChange}
+                    entry={entry}
+                    handleChange={handleChange}
                 />
                 <input type="submit" onClick = {() => handleRedirect()}/>
             </form>

@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import moment from "moment";
 
-import deleteEntry from "../../utils/entryListUtils";
+import {deleteEntry} from "../../utils/entryListUtils";
 
 const Header = (props) => {
     const { selectedEntry, entries, setEntries, selectEntry } = props;
