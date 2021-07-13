@@ -4,12 +4,13 @@ import axios from "axios";
 
 import './App.css';
 import Landing from "./components/Landing";
+// import Layout from "./components/Layout";
 import EntryList from "./components/entries/EntryList";
-import Init from "./components/admin/Admin";
-import Login from "./components/users/Login";
+import AdminPanelComponent from "./components/admin/Admin";
+
 
 const App = () => {
-    const { LoginToken, UserId, UserType } = localStorage;
+    const { LoginToken, UserId, UserType, Username } = localStorage;
 
     const [user, setUser] = useState({});
     const [newUser, setNewUser] = useState({});
@@ -20,9 +21,10 @@ const App = () => {
         setIsAuthenticated(!!LoginToken);
         setUser({
             UserId,
-            UserType
+            UserType,
+            Username
         });
-    }, []);
+    }, [LoginToken, UserId, UserType]);
 
     const checkAuth = status => {
         if (status === 200) {
@@ -35,15 +37,19 @@ const App = () => {
         const url = "http://localhost:8081/auth";
         axios.post(url, {username, password})
             .then((result) => {
-                setUser(user);
-                // setState({...user, userType: result.data.userType});
+                setUser({
+                    UserId,
+                    UserType,
+                    Username
+                });
                 localStorage.setItem('LoginToken', result.data.token);
                 localStorage.setItem('UserId', result.data.userId);
                 localStorage.setItem('UserType', result.data.userType);
+                localStorage.setItem('Username', result.data.username);
+                console.log(user);
                 checkAuth(result.status);
             });
     }
-
 
     const register = (newUser) => {
         const {username, password} = newUser;
@@ -52,10 +58,9 @@ const App = () => {
             .then((result) => {
                 console.log(result);
                 setNewUser(newUser);
-                // window.location.href="/auth"
+                window.location.href="/auth"
             });
     }
-
 
     const handleChangeLogin = (e) => {
         e.preventDefault();
@@ -64,7 +69,6 @@ const App = () => {
         setUser(userCopy);
     }
 
-
     const handleChangeRegister = (e) => {
         e.preventDefault();
         const newUserCopy = newUser;
@@ -72,12 +76,10 @@ const App = () => {
         setNewUser(newUserCopy);
     }
 
-
     const handleLogin = (e) => {
         e.preventDefault();
-        login(user);
+        login();
     }
-
 
     const handleRegister = (e, newUser) => {
         e.preventDefault();
@@ -101,12 +103,14 @@ const App = () => {
                                /> : null
                            }>
                     </Route>
-                    {/*// layout component should start wrapping here*/}
-                    <Route path="/entries" component={EntryList}/>
-                    {/*// all other major routes, like user list, etc, should go here*/}
-                    {/*// admin panel component*/}
-                    {/*// should end here*/}
-                    <Route path="/init" component={Init}/>
+
+                    <Route path="/entries">
+                        <EntryList/>
+                    </Route>
+
+                    <Route path="/admin">
+                        <AdminPanelComponent/>
+                    </Route>
 
                 </BrowserRouter>
             </div>
