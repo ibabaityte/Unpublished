@@ -86,6 +86,36 @@ const App = () => {
         register(newUser);
     }
 
+    // will go to Header.js from props
+    const logout = () => {
+        const userId = localStorage.getItem('UserId');
+        const loginToken = localStorage.getItem('LoginToken');
+        const url = `http://localhost:8081/${userId}/logout`;
+        const headers = {
+            'Authorization': loginToken
+        }
+        axios.get(url, {headers}).then((response) => {
+            console.log(response);
+            localStorage.removeItem("LoginToken");
+        });
+        window.location.href = "/"
+    }
+
+    // will go to Header.js from props
+    const deleteProfile = () => {
+        const userId = localStorage.getItem('UserId');
+        const loginToken = localStorage.getItem('LoginToken');
+        let url = `http://localhost:8081/${userId}`;
+        const headers = {
+            'Authorization': loginToken
+        }
+        axios.delete(url, {headers}).then((response) => {
+            console.log(response);
+            localStorage.removeItem("LoginToken");
+            window.location.href = "/"
+        });
+    }
+
     return (
         <div className="App">
             <div>

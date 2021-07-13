@@ -40,7 +40,6 @@ const EntryList = () => {
         }
         axios.post(url, {title, content}, {headers}).then((result) => {
             entries.push(result.data.data);
-            // updateEntries(entries);
             setEntries(entries);
 
         }).catch(err => {
@@ -62,7 +61,6 @@ const EntryList = () => {
             for (let i = 0; i < entries.length; i++) {
                 if (entries[i]._id === result.data._id) {
                     entries[i] = result.data;
-                    // updateEntries(entries);
                     setEntries(entries);
                     console.log(selectedEntry);
                     // displayUpdateToggle();
@@ -106,37 +104,6 @@ const EntryList = () => {
     const handleRedirect = () => {
         window.location.href = "/entries"
     }
-
-    // logout should go to app.js
-    // const logout = () => {
-    //     const userId = localStorage.getItem('UserId');
-    //     const loginToken = localStorage.getItem('LoginToken');
-    //     const url = `http://localhost:8081/${userId}/logout`;
-    //     const headers = {
-    //         'Authorization': loginToken
-    //     }
-    //     axios.get(url, {headers}).then((response) => {
-    //         console.log(response);
-    //         localStorage.removeItem("LoginToken");
-    //     });
-    //     window.location.href = "/"
-    // }
-
-
-    // // app.js method
-    // const deleteProfile = () => {
-    //     const userId = localStorage.getItem('UserId');
-    //     const loginToken = localStorage.getItem('LoginToken');
-    //     let url = `http://localhost:8081/${userId}`;
-    //     const headers = {
-    //         'Authorization': loginToken
-    //     }
-    //     axios.delete(url, {headers}).then((response) => {
-    //         console.log(response);
-    //         localStorage.removeItem("LoginToken");
-    //         window.location.href = "/"
-    //     });
-    // }
 
     return (
         <div>
