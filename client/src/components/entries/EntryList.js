@@ -51,7 +51,7 @@ const EntryList = () => {
     const handleSubmit = (e, entry) => {
         e.preventDefault();
         if (entry._id) {
-            updateEntry(entry._id, entry);
+            updateEntry(entry._id, entry, entries, setEntries, selectedEntry, setSelectedEntry);
         } else {
             createEntry(entry);
         }
