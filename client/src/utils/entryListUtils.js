@@ -40,7 +40,7 @@ const deleteEntry = (userType, entryId, entries, setEntries) => {
     axios.delete(url, generateRequestConfig()).then(() => {
         const updatedEntries = entries.filter(entry => entry._id !== entryId);
         setEntries(updatedEntries);
-        if(userType === "USER") {
+        if (userType === "USER") {
             window.location.href = "/entries"
         }
     }).catch(err => {

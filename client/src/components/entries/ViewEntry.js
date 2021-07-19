@@ -5,10 +5,10 @@ import moment from "moment";
 import {deleteEntry} from "../../utils/entryListUtils";
 
 const ViewEntry = (props) => {
-    const { selectedEntry, entries, setEntries, setSelectedEntry } = props;
+    const {selectedEntry, entries, setEntries, setSelectedEntry} = props;
 
     return (
-        <div className = "viewEntry">
+        <div className="viewEntry">
             <div>{selectedEntry.title}</div>
             <div>{selectedEntry.content}</div>
             <div>
@@ -21,7 +21,7 @@ const ViewEntry = (props) => {
             }
             </div>
             <button onClick={() => deleteEntry(selectedEntry._id, entries, setEntries)}>Delete</button>
-            <Link to = "/entries/updateEntry">
+            <Link to="/entries/updateEntry">
                 <button onClick={() => setSelectedEntry(selectedEntry)}>Update</button>
             </Link>
         </div>

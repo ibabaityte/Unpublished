@@ -15,36 +15,36 @@ const Landing = (props) => {
         handleRegisterChange,
         handleRegisterSubmit
     } = props;
-    return(
+    return (
         <div>
-            <div className = "landingBackground"/>
-                <Grid container className = "container">
-                    <Grid item lg = {6} className = "landingContent">
-                        <h1>Unpublished</h1>
-                        <h2>Your personal online Diary</h2>
-                        <h3>So many great stories that are left Unpublished</h3>
-                        <Link to = "/register"><Button variant="outlined">Sign up</Button></Link>
-                        <Link to = "/auth"><Button variant="outlined">Sign in</Button></Link>
-                    </Grid>
-                    <Grid item lg = {6}>
-                        <Route path = "/auth" render={() => (
-                            <Login
-                                user={user}
-                                handleChange={handleLoginChange}
-                                handleSubmit={handleLoginSubmit}
-                                isAuthenticated={isAuthenticated}
-                            />
-                        )}/>
-                        <Route path = "/register" render={() => (
-                            <Register
-                                newUser = {newUser}
-                                handleChange = {handleRegisterChange}
-                                handleSubmit = {handleRegisterSubmit}
-                                isAuthenticated = {isAuthenticated}
-                            />
-                        )}/>
-                    </Grid>
+            <div className="landingBackground"/>
+            <Grid container className="container">
+                <Grid item lg={6} className="landingContent">
+                    <h1>Unpublished</h1>
+                    <h2>Your personal online Diary</h2>
+                    <h3>So many great stories that are left Unpublished</h3>
+                    <Link to="/register"><Button variant="outlined">Sign up</Button></Link>
+                    <Link to="/auth"><Button variant="outlined">Sign in</Button></Link>
                 </Grid>
+                <Grid item lg={6}>
+                    <Route path="/auth" render={() => (
+                        <Login
+                            user={user}
+                            handleChange={handleLoginChange}
+                            handleSubmit={handleLoginSubmit}
+                            isAuthenticated={isAuthenticated}
+                        />
+                    )}/>
+                    <Route path="/register" render={() => (
+                        <Register
+                            newUser={newUser}
+                            handleChange={handleRegisterChange}
+                            handleSubmit={handleRegisterSubmit}
+                            isAuthenticated={isAuthenticated}
+                        />
+                    )}/>
+                </Grid>
+            </Grid>
         </div>
     );
 }

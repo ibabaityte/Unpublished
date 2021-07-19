@@ -1,14 +1,14 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
     faBold,
     faItalic,
     faList
 } from '@fortawesome/free-solid-svg-icons';
 
-const bold = <FontAwesomeIcon icon={faBold} />;
-const italic = <FontAwesomeIcon icon={faItalic} />;
-const list = <FontAwesomeIcon icon={faList} />;
+const bold = <FontAwesomeIcon icon={faBold}/>;
+const italic = <FontAwesomeIcon icon={faItalic}/>;
+const list = <FontAwesomeIcon icon={faList}/>;
 
 const TextEditor = (props) => {
 
@@ -20,13 +20,11 @@ const TextEditor = (props) => {
         let entryCopy = entry;
         let modifiedSelection = '';
 
-        if(command === 'bold') {
+        if (command === 'bold') {
             modifiedSelection = '<b>' + selection + '</b>'
-        }
-        else if(command === 'italic') {
+        } else if (command === 'italic') {
             modifiedSelection = '<i>' + selection + '</i>'
-        }
-        else if(command === 'unorderedList') {
+        } else if (command === 'unorderedList') {
             modifiedSelection = '<ul>' + selection + '</ul>'
         }
 
@@ -38,10 +36,10 @@ const TextEditor = (props) => {
         <div>
 
             <h3>actions</h3>
-            <div className = "toolbar">
-                <button type = "button" onClick={() => format('bold', entry.content)}><span>{bold}</span></button>
-                <button type="button" onClick={() => format('italic', entry.content)}><span>{italic}</span></button>
-                <button type="button" onClick={() => format('unorderedList', entry.content)}><span>{list}</span></button>
+            <div className="toolbar">
+                <button type="button" onClick={() => format('bold')}><span>{bold}</span></button>
+                <button type="button" onClick={() => format('italic')}><span>{italic}</span></button>
+                <button type="button" onClick={() => format('unorderedList')}><span>{list}</span></button>
             </div>
 
             <textarea

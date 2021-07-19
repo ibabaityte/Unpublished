@@ -37,15 +37,17 @@ const EntryList = (props) => {
 
     const handleChange = (e, entry) => {
         e.preventDefault();
-        if(entry._id) {
+        if (entry._id) {
             setSelectedEntry({
-                ...selectedEntry,
-                [e.target.className]: e.target.value}
+                    ...selectedEntry,
+                    [e.target.className]: e.target.value
+                }
             );
         } else {
             setNewEntry({
-                ...newEntry,
-                [e.target.className]: e.target.value}
+                    ...newEntry,
+                    [e.target.className]: e.target.value
+                }
             );
         }
     }
