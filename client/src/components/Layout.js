@@ -18,7 +18,9 @@ const Layout = (props) => {
             />
 
             <Route path="/entries">
-                <EntryList/>
+                <EntryList
+                    userType={userType}
+                />
             </Route>
         </div>
     )

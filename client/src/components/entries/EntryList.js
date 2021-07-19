@@ -12,7 +12,9 @@ import UpdateEntry from "./UpdateEntry";
 import ViewEntry from "./ViewEntry";
 import axios from "axios";
 
-const EntryList = () => {
+const EntryList = (props) => {
+
+    const {userType} = props;
 
     const [entries, setEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({});
@@ -53,7 +55,7 @@ const EntryList = () => {
         if (entry._id) {
             updateEntry(entry._id, entry, entries, setEntries, selectedEntry, setSelectedEntry);
         } else {
-            createEntry(entry);
+            createEntry(entry, entries, setEntries);
         }
     }
 
@@ -71,6 +73,7 @@ const EntryList = () => {
                         entries={entries}
                         setEntries={setEntries}
                         setSelectedEntry={setSelectedEntry}
+                        userType={userType}
                     />
                 ))}
                 <Link to="/entries/createEntry">
@@ -84,6 +87,7 @@ const EntryList = () => {
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     handleRedirect={handleRedirect}
+                    setSelectedEntry={setSelectedEntry}
                 />
             )}/>
 

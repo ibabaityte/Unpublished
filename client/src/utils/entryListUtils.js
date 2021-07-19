@@ -12,7 +12,7 @@ const createEntry = (entry, entries, setEntries) => {
         entries.push(result.data.data);
         setEntries(entries);
     }).catch(err => {
-        console.log(err.response.data.message);
+        console.log(err);
     });
 };
 
@@ -28,7 +28,6 @@ const updateEntry = (id, entry, entries, setEntries, selectedEntry, setSelectedE
                 entries[i] = result.data;
                 setEntries(entries);
                 console.log(selectedEntry);
-                // displayUpdateToggle();
             }
         }
     }).catch(err => {

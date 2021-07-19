@@ -49,13 +49,13 @@ const register = (newUser, setNewUser) => {
 }
 
 const logout = () => {
-    const userId = localStorage.getItem('UserId');
-    const url = `${API_URL}${userId}/logout`;
-    axios.get(url, generateRequestConfig()).then((response) => {
-        console.log(response);
+    // const userId = localStorage.getItem('UserId');
+    // const url = `${API_URL}${userId}/logout`;
+    // axios.get(url, generateRequestConfig()).then((response) => {
+    //     console.log(response);
         localStorage.clear();
         window.location.href = "/"
-    });
+    // });
 }
 
 const deleteProfile = () => {

@@ -21,13 +21,13 @@ const TextEditor = (props) => {
         let modifiedSelection = '';
 
         if(command === 'bold') {
-            modifiedSelection = '<b>' + selection + '</b>';
+            modifiedSelection = '<b>' + selection + '</b>'
         }
         else if(command === 'italic') {
-
+            modifiedSelection = '<i>' + selection + '</i>'
         }
         else if(command === 'unorderedList') {
-
+            modifiedSelection = '<ul>' + selection + '</ul>'
         }
 
         entryCopy.content = fullContent.replace(selection, modifiedSelection);
@@ -39,7 +39,7 @@ const TextEditor = (props) => {
 
             <h3>actions</h3>
             <div className = "toolbar">
-                <button onClick={() => format('bold', entry.content)}><span>{bold}</span></button>
+                <button type = "button" onClick={() => format('bold', entry.content)}><span>{bold}</span></button>
                 <button type="button" onClick={() => format('italic', entry.content)}><span>{italic}</span></button>
                 <button type="button" onClick={() => format('unorderedList', entry.content)}><span>{list}</span></button>
             </div>
