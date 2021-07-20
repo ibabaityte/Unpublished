@@ -14,18 +14,19 @@ const TextEditor = (props) => {
 
     const {entry, handleChange, setSelectedEntry} = props;
 
-    const format = (command) => {
+    const formatText = (e, command) => {
+        e.preventDefault();
         let selection = window.getSelection().toString();
         let fullContent = entry.content;
         let entryCopy = entry;
         let modifiedSelection = '';
 
         if (command === 'bold') {
-            modifiedSelection = '<b>' + selection + '</b>'
+            modifiedSelection = '<b>' + selection + '</b>';
         } else if (command === 'italic') {
-            modifiedSelection = '<i>' + selection + '</i>'
+            modifiedSelection = '<i>' + selection + '</i>';
         } else if (command === 'unorderedList') {
-            modifiedSelection = '<ul>' + selection + '</ul>'
+            modifiedSelection = '<ul>' + selection + '</ul>';
         }
 
         entryCopy.content = fullContent.replace(selection, modifiedSelection);
@@ -37,9 +38,9 @@ const TextEditor = (props) => {
 
             <h3>actions</h3>
             <div className="toolbar">
-                <button type="button" onClick={() => format('bold')}><span>{bold}</span></button>
-                <button type="button" onClick={() => format('italic')}><span>{italic}</span></button>
-                <button type="button" onClick={() => format('unorderedList')}><span>{list}</span></button>
+                <button onClick={(e) => formatText(e,'bold')}><span>{bold}</span></button>
+                <button onClick={(e) => formatText(e,'italic')}><span>{italic}</span></button>
+                <button onClick={(e) => formatText(e,'unorderedList')}><span>{list}</span></button>
             </div>
 
             <textarea

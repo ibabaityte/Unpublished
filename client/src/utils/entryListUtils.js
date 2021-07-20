@@ -11,6 +11,7 @@ const createEntry = (entry, entries, setEntries) => {
     axios.post(ENTRIES_URL, {title, content}, generateRequestConfig()).then((result) => {
         entries.push(result.data.data);
         setEntries(entries);
+        console.log(result);
     }).catch(err => {
         console.log(err);
     });
@@ -40,7 +41,7 @@ const deleteEntry = (userType, entryId, entries, setEntries) => {
     axios.delete(url, generateRequestConfig()).then(() => {
         const updatedEntries = entries.filter(entry => entry._id !== entryId);
         setEntries(updatedEntries);
-        if (userType === "USER") {
+        if(userType === "USER") {
             window.location.href = "/entries"
         }
     }).catch(err => {
