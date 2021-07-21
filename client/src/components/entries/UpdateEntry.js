@@ -16,6 +16,7 @@ const UpdateEntry = (props) => {
                     onChange={e => handleChange(e, selectedEntry)}
                 />
                 <TextEditor
+                    selectedEntry={selectedEntry}
                     entry={selectedEntry}
                     handleChange={handleChange}
                     setSelectedEntry={setSelectedEntry}
