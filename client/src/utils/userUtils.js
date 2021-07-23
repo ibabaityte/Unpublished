@@ -48,22 +48,32 @@ const register = (newUser, setNewUser) => {
     });
 }
 
-const logout = () => {
+const logout = (e, anchorRef, setOpen) => {
     // const userId = localStorage.getItem('UserId');
     // const url = `${API_URL}${userId}/logout`;
     // axios.get(url, generateRequestConfig()).then((response) => {
     //     console.log(response);
     localStorage.clear();
     window.location.href = "/"
+    if (anchorRef.current && anchorRef.current.contains(e.target)) {
+        return;
+    }
+
+    setOpen(false);
     // });
 }
 
-const deleteProfile = () => {
+const deleteProfile = (e, anchorRef, setOpen) => {
     const userId = localStorage.getItem('UserId');
     axios.delete(`${API_URL}${userId}`, generateRequestConfig()).then((response) => {
         console.log(response);
         localStorage.clear();
         window.location.href = "/";
+        if (anchorRef.current && anchorRef.current.contains(e.target)) {
+            return;
+        }
+
+        setOpen(false);
     });
 }
 

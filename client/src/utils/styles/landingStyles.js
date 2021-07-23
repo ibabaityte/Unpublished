@@ -16,13 +16,17 @@ const LandingStyles = makeStyles({
         zIndex: "-1"
     },
     btn: {
-        width: "110px",
+        width: "120px",
         height: "60px",
         margin: "30px",
         fontSize: "1.2rem",
         backgroundColor: "rgba(230, 230, 230, 0.5)",
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
-        borderRadius: "8px"
+        borderRadius: "8px",
+
+    },
+    landingLink: {
+        textDecoration: "none"
     },
     container: {
         position: "absolute",
@@ -53,9 +57,6 @@ const LandingStyles = makeStyles({
         fontSize: "2.1em",
         color: "rgb(240, 240, 240)",
         textShadow: "5px -1px 4px rgb(110, 110, 110)"
-    },
-    landingLink: {
-        textDecoration: "none"
     }
 });
 

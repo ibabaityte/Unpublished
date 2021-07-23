@@ -1,25 +1,7 @@
 body {
     margin: 0 !important;
     padding: 0 !important;
-    font-family: 'Zilla Slab', serif;
-}
-
-.header {
-    width: 100vw;
-    height: 10vh;
-}
-
-.header h3 {
-    width: auto;
-    margin: 5px;
-    display: inline;
-}
-
-/*in the header*/
-.username {
-    width: auto;
-    margin: 5px;
-    display: inline;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .toolbar
