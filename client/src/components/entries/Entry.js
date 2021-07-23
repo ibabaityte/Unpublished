@@ -6,6 +6,7 @@ import {deleteEntry} from "../../utils/entryListUtils";
 const Entry = (props) => {
     const {entry, entries, setEntries, setSelectedEntry, userType} = props;
 
+
     return (
         <div>
             <div>{entry.title}</div>

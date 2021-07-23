@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Grid from "@material-ui/core/Grid";
 import Login from "./users/Login";
 import Register from "./users/Register";
+import { LandingStyles } from "../utils/styles/landingStyles";
 
 const Landing = (props) => {
     const {
@@ -15,34 +16,40 @@ const Landing = (props) => {
         handleRegisterChange,
         handleRegisterSubmit
     } = props;
+
+    const styles = LandingStyles();
+
     return (
         <div>
-            <div className="landingBackground"/>
-            <Grid container className="container">
-                <Grid item lg={6} className="landingContent">
-                    <h1>Unpublished</h1>
-                    <h2>Your personal online Diary</h2>
-                    <h3>So many great stories that are left Unpublished</h3>
-                    <Link to="/register"><Button variant="outlined">Sign up</Button></Link>
-                    <Link to="/auth"><Button variant="outlined">Sign in</Button></Link>
+            <div/>
+            <img className={styles.img} src="/images/landing images/detail.jpg" alt=""/>
+            <Grid container className={styles.container}>
+                <Grid item lg={7} className={styles.landingTextGrid}>
+                    <h1 className={styles.landingH1}>Unpublished</h1>
+                    <h2 className={styles.landingH2}>Your personal online Diary</h2>
+                    <h3 className={styles.landingH3}>So many great stories that are left Unpublished</h3>
+                    <Link to="/register" className={styles.landingLink}><Button className={styles.btn} variant="outlined">Sign up</Button></Link>
+                    <Link to="/auth" className={styles.landingLink}><Button className={styles.btn} variant="outlined">Sign in</Button></Link>
                 </Grid>
-                <Grid item lg={6}>
-                    <Route path="/auth" render={() => (
-                        <Login
-                            user={user}
-                            handleChange={handleLoginChange}
-                            handleSubmit={handleLoginSubmit}
-                            isAuthenticated={isAuthenticated}
-                        />
-                    )}/>
-                    <Route path="/register" render={() => (
-                        <Register
-                            newUser={newUser}
-                            handleChange={handleRegisterChange}
-                            handleSubmit={handleRegisterSubmit}
-                            isAuthenticated={isAuthenticated}
-                        />
-                    )}/>
+                <Grid item lg={5}>
+                    <div className={styles.landingFormGrid}>
+                        <Route path="/auth" render={() => (
+                            <Login
+                                user={user}
+                                handleChange={handleLoginChange}
+                                handleSubmit={handleLoginSubmit}
+                                isAuthenticated={isAuthenticated}
+                            />
+                        )}/>
+                        <Route path="/register" render={() => (
+                            <Register
+                                newUser={newUser}
+                                handleChange={handleRegisterChange}
+                                handleSubmit={handleRegisterSubmit}
+                                isAuthenticated={isAuthenticated}
+                            />
+                        )}/>
+                    </div>
                 </Grid>
             </Grid>
         </div>
