@@ -8,11 +8,12 @@ const LandingStyles = makeStyles({
         minWidth: "1024px",
         width: "100%",
         height: "50%",
-        filter: "blur(10px)",
+        filter: "blur(8px)",
         position: "fixed",
         top: 0,
         left: 0,
-        opacity: "93%"
+        opacity: "90%",
+        zIndex: "-1"
     },
     btn: {
         width: "110px",

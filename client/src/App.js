@@ -14,6 +14,7 @@ import './App.css';
 import Landing from "./components/Landing";
 import Layout from "./components/Layout";
 import AdminPanelComponent from "./components/admin/Admin";
+import {Background} from "./utils/styles/background";
 
 const App = () => {
     const {LoginToken, UserId, UserType, Username} = localStorage;
@@ -31,6 +32,8 @@ const App = () => {
             Username
         });
     }, [LoginToken, UserId, UserType, Username]);
+
+    const styles = Background();
 
     const handleChangeLogin = (e) => {
         e.preventDefault();
@@ -58,6 +61,7 @@ const App = () => {
 
     return (
         <div className="App">
+            <div className={styles.img}/>
             <div>
                 <BrowserRouter>
                     <Route path="/"
