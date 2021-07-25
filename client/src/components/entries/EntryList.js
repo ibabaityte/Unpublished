@@ -108,6 +108,7 @@ const EntryList = (props) => {
                     selectedEntry={selectedEntry}
                     entries={entries}
                     setEntries={setEntries}
+                    setSelectedEntry={setSelectedEntry}
                 />
             )}/>
         </div>

@@ -6,6 +6,7 @@ import {
     faItalic,
     faList
 } from '@fortawesome/free-solid-svg-icons';
+import sanitize from "sanitize-html";
 
 const bold = <FontAwesomeIcon icon={faBold}/>;
 const italic = <FontAwesomeIcon icon={faItalic}/>;
@@ -15,7 +16,7 @@ const list = <FontAwesomeIcon icon={faList}/>;
 const TextEditor = (props) => {
 
     const {selectedEntry, entry, handleChange, setSelectedEntry} = props;
-
+    const sanitized = sanitize(entry.content);
 
     return (
         <div>
@@ -32,6 +33,11 @@ const TextEditor = (props) => {
                 className="content"
                 name="content"
                 onChange={e => handleChange(e, entry)}
+            />
+
+            <span
+                className="preview"
+                dangerouslySetInnerHTML={{__html: sanitized}}
             />
 
         </div>
