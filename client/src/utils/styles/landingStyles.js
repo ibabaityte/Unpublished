@@ -12,7 +12,19 @@ const LandingStyles = makeStyles({
         position: "fixed",
         top: 0,
         left: 0,
-        opacity: "90%",
+        zIndex: "-1"
+    },
+    imgOverlay: {
+        backgroundColor: 'black',
+        minHeight: "100%",
+        minWidth: "1024px",
+        width: "100%",
+        height: "50%",
+        filter: "blur(8px)",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        opacity: "30%",
         zIndex: "-1"
     },
     btn: {
