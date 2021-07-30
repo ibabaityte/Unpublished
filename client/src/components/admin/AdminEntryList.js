@@ -1,4 +1,6 @@
 import React from "react";
+
+// util imports
 import {deleteEntry} from "../../utils/entryListUtils";
 
 const AdminEntryList = (props) => {

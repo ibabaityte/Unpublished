@@ -1,68 +1,31 @@
 import React, {useEffect, useState} from "react";
-import {Link, Route} from "react-router-dom";
-
 import {
-    createEntry,
-    updateEntry
-} from "../../utils/entryListUtils";
+    Link,
+    Route
+} from "react-router-dom";
 
+// component imports
 import Entry from "./Entry";
 import CreateEntry from "./CreateEntry";
 import UpdateEntry from "./UpdateEntry";
 import ViewEntry from "./ViewEntry";
-import axios from "axios";
+
+// util imports
+import {init} from "../../utils/initUtils";
 
 const EntryList = (props) => {
 
-    const {userType} = props;
+    const {
+        userType
+    } = props;
 
     const [entries, setEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({});
     const [selectedEntry, setSelectedEntry] = useState({});
 
     useEffect(() => {
-        const init = () => {
-            const loginToken = localStorage.getItem('LoginToken');
-            const url = "http://localhost:8081/entries";
-            const headers = {
-                'Authorization': loginToken
-            }
-            axios.get(url, {headers}).then((response) => {
-                setEntries(response.data);
-            });
-        }
-
-        init();
+        init(setEntries);
     }, []);
-
-    const handleChange = (e, entry) => {
-        e.preventDefault();
-        if(entry._id) {
-            setSelectedEntry({
-                ...selectedEntry,
-                [e.target.className]: e.target.value}
-            );
-        } else {
-            setNewEntry({
-                ...newEntry,
-                [e.target.className]: e.target.value}
-            );
-        }
-    }
-
-    const handleSubmit = (e, entry) => {
-        e.preventDefault();
-        if (entry._id) {
-            updateEntry(entry._id, entry, entries, setEntries, selectedEntry, setSelectedEntry);
-        } else {
-            createEntry(entry, entries, setEntries);
-            console.log(entry);
-        }
-    }
-
-    const handleRedirect = () => {
-        window.location.href = "/entries"
-    }
 
     return (
         <div>
@@ -85,29 +48,33 @@ const EntryList = (props) => {
             <Route path="/entries/createEntry" render={() => (
                 <CreateEntry
                     entry={newEntry}
-                    handleChange={handleChange}
-                    handleSubmit={handleSubmit}
-                    handleRedirect={handleRedirect}
+                    entries={entries}
+                    setEntries={setEntries}
+                    selectedEntry={selectedEntry}
                     setSelectedEntry={setSelectedEntry}
+                    newEntry={newEntry}
+                    setNewEntry={setNewEntry}
                 />
             )}/>
 
             <Route path="/entries/updateEntry">
                 <UpdateEntry
+                    entry={selectedEntry}
+                    entries={entries}
+                    setEntries={setEntries}
                     selectedEntry={selectedEntry}
                     setSelectedEntry={setSelectedEntry}
-                    handleChange={handleChange}
-                    handleSubmit={handleSubmit}
-                    handleRedirect={handleRedirect}
+                    newEntry={newEntry}
+                    setNewEntry={setNewEntry}
                 />
             </Route>
 
             <Route path="/entries/viewEntry" render={() => (
                 <ViewEntry
                     key={selectedEntry._id}
-                    selectedEntry={selectedEntry}
                     entries={entries}
                     setEntries={setEntries}
+                    selectedEntry={selectedEntry}
                     setSelectedEntry={setSelectedEntry}
                 />
             )}/>

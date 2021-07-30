@@ -1,26 +1,33 @@
 import React from "react";
+import sanitize from "sanitize-html";
+
+// util imports
 import {formatText} from "../utils/textEditorUtils";
+import {handleChange} from "../utils/userHandlers";
+
+// icons
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
     faBold,
     faItalic,
     faList
 } from '@fortawesome/free-solid-svg-icons';
-import sanitize from "sanitize-html";
-
 const bold = <FontAwesomeIcon icon={faBold}/>;
 const italic = <FontAwesomeIcon icon={faItalic}/>;
 const list = <FontAwesomeIcon icon={faList}/>;
 
-
 const TextEditor = (props) => {
 
-    const {selectedEntry, entry, handleChange, setSelectedEntry} = props;
-    const sanitized = sanitize(entry.content);
+    const {
+        entry,
+        selectedEntry,
+        setSelectedEntry,
+        newEntry,
+        setNewEntry
+    } = props;
 
     return (
         <div>
-
             <h3>actions</h3>
             <div className="toolbar">
                 <button onClick={(e) => formatText(e, 'bold', entry, setSelectedEntry, selectedEntry)}>{bold}</button>
@@ -32,14 +39,13 @@ const TextEditor = (props) => {
                 value={entry.content}
                 className="content"
                 name="content"
-                onChange={e => handleChange(e, entry)}
+                onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
             />
 
             <span
                 className="preview"
-                dangerouslySetInnerHTML={{__html: sanitized}}
+                dangerouslySetInnerHTML={{__html: sanitize(entry.content)}}
             />
-
         </div>
     )
 }

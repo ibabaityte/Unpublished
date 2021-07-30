@@ -1,13 +1,21 @@
 import React from "react";
 import {Route} from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
 
+// component imports
 import Header from "./users/Header";
 import EntryList from "./entries/EntryList";
 
+// styles imports
+import Grid from "@material-ui/core/Grid";
+
 const Layout = (props) => {
 
-    const {username, userType, handleLogout, handleProfileDelete} = props;
+    const {
+        username,
+        userType,
+        handleLogout,
+        handleProfileDelete
+    } = props;
 
     return (
         <div>
@@ -19,6 +27,7 @@ const Layout = (props) => {
                     handleProfileDelete={handleProfileDelete}
                 />
             </Grid>
+
             <Grid container>
                 <Route path="/entries">
                     <EntryList

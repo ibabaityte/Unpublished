@@ -1,14 +1,21 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom'
-import TextField from '@material-ui/core/TextField';
+
+// styles imports
 import {UserFormStyles} from "../../utils/styles/userFormStyles";
 import Button from "@material-ui/core/Button";
+import TextField from '@material-ui/core/TextField';
 
 const Login = (props) => {
-    const {user, handleChange, handleSubmit} = props;
+    const {
+        user,
+        handleChange,
+        handleSubmit
+    } = props;
 
     const styles = UserFormStyles();
 
+    // will have to delete this later
     if (user.UserType === "ADMIN") {
         return <Redirect to="/admin"/>
     }
@@ -20,8 +27,10 @@ const Login = (props) => {
     return (
         <div className={styles.userForm}>
             <div className={styles.label}>Sign In to your account</div>
+
             <form onSubmit={e => handleSubmit(e)}>
                 <div className="inputs">
+
                     <TextField
                         className={styles.input}
                         type="text"
@@ -30,7 +39,9 @@ const Login = (props) => {
                         label="username"
                         onChange={e => handleChange(e)}
                     />
+
                     <br/>
+
                     <TextField
                         className={styles.input}
                         type="password"
@@ -39,9 +50,11 @@ const Login = (props) => {
                         label="password"
                         onChange={e => handleChange(e)}
                     />
+
                 </div>
                 <Button className={styles.btn} type="submit">Sign In</Button>
             </form>
+
         </div>
     );
 }

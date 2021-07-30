@@ -19,7 +19,8 @@ const formatText = (e, command, entry, setSelectedEntry, selectedEntry) => {
             entryCopy
         }
     );
-}
+};
+
 
 export {
     formatText

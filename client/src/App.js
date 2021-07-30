@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 
+// util imports
 import {
     checkAuth,
     login,
@@ -9,15 +10,22 @@ import {
     deleteProfile
 } from "./utils/userUtils";
 
-import './App.css';
-
+// component imports
 import Landing from "./components/Landing";
 import Layout from "./components/Layout";
 import AdminPanelComponent from "./components/admin/Admin";
+
+// style imports
+import './App.css';
 import {Background} from "./utils/styles/background";
 
 const App = () => {
-    const {LoginToken, UserId, UserType, Username} = localStorage;
+    const {
+        LoginToken,
+        UserId,
+        UserType,
+        Username
+    } = localStorage;
 
     const [user, setUser] = useState({});
     const [newUser, setNewUser] = useState({});

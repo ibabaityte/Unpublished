@@ -1,10 +1,17 @@
 import React from "react";
-import {Link, Route} from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Grid from "@material-ui/core/Grid";
+import {
+    Link,
+    Route
+} from 'react-router-dom';
+
+// component imports
 import Login from "./users/Login";
 import Register from "./users/Register";
+
+// styles imports
 import { LandingStyles } from "../utils/styles/landingStyles";
+import Button from '@material-ui/core/Button';
+import Grid from "@material-ui/core/Grid";
 
 const Landing = (props) => {
     const {

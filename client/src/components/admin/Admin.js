@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {Link, Route} from "react-router-dom";
+import {
+    Link,
+    Route
+} from "react-router-dom";
+
+// component imports
+import Header from "../users/Header";
 import AdminUserList from "./AdminUserList";
 import AdminEntryList from "./AdminEntryList";
-import Header from "../users/Header";
 
+// util imports
 import {
     getAdminUserList,
     getAdminEntryList,
@@ -12,7 +18,12 @@ import {
 
 const AdminPanelComponent = (props) => {
 
-    const {username, userType, handleLogout, handleProfileDelete} = props;
+    const {
+        username,
+        userType,
+        handleLogout,
+        handleProfileDelete
+    } = props;
 
     const [adminEntries, setAdminEntries] = useState([]);
     const [adminUsers, setAdminUsers] = useState([]);
