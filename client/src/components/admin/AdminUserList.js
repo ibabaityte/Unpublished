@@ -13,4 +13,3 @@ const AdminUserList = (props) => {
 };
 
 export default AdminUserList;
-

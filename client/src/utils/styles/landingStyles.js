@@ -54,7 +54,6 @@ const LandingStyles = makeStyles({
         transform: "translate(0, -50%)",
     },
     landingH1: {
-        textShadow: "5px -1px 4px rgb(110, 110, 110)",
         color: "white",
         fontSize: "6em",
         margin: "30px",
@@ -63,12 +62,10 @@ const LandingStyles = makeStyles({
     landingH2: {
         fontSize: "2.5em",
         color: "rgb(240, 240, 240)",
-        textShadow: "5px -1px 4px rgb(110, 110, 110)"
     },
     landingH3: {
         fontSize: "2.1em",
         color: "rgb(240, 240, 240)",
-        textShadow: "5px -1px 4px rgb(110, 110, 110)"
     }
 });
 

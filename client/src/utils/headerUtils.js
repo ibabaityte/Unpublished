@@ -1,4 +1,4 @@
-const generateRequestConfig = () => {
+let generateRequestConfig = () => {
     return {
         'headers': {
             'Authorization': localStorage.getItem('LoginToken')
