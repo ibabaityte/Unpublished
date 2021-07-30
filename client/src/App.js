@@ -1,15 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 
-// util imports
-import {
-    checkAuth,
-    login,
-    register,
-    logout,
-    deleteProfile
-} from "./utils/userUtils";
-
 // component imports
 import Landing from "./components/Landing";
 import Layout from "./components/Layout";
@@ -43,30 +34,6 @@ const App = () => {
 
     const styles = Background();
 
-    const handleChangeLogin = (e) => {
-        e.preventDefault();
-        const userCopy = user;
-        userCopy[e.currentTarget.name] = e.currentTarget.value;
-        setUser(userCopy);
-    }
-
-    const handleChangeRegister = (e) => {
-        e.preventDefault();
-        const newUserCopy = newUser;
-        newUserCopy[e.currentTarget.name] = e.currentTarget.value;
-        setNewUser(newUserCopy);
-    }
-
-    const handleLogin = (e) => {
-        e.preventDefault();
-        login(user, setUser, checkAuth, setIsAuthenticated);
-    }
-
-    const handleRegister = (e, newUser) => {
-        e.preventDefault();
-        register(newUser, setNewUser);
-    }
-
     return (
         <div className="App">
             <div className={styles.img}/>
@@ -76,12 +43,10 @@ const App = () => {
                            render={(location) => ["/", "/auth", "/register"].includes(location.location.pathname) ?
                                <Landing
                                    user={user}
-                                   handleLoginChange={handleChangeLogin}
-                                   handleLoginSubmit={handleLogin}
-                                   isAuthenticated={isAuthenticated}
+                                   setUser={setUser}
                                    newUser={newUser}
-                                   handleRegisterChange={handleChangeRegister}
-                                   handleRegisterSubmit={handleRegister}
+                                   setNewUser={setNewUser}
+                                   setIsAuthenticated={setIsAuthenticated}
                                /> : null
                            }>
                     </Route>
@@ -90,8 +55,6 @@ const App = () => {
                         <Layout
                             username={Username}
                             userType={UserType}
-                            handleLogout={logout}
-                            handleProfileDelete={deleteProfile}
                         />
                     </Route>
 
@@ -99,8 +62,6 @@ const App = () => {
                         <AdminPanelComponent
                             username={Username}
                             userType={UserType}
-                            handleLogout={logout}
-                            handleProfileDelete={deleteProfile}
                         />
                     </Route>
                 </BrowserRouter>

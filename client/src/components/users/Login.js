@@ -6,11 +6,17 @@ import {UserFormStyles} from "../../utils/styles/userFormStyles";
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 
+// util imports
+import {
+    handleChangeLogin,
+    handleLogin,
+} from "../../utils/LoginRegisterUtils";
+
 const Login = (props) => {
     const {
         user,
-        handleChange,
-        handleSubmit
+        setUser,
+        setIsAuthenticated
     } = props;
 
     const styles = UserFormStyles();
@@ -28,7 +34,7 @@ const Login = (props) => {
         <div className={styles.userForm}>
             <div className={styles.label}>Sign In to your account</div>
 
-            <form onSubmit={e => handleSubmit(e)}>
+            <form onSubmit={e => handleLogin(e, user, setUser, setIsAuthenticated)}>
                 <div className="inputs">
 
                     <TextField
@@ -37,7 +43,7 @@ const Login = (props) => {
                         value={user.username}
                         name="username"
                         label="username"
-                        onChange={e => handleChange(e)}
+                        onChange={e => handleChangeLogin(e, user, setUser)}
                     />
 
                     <br/>
@@ -48,7 +54,7 @@ const Login = (props) => {
                         value={user.password}
                         name="password"
                         label="password"
-                        onChange={e => handleChange(e)}
+                        onChange={e => handleChangeLogin(e, user, setUser)}
                     />
 
                 </div>

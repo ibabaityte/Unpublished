@@ -21,8 +21,6 @@ const AdminPanelComponent = (props) => {
     const {
         username,
         userType,
-        handleLogout,
-        handleProfileDelete
     } = props;
 
     const [adminEntries, setAdminEntries] = useState([]);
@@ -38,8 +36,6 @@ const AdminPanelComponent = (props) => {
             <Header
                 username={username}
                 userType={userType}
-                handleLogout={handleLogout}
-                handleProfileDelete={handleProfileDelete}
             />
 
             <div>ADMIN PANEL</div>

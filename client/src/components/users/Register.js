@@ -5,12 +5,14 @@ import {UserFormStyles} from "../../utils/styles/userFormStyles";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+// util imports
+import {
+    handleChangeRegister,
+    handleRegister
+} from "../../utils/LoginRegisterUtils";
+
 const Register = (props) => {
-    const {
-        newUser,
-        handleChange,
-        handleSubmit
-    } = props;
+    const {newUser, setNewUser} = props;
 
     const styles = UserFormStyles();
 
@@ -18,29 +20,27 @@ const Register = (props) => {
         <div className={styles.userForm}>
             <div className={styles.label}>Sign Up in to your account</div>
 
-            <form onSubmit={e => handleSubmit(e, newUser)}>
+            <form onSubmit={e => handleRegister(e, newUser, setNewUser)}>
                 <div className="inputs">
 
                     <TextField
                         className={styles.input}
-                        id="standard-basic"
                         type="text"
                         value={newUser.username}
                         label="username"
                         name="username"
-                        onChange={e => handleChange(e, newUser)}
+                        onChange={e => handleChangeRegister(e, newUser, setNewUser)}
                     />
 
                     <br/>
 
                     <TextField
                         className={styles.input}
-                        id="standard-basic"
                         type="password"
                         value={newUser.password}
                         label="password"
                         name="password"
-                        onChange={e => handleChange(e, newUser)}
+                        onChange={e => handleChangeRegister(e, newUser, setNewUser)}
                     />
 
                 </div>

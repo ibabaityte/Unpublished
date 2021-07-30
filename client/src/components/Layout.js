@@ -13,8 +13,6 @@ const Layout = (props) => {
     const {
         username,
         userType,
-        handleLogout,
-        handleProfileDelete
     } = props;
 
     return (
@@ -23,8 +21,6 @@ const Layout = (props) => {
                 <Header
                     username={username}
                     userType={userType}
-                    handleLogout={handleLogout}
-                    handleProfileDelete={handleProfileDelete}
                 />
             </Grid>
 

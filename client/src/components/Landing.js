@@ -16,12 +16,10 @@ import Grid from "@material-ui/core/Grid";
 const Landing = (props) => {
     const {
         user,
+        setUser,
         newUser,
-        isAuthenticated,
-        handleLoginChange,
-        handleLoginSubmit,
-        handleRegisterChange,
-        handleRegisterSubmit
+        setNewUser,
+        setIsAuthenticated
     } = props;
 
     const styles = LandingStyles();
@@ -43,17 +41,14 @@ const Landing = (props) => {
                         <Route path="/auth" render={() => (
                             <Login
                                 user={user}
-                                handleChange={handleLoginChange}
-                                handleSubmit={handleLoginSubmit}
-                                isAuthenticated={isAuthenticated}
+                                setUser={setUser}
+                                setIsAuthenticated={setIsAuthenticated}
                             />
                         )}/>
                         <Route path="/register" render={() => (
                             <Register
                                 newUser={newUser}
-                                handleChange={handleRegisterChange}
-                                handleSubmit={handleRegisterSubmit}
-                                isAuthenticated={isAuthenticated}
+                                setNewUser={setNewUser}
                             />
                         )}/>
                     </div>

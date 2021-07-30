@@ -1,6 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
+// util imports
+import {
+    logout,
+    deleteProfile
+} from "../../utils/userUtils";
+
 // styles imports
 import {HeaderStyles} from "../../utils/styles/headerStyles";
 import Grid from "@material-ui/core/Grid";
@@ -19,8 +25,6 @@ const Header = (props) => {
     const {
         username,
         userType,
-        handleLogout,
-        handleProfileDelete
     } = props;
 
     const [open, setOpen] = React.useState(false);
@@ -85,9 +89,9 @@ const Header = (props) => {
                                 <Paper>
                                     <ClickAwayListener onClickAway={handleClose}>
                                         <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                            <MenuItem onClick={e => handleLogout(e, anchorRef, setOpen)}>Logout</MenuItem>
+                                            <MenuItem onClick={e => logout(e, anchorRef, setOpen)}>Logout</MenuItem>
                                             {userType !== "ADMIN" ?
-                                                <MenuItem onClick={e => handleProfileDelete(e, anchorRef, setOpen)}>Delete Profile</MenuItem> :
+                                                <MenuItem onClick={e => deleteProfile(e, anchorRef, setOpen)}>Delete Profile</MenuItem> :
                                                 null
                                             }
                                         </MenuList>
