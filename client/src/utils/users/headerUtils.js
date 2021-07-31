@@ -20,7 +20,7 @@ const handleListKeyDown = (e, setOpen) => {
     }
 }
 
-const useHandleClose = (e, anchorRef, setOpen) => {
+const handleClose = (e, anchorRef, setOpen) => {
     if (anchorRef.current && anchorRef.current.contains(e.target)) {
         return;
     }
@@ -31,5 +31,5 @@ export {
     generateRequestConfig,
     handleToggle,
     handleListKeyDown,
-    useHandleClose,
+    handleClose,
 };
