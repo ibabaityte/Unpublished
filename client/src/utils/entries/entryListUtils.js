@@ -2,7 +2,7 @@ import axios from "axios";
 
 import {
     generateRequestConfig
-} from "./headerUtils";
+} from "../users/headerUtils";
 
 const ENTRIES_URL = "http://localhost:8081/entries";
 

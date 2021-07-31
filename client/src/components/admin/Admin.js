@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 
 // component imports
-import Header from "../users/Header";
+import Header from "../header/Header";
 import AdminUserList from "./AdminUserList";
 import AdminEntryList from "./AdminEntryList";
 
@@ -14,7 +14,7 @@ import {
     getAdminUserList,
     getAdminEntryList,
     adminDeleteProfile
-} from "../../utils/adminUtils";
+} from "../../utils/admin/adminUtils";
 
 const AdminPanelComponent = (props) => {
 

@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import {
     handleChangeLogin,
     handleLogin,
-} from "../../utils/LoginRegisterUtils";
+} from "../../utils/users/LoginRegisterUtils";
 
 const Login = (props) => {
     const {

@@ -4,11 +4,11 @@ import React from "react";
 import TextEditor from "../TextEditor";
 
 // util imports
-import {handleRedirect} from "../../utils/initUtils";
+import {handleRedirect} from "../../utils/entries/initUtils";
 import {
     handleChange,
     handleSubmit
-} from "../../utils/userHandlers";
+} from "../../utils/users/userHandlers";
 
 const UpdateEntry = (props) => {
     const {

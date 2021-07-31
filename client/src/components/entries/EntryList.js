@@ -11,7 +11,7 @@ import UpdateEntry from "./UpdateEntry";
 import ViewEntry from "./ViewEntry";
 
 // util imports
-import {init} from "../../utils/initUtils";
+import {init} from "../../utils/entries/initUtils";
 
 const EntryList = (props) => {
 

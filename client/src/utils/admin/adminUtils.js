@@ -1,5 +1,5 @@
 import axios from "axios";
-import {generateRequestConfig} from "./headerUtils";
+import {generateRequestConfig} from "../users/headerUtils";
 
 const API_URL = "http://localhost:8081";
 const ADMIN_URL = API_URL + "/admin";

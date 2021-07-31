@@ -2,8 +2,8 @@ import React from "react";
 import sanitize from "sanitize-html";
 
 // util imports
-import {formatText} from "../utils/textEditorUtils";
-import {handleChange} from "../utils/userHandlers";
+import {formatText} from "../utils/textEditor/textEditorUtils";
+import {handleChange} from "../utils/users/userHandlers";
 
 // icons
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';

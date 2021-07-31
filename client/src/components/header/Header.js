@@ -5,7 +5,12 @@ import {Link} from "react-router-dom";
 import {
     logout,
     deleteProfile
-} from "../../utils/userUtils";
+} from "../../utils/users/userUtils";
+import {
+    handleToggle,
+    handleListKeyDown,
+    useHandleClose,
+} from "../../utils/users/headerUtils";
 
 // styles imports
 import {HeaderStyles} from "../../utils/styles/headerStyles";
@@ -29,31 +34,14 @@ const Header = (props) => {
 
     const [open, setOpen] = React.useState(false);
 
-    const anchorRef = React.useRef(null);
-
     const styles = HeaderStyles();
 
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
-
-    const handleClose = (event) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
-        }
-
-        setOpen(false);
-    };
-
-    function handleListKeyDown(event) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            setOpen(false);
-        }
-    }
+    const handleClose = useHandleClose;
 
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = React.useRef(open);
+    const anchorRef = React.useRef(null);
+
     React.useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
@@ -75,7 +63,7 @@ const Header = (props) => {
                         ref={anchorRef}
                         aria-controls={open ? 'menu-list-grow' : undefined}
                         aria-haspopup="true"
-                        onClick={handleToggle}
+                        onClick={() => handleToggle(setOpen)}
                     >
                         <AccountCircleIcon className={styles.icon}/>
                         {username}
@@ -87,8 +75,8 @@ const Header = (props) => {
                                 style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                             >
                                 <Paper>
-                                    <ClickAwayListener onClickAway={handleClose}>
-                                        <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                    <ClickAwayListener onClickAway={(e) => handleClose(e, setOpen)}>
+                                        <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={e => handleListKeyDown(e, setOpen)}>
                                             <MenuItem onClick={e => logout(e, anchorRef, setOpen)}>Logout</MenuItem>
                                             {userType !== "ADMIN" ?
                                                 <MenuItem onClick={e => deleteProfile(e, anchorRef, setOpen)}>Delete Profile</MenuItem> :

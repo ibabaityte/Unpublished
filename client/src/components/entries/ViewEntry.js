@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import moment from "moment";
 
 // util imports
-import {deleteEntry} from "../../utils/entryListUtils";
+import {deleteEntry} from "../../utils/entries/entryListUtils";
 
 const ViewEntry = (props) => {
     const {

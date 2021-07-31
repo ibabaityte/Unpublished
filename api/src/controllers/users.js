@@ -26,12 +26,12 @@ const register = (req, res) => {
                         message: err.message
                     });
                 } else {
-                    //create new user
+                    //create new users
                     const newUser = new User({
                         username: req.body.username,
                         password: hash
                     });
-                    //save user in database
+                    //save users in database
                     newUser.save().then(data => {
                         res.send(data);
                     }).catch(err => {
@@ -91,7 +91,7 @@ const get = (req, res) => {
         res.status(200).send(user);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "An error occurred while retrieving user"
+            message: err.message || "An error occurred while retrieving users"
         });
     });
 };
@@ -111,7 +111,7 @@ const remove = (req, res) => {
             });
         }
         return res.status(500).send({
-            message: "Could not delete this user profile"
+            message: "Could not delete this users profile"
         });
     });
 };
@@ -133,13 +133,13 @@ const logout = (req, res) => {
 /*
 * TODO
 * Fill with the following logic:
-* 1. If no ADMIN user exists(search in DB for users with ADMIN userType(count of such users should be 1))
-* 2. Then create an ADMIN user
+* 1. If no ADMIN users exists(search in DB for users with ADMIN userType(count of such users should be 1))
+* 2. Then create an ADMIN users
 * 3. Else do nothing
-* 4. Nice to have: have a config with default ADMIN user login/password with preset values
-* 4.1 Second nice to have: Force that user to change their password upon first login to the system(should implement lastLogin date field)
+* 4. Nice to have: have a config with default ADMIN users login/password with preset values
+* 4.1 Second nice to have: Force that users to change their password upon first login to the system(should implement lastLogin date field)
 * 4.1.1 Second nice to have additional notes: Expand login functionality to store lastLogin field
-* 4.2 Based on lastLogin the system should determine if the user needs to change their password
+* 4.2 Based on lastLogin the system should determine if the users needs to change their password
 * 4.2.1 I.E. if lastLogin === null then force password change; else do nothing;
 * */
 
@@ -152,13 +152,13 @@ const init = (req, res) => {
                         message: err.message
                     });
                 } else {
-                    //create new user
+                    //create new users
                     const newUser = new User({
                         username: "ADMIN123",
                         password: hash,
                         userType: "ADMIN"
                     });
-                    //save user in database
+                    //save users in database
                     newUser.save().then(data => {
                         res.send(data);
                     }).catch(err => {
@@ -177,7 +177,7 @@ const listAllUsers = (req, res) => {
         res.status(200).send(user);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "An error occurred while retrieving all user entries"
+            message: err.message || "An error occurred while retrieving all users entries"
         });
     });
 }

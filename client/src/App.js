@@ -22,7 +22,7 @@ const App = () => {
     const [newUser, setNewUser] = useState({});
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // will need useEffect hook to init state with user details and isAuthenticated
+    // will need useEffect hook to init state with users details and isAuthenticated
     useEffect(() => {
         setIsAuthenticated(!!LoginToken);
         setUser({

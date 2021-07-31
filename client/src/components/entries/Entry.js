@@ -6,7 +6,7 @@ import sanitize from "sanitize-html";
 import moment from "moment";
 
 // util imports
-import {deleteEntry} from "../../utils/entryListUtils";
+import {deleteEntry} from "../../utils/entries/entryListUtils";
 
 const Entry = (props) => {
     const {

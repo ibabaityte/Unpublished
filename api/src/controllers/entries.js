@@ -25,7 +25,7 @@ const create = (req, res) => {
     });
 };
 
-//Retrieve and return all entries which belong to logged in user from the db
+//Retrieve and return all entries which belong to logged in users from the db
 const list = (req, res) => {
     Entry.find({'author': req.decodedToken.userId}).then(data => {
         res.status(200).send(data);

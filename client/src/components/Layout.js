@@ -2,7 +2,7 @@ import React from "react";
 import {Route} from "react-router-dom";
 
 // component imports
-import Header from "./users/Header";
+import Header from "./header/Header";
 import EntryList from "./entries/EntryList";
 
 // styles imports

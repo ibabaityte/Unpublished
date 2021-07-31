@@ -53,14 +53,13 @@ const logout = (e, anchorRef, setOpen) => {
     // const url = `${API_URL}${userId}/logout`;
     // axios.get(url, generateRequestConfig()).then((response) => {
     //     console.log(response);
+    // });
     localStorage.clear();
     window.location.href = "/"
     if (anchorRef.current && anchorRef.current.contains(e.target)) {
         return;
     }
-
     setOpen(false);
-    // });
 }
 
 const deleteProfile = (e, anchorRef, setOpen) => {

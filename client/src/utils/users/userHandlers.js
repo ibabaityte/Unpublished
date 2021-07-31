@@ -1,7 +1,7 @@
 import {
     createEntry,
     updateEntry
-} from "./entryListUtils";
+} from "../entries/entryListUtils";
 
 const handleChange = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry) => {
     e.preventDefault();
