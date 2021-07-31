@@ -20,12 +20,10 @@ const handleListKeyDown = (e, setOpen) => {
     }
 }
 
-const useHandleClose = (e, setOpen) => {
-    const anchorRef = React.useRef(null);
+const useHandleClose = (e, anchorRef, setOpen) => {
     if (anchorRef.current && anchorRef.current.contains(e.target)) {
         return;
     }
-
     setOpen(false);
 };
 

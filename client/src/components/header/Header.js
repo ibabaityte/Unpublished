@@ -75,7 +75,7 @@ const Header = (props) => {
                                 style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                             >
                                 <Paper>
-                                    <ClickAwayListener onClickAway={(e) => handleClose(e, setOpen)}>
+                                    <ClickAwayListener onClickAway={(e) => handleClose(e, anchorRef, setOpen)}>
                                         <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={e => handleListKeyDown(e, setOpen)}>
                                             <MenuItem onClick={e => logout(e, anchorRef, setOpen)}>Logout</MenuItem>
                                             {userType !== "ADMIN" ?
