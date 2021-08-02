@@ -1,9 +1,6 @@
 import axios from "axios";
 import {generateRequestConfig} from "./headerUtils";
-
-const API_URL = "http://localhost:8081/";
-const AUTH_URL = "http://localhost:8081/auth";
-const REGISTER_URL = "http://localhost:8081/register";
+import {API_URL, AUTH_URL, REGISTER_URL} from "../constants/apiConstants";
 
 const getUserData = () => {
     const {LoginToken, UserId, UserType, Username} = localStorage;
@@ -49,11 +46,6 @@ const register = (newUser, setNewUser) => {
 }
 
 const logout = (e, anchorRef, setOpen) => {
-    // const userId = localStorage.getItem('UserId');
-    // const url = `${API_URL}${userId}/logout`;
-    // axios.get(url, generateRequestConfig()).then((response) => {
-    //     console.log(response);
-    // });
     localStorage.clear();
     window.location.href = "/"
     if (anchorRef.current && anchorRef.current.contains(e.target)) {

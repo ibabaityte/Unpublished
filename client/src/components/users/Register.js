@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import {
     handleChangeRegister,
     handleRegister
-} from "../../utils/users/LoginRegisterUtils";
+} from "../../utils/users/loginRegisterUtils";
 
 const Register = (props) => {
     const {newUser, setNewUser} = props;

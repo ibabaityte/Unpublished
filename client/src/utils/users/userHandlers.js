@@ -11,7 +11,8 @@ const handleChange = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNe
                 [e.target.className]: e.target.value
             }
         );
-    } else {
+    }
+    else {
         setNewEntry({
                 ...newEntry,
                 [e.target.className]: e.target.value
@@ -24,7 +25,8 @@ const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedE
     e.preventDefault();
     if (entry._id) {
         updateEntry(entry._id, entry, entries, setEntries, selectedEntry, setSelectedEntry);
-    } else {
+    }
+    else {
         createEntry(entry, entries, setEntries);
         console.log(entry);
     }

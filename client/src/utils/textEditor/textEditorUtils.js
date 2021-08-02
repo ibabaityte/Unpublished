@@ -7,9 +7,11 @@ const formatText = (e, command, entry, setSelectedEntry, selectedEntry) => {
 
     if (command === 'bold') {
         modifiedSelection = '<b>' + selection + '</b>';
-    } else if (command === 'italic') {
+    }
+    else if (command === 'italic') {
         modifiedSelection = '<i>' + selection + '</i>';
-    } else if (command === 'unorderedList') {
+    }
+    else if (command === 'unorderedList') {
         modifiedSelection = '<ul>' + selection + '</ul>';
     }
 

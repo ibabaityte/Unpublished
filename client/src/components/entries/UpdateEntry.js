@@ -4,7 +4,7 @@ import React from "react";
 import TextEditor from "../TextEditor";
 
 // util imports
-import {handleRedirect} from "../../utils/entries/initUtils";
+import {handleRedirect} from "../../utils/entries/redirectUtils";
 import {
     handleChange,
     handleSubmit

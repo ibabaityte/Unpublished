@@ -10,13 +10,7 @@ const init = (setEntries) => {
         setEntries(response.data);
     });
 }
-//// redirect handler, dont know where to put this one
-//// will need to remove this method later
-const handleRedirect = () => {
-    window.location.href = "/entries"
-}
 
 export {
-    init,
-    handleRedirect
-};
+    init
+}

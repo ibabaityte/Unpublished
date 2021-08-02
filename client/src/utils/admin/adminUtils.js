@@ -1,10 +1,6 @@
 import axios from "axios";
 import {generateRequestConfig} from "../users/headerUtils";
-
-const API_URL = "http://localhost:8081";
-const ADMIN_URL = API_URL + "/admin";
-const ADMIN_USERS_URL = ADMIN_URL + "/allUsers";
-const ADMIN_ENTRIES_URL = ADMIN_URL + "/allEntries";
+import {ADMIN_ENTRIES_URL, ADMIN_USERS_URL, API_URL} from "../constants/apiConstants";
 
 const getAdminUserList = (setState) => {
     axios.get(ADMIN_USERS_URL, generateRequestConfig()).then((response) => {

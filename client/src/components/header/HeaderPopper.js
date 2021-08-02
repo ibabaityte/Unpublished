@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 
 //util imports
@@ -26,7 +26,6 @@ import MenuList from '@material-ui/core/MenuList';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const HeaderPopper = (props) => {
-
     const {
         username,
         userType
@@ -40,7 +39,7 @@ const HeaderPopper = (props) => {
     const prevOpen = React.useRef(open);
     const anchorRef = React.useRef(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
         }

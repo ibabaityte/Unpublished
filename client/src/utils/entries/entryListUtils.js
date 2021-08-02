@@ -3,15 +3,13 @@ import axios from "axios";
 import {
     generateRequestConfig
 } from "../users/headerUtils";
-
-const ENTRIES_URL = "http://localhost:8081/entries";
+import {ENTRIES_URL} from "../constants/apiConstants";
 
 const createEntry = (entry, entries, setEntries) => {
     const {title, content} = entry;
     axios.post(ENTRIES_URL, {title, content}, generateRequestConfig()).then((result) => {
         entries.push(result.data.data);
         setEntries(entries);
-        console.log(result);
     }).catch(err => {
         console.log(err);
     });
@@ -21,16 +19,12 @@ const updateEntry = (id, entry, entries, setEntries, selectedEntry, setSelectedE
     const {title, content} = entry;
     const url = `${ENTRIES_URL}/${id}`;
     axios.put(url, {title, content}, generateRequestConfig()).then((result) => {
-        console.log(result);
         const updatedEntry = result.data;
         setSelectedEntry(updatedEntry);
-        for (let i = 0; i < entries.length; i++) {
-            if (entries[i]._id === result.data._id) {
-                entries[i] = result.data;
-                setEntries(entries);
-                console.log(selectedEntry);
-            }
-        }
+        const entryInList = entries.find(entry => entry._id === result.data._id);
+        const index = entries.indexOf(entryInList);
+        entries[index] = result.data;
+        setEntries(entries);
     }).catch(err => {
         console.log(err);
     });

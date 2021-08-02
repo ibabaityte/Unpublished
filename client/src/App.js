@@ -24,13 +24,15 @@ const App = () => {
 
     // will need useEffect hook to init state with users details and isAuthenticated
     useEffect(() => {
-        setIsAuthenticated(!!LoginToken);
+        if(!isAuthenticated) {
+            setIsAuthenticated(!!LoginToken);
+        }
         setUser({
             UserId,
             UserType,
             Username
         });
-    }, [LoginToken, UserId, UserType, Username]);
+    }, [LoginToken, UserId, UserType, Username, isAuthenticated]);
 
     const styles = Background();
 
