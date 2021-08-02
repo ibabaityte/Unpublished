@@ -1,9 +1,8 @@
 import React from "react";
-import sanitize from "sanitize-html";
+import ContentEditable from "react-contenteditable";
 
 // util imports
-import {formatText} from "../utils/textEditor/textEditorUtils";
-import {handleChange} from "../utils/users/userHandlers";
+import {handleChange, handleContentEditableChange} from "../utils/users/userHandlers";
 
 // icons
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -12,6 +11,8 @@ import {
     faItalic,
     faList
 } from '@fortawesome/free-solid-svg-icons';
+import TextEditorToolButton from "./TextEditorToolButton";
+
 const bold = <FontAwesomeIcon icon={faBold}/>;
 const italic = <FontAwesomeIcon icon={faItalic}/>;
 const list = <FontAwesomeIcon icon={faList}/>;
@@ -30,9 +31,21 @@ const TextEditor = (props) => {
         <div>
             <h3>actions</h3>
             <div className="toolbar">
-                <button onClick={(e) => formatText(e, 'bold', entry, setSelectedEntry, selectedEntry)}>{bold}</button>
-                <button onClick={(e) => formatText(e, 'italic', entry, setSelectedEntry, selectedEntry)}>{italic}</button>
-                <button onClick={(e) => formatText(e, 'unorderedList', entry, setSelectedEntry, selectedEntry)}>{list}</button>
+                <TextEditorToolButton
+                    command="bold"
+                >
+                    {bold}
+                </TextEditorToolButton>
+                <TextEditorToolButton
+                    command="italic"
+                >
+                    {italic}
+                </TextEditorToolButton>
+                <TextEditorToolButton
+                    command="insertUnorderedList"
+                >
+                    {list}
+                </TextEditorToolButton>
             </div>
 
             <textarea
@@ -42,9 +55,12 @@ const TextEditor = (props) => {
                 onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
             />
 
-            <span
-                className="preview"
-                dangerouslySetInnerHTML={{__html: sanitize(entry.content)}}
+            <ContentEditable
+                className="content"
+                tagName="pre"
+                html={entry.content}
+                disabled={false}
+                onChange={e => handleContentEditableChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
             />
         </div>
     )
