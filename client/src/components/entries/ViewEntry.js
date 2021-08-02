@@ -6,6 +6,7 @@ import moment from "moment";
 
 // util imports
 import {deleteEntry} from "../../utils/entries/entryListUtils";
+import sanitize from "sanitize-html";
 
 const ViewEntry = (props) => {
     const {
@@ -17,7 +18,9 @@ const ViewEntry = (props) => {
     return (
         <div className="viewEntry">
             <div>{selectedEntry.title}</div>
-            <div>{selectedEntry.content}</div>
+            <div><span
+                dangerouslySetInnerHTML={{__html: sanitize(selectedEntry.content)}}
+            /></div>
 
             <div>
                 Created at: {moment(selectedEntry.createdAt).format("L")}

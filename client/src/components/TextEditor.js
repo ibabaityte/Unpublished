@@ -1,8 +1,9 @@
 import React from "react";
 import ContentEditable from "react-contenteditable";
+import sanitize from "sanitize-html";
 
 // util imports
-import {handleChange, handleContentEditableChange} from "../utils/users/userHandlers";
+import {handleContentEditableChange} from "../utils/users/userHandlers";
 
 // icons
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -12,6 +13,9 @@ import {
     faList
 } from '@fortawesome/free-solid-svg-icons';
 import TextEditorToolButton from "./TextEditorToolButton";
+
+// style imports
+import {TextEditorStyles} from "../utils/styles/textEditorStyles";
 
 const bold = <FontAwesomeIcon icon={faBold}/>;
 const italic = <FontAwesomeIcon icon={faItalic}/>;
@@ -26,6 +30,8 @@ const TextEditor = (props) => {
         newEntry,
         setNewEntry
     } = props;
+
+    // const styles = TextEditorStyles();
 
     return (
         <div>
@@ -48,19 +54,13 @@ const TextEditor = (props) => {
                 </TextEditorToolButton>
             </div>
 
-            <textarea
-                value={entry.content}
-                className="content"
-                name="content"
-                onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
-            />
-
             <ContentEditable
                 className="content"
                 tagName="pre"
                 html={entry.content}
                 disabled={false}
                 onChange={e => handleContentEditableChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
+                dangerouslySetInnerHTML={{__html: sanitize(entry.content)}}
             />
         </div>
     )
