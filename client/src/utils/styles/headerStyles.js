@@ -4,14 +4,21 @@ import {
 
 const HeaderStyles = makeStyles({
     header: {
-        margin: "40px",
+        margin: "40px 80px 40px 80px",
         width: "100%"
     },
     logo: {
         textDecoration: "none",
         color: "white",
         fontSize: "3.5em",
-        letterSpacing: "10px"
+        letterSpacing: "10px",
+        width: "100%",
+        textAlign: "center"
+    },
+    logoPanel: {
+        ['@media only screen and (min-width: 600px)']: {
+            margin: "0 auto"
+        }
     },
     home: {
         textDecoration: "none",
@@ -19,18 +26,23 @@ const HeaderStyles = makeStyles({
         fontSize: "2em",
         letterSpacing: "7px",
         verticalAlign: "middle",
-        marginLeft: "30px",
-        marginRight: "30px"
+        paddingRight: "30px"
     },
     panel: {
         display: "inline",
+        textAlign: "right",
+        ['@media only screen and (min-width: 600px)']: {
+            margin: "0 auto"
+        },
+        ['@media only screen and (min-width: 768px)']: {
+            margin: "0 auto"
+        }
     },
     username: {
         color: "white",
         fontSize: "2em",
         letterSpacing: "7px",
         textTransform: "none",
-        padding: "0",
     },
     icon: {
         marginRight: "15px",

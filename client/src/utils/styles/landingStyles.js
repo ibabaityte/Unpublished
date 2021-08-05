@@ -20,7 +20,6 @@ const LandingStyles = makeStyles({
         minWidth: "1024px",
         width: "100%",
         height: "50%",
-        filter: "blur(8px)",
         position: "fixed",
         top: 0,
         left: 0,
@@ -35,23 +34,20 @@ const LandingStyles = makeStyles({
         backgroundColor: "rgba(230, 230, 230, 0.5)",
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
         borderRadius: "8px",
-
     },
     landingLink: {
         textDecoration: "none"
     },
     container: {
         position: "absolute",
-        top: "20%"
+        top: "200px",
+        ['@media only screen and (max-width: 1280px)']: {
+            marginTop: "-180px"
+        }
     },
     landingTextGrid: {
         position: "relative",
         textAlign: "center",
-    },
-    landingFormGrid: {
-        position: "absolute",
-        top: "50%",
-        transform: "translate(0, -50%)",
     },
     landingH1: {
         color: "white",

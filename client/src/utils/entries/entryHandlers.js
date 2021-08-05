@@ -1,7 +1,7 @@
 import {
     createEntry,
     updateEntry
-} from "../entries/entryListUtils";
+} from "./entryListUtils";
 
 const handleEntry = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry) => {
     if (entry._id) {

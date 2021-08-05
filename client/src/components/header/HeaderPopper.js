@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import {Link} from "react-router-dom";
 
 //util imports
 import {
@@ -48,8 +47,7 @@ const HeaderPopper = (props) => {
     }, [open]);
 
     return (
-      <div>
-          <Link className={styles.home} to="/entries">Home</Link>
+      <div className={styles.panel}>
           <Button
               className={styles.username}
               ref={anchorRef}

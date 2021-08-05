@@ -8,7 +8,7 @@ import {handleRedirect} from "../../utils/entries/redirectUtils";
 import {
     handleChange,
     handleSubmit
-} from "../../utils/users/userHandlers";
+} from "../../utils/entries/entryHandlers";
 
 const CreateEntry = (props) => {
     const {

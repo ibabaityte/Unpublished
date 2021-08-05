@@ -9,9 +9,13 @@ const UserFormStyles = makeStyles({
         width: "500px",
         backgroundColor: "rgba(230, 230, 230, 0.5)",
         border: "1px solid rgba(0, 0, 0, 0.1)",
+        margin: "0 auto",
         borderRadius: "8px",
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
         textAlign: "center",
+        ['@media only screen and (max-width: 600px)']: {
+            margin: "auto",
+        }
     },
     label: {
         textAlign: "center",
@@ -21,14 +25,12 @@ const UserFormStyles = makeStyles({
         fontWeight: "600",
     },
     input: {
-        marginTop: "25px",
         fontSize: "1.5em",
-        width: "270px"
+        width: "60%"
     },
     btn: {
-        width: "110px",
+        width: "25%",
         height: "45px",
-        marginTop: "75px",
         fontSize: "1.2rem",
         backgroundColor: "rgba(230, 230, 230, 0.5)",
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
@@ -36,6 +38,18 @@ const UserFormStyles = makeStyles({
     }
 });
 
+
+const userFormStyles = {
+    btn: {
+        marginTop: "75px"
+    },
+    input: {
+        marginTop: "25px"
+    }
+};
+
 export {
     UserFormStyles
 };
+
+export default userFormStyles;

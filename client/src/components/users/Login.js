@@ -2,6 +2,8 @@ import React from 'react';
 import {Redirect} from 'react-router-dom'
 
 // styles imports
+import {withStyles} from "@material-ui/core/styles";
+import userFormStyles from "../../utils/styles/userFormStyles";
 import {UserFormStyles} from "../../utils/styles/userFormStyles";
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
@@ -20,6 +22,7 @@ const Login = (props) => {
     } = props;
 
     const styles = UserFormStyles();
+    const classes = props.classes;
 
     // will have to delete this later
     if (user.UserType === "ADMIN") {
@@ -38,7 +41,7 @@ const Login = (props) => {
                 <div className="inputs">
 
                     <TextField
-                        className={styles.input}
+                        className={`${styles.input} ${classes.input}`}
                         type="text"
                         value={user.username}
                         name="username"
@@ -49,7 +52,7 @@ const Login = (props) => {
                     <br/>
 
                     <TextField
-                        className={styles.input}
+                        className={`${styles.input} ${classes.input}`}
                         type="password"
                         value={user.password}
                         name="password"
@@ -58,11 +61,11 @@ const Login = (props) => {
                     />
 
                 </div>
-                <Button className={styles.btn} type="submit">Sign In</Button>
+                <Button className={`${styles.btn} ${classes.btn}`} type="submit">Sign In</Button>
             </form>
 
         </div>
     );
 }
 
-export default Login;
+export default withStyles(userFormStyles)(Login);

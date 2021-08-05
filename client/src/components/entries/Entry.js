@@ -1,12 +1,22 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import sanitize from "sanitize-html";
 
 // data formatting import
 import moment from "moment";
 
 // util imports
-import {deleteEntry} from "../../utils/entries/entryListUtils";
+import { deleteEntry } from "../../utils/entries/entryListUtils";
+
+// style imports
+import { withStyles } from '@material-ui/core/styles';
+import { EntryListStyles } from "../../utils/styles/entryListStyles";
+import entryListStyles from "../../utils/styles/entryListStyles";
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+
+// icon imports
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const Entry = (props) => {
     const {
@@ -17,37 +27,39 @@ const Entry = (props) => {
         userType
     } = props;
 
-    return (
-        <div>
-            <div>{entry.title}</div>
+    const styles = EntryListStyles();
+    const classes = props.classes;
 
-            <div>
+    return (
+        <Container className={classes.entry}>
+            <div className={styles.title}>
+                {entry.title}
+                <DeleteIcon
+                    className={styles.deleteIcon}
+                    onClick={() => deleteEntry(userType, entry._id, entries, setEntries)}
+                />
+            </div>
+
+            <div>{moment(entry.createdAt).format("L")}</div>
+
+            <div className={styles.content}>
                 <span
                     dangerouslySetInnerHTML={{__html: sanitize(entry.content)}}
                 />
             </div>
 
-            <div>Created at: {moment(entry.createdAt).format("L")}</div>
-
-            <div>
-                Last updated at: {
-                moment(entry.updatedAt).format("L") +
-                moment(entry.updatedAt).format(" LT")
-                }
-            </div>
-
-            <Link to="/entries/viewEntry">
-                <button onClick={() => setSelectedEntry(entry)}>View</button>
+            <Link  className={styles.link} to="/entries/viewEntry">
+                <Button className={classes.button} onClick={() => setSelectedEntry(entry)}>View</Button>
             </Link>
 
-            <button onClick={() => deleteEntry(userType, entry._id, entries, setEntries)}>Delete</button>
-
-            <Link to="/entries/updateEntry">
-                <button onClick={() => setSelectedEntry(entry)}>Update</button>
+            <Link className={styles.link} to="/entries/updateEntry">
+                <Button className={classes.button} onClick={() => setSelectedEntry(entry)}>Update</Button>
             </Link>
 
-        </div>
+            {/*<hr/>*/}
+
+        </Container>
     );
 };
 
-export default Entry;
+export default withStyles(entryListStyles)(Entry);

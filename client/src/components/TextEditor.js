@@ -3,7 +3,7 @@ import ContentEditable from "react-contenteditable";
 import sanitize from "sanitize-html";
 
 // util imports
-import {handleContentEditableChange} from "../utils/users/userHandlers";
+import {handleContentEditableChange} from "../utils/entries/entryHandlers";
 
 // icons
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -13,9 +13,6 @@ import {
     faList
 } from '@fortawesome/free-solid-svg-icons';
 import TextEditorToolButton from "./TextEditorToolButton";
-
-// style imports
-import {TextEditorStyles} from "../utils/styles/textEditorStyles";
 
 const bold = <FontAwesomeIcon icon={faBold}/>;
 const italic = <FontAwesomeIcon icon={faItalic}/>;

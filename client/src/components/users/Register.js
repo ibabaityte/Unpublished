@@ -1,6 +1,8 @@
 import React from "react";
 
 // styles imports
+import {withStyles} from "@material-ui/core/styles";
+import userFormStyles from "../../utils/styles/userFormStyles";
 import {UserFormStyles} from "../../utils/styles/userFormStyles";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +17,7 @@ const Register = (props) => {
     const {newUser, setNewUser} = props;
 
     const styles = UserFormStyles();
+    const classes = props.classes;
 
     return (
         <div className={styles.userForm}>
@@ -24,7 +27,7 @@ const Register = (props) => {
                 <div className="inputs">
 
                     <TextField
-                        className={styles.input}
+                        className={`${styles.input} ${classes.input}`}
                         type="text"
                         value={newUser.username}
                         label="username"
@@ -35,7 +38,7 @@ const Register = (props) => {
                     <br/>
 
                     <TextField
-                        className={styles.input}
+                        className={`${styles.input} ${classes.input}`}
                         type="password"
                         value={newUser.password}
                         label="password"
@@ -44,11 +47,11 @@ const Register = (props) => {
                     />
 
                 </div>
-                <Button className={styles.btn} type="submit">Sign Up</Button>
+                <Button className={`${styles.btn} ${classes.btn}`} type="submit">Sign Up</Button>
             </form>
 
         </div>
     );
 }
 
-export default Register;
+export default withStyles(userFormStyles)(Register);

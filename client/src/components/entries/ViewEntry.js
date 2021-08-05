@@ -23,11 +23,11 @@ const ViewEntry = (props) => {
             /></div>
 
             <div>
-                Created at: {moment(selectedEntry.createdAt).format("L")}
+                Created: {moment(selectedEntry.createdAt).format("L")}
             </div>
 
             <div>
-                Last updated at: {
+                Updated: {
                 moment(selectedEntry.updatedAt).format("L") +
                 moment(selectedEntry.updatedAt).format(" LT")
             }

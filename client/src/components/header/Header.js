@@ -20,10 +20,11 @@ const Header = (props) => {
     return (
         <div className={styles.header}>
             <Grid container>
-                <Grid item lg={9}>
+                <Grid item lg={6} className={styles.logoPanel}>
                     <Link className={styles.logo} to="/entries">unpublished</Link>
                 </Grid>
-                <Grid item lg={3} className={styles.panel}>
+                <Grid item lg={6} className={styles.panel}>
+                    <Link className={styles.home} to="/entries">Home</Link>
                     <HeaderPopper
                         username={username}
                         userType={userType}

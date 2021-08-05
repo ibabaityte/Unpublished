@@ -13,6 +13,12 @@ import ViewEntry from "./ViewEntry";
 // util imports
 import {init} from "../../utils/entries/initUtils";
 
+// style imports
+import {withStyles} from '@material-ui/core/styles';
+import entryListStyles, {EntryListStyles} from "../../utils/styles/entryListStyles";
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+
 const EntryList = (props) => {
 
     const {
@@ -23,13 +29,23 @@ const EntryList = (props) => {
     const [newEntry, setNewEntry] = useState({});
     const [selectedEntry, setSelectedEntry] = useState({});
 
+    const styles = EntryListStyles();
+    const classes = props.classes;
+
     useEffect(() => {
         init(setEntries);
     }, []);
 
     return (
-        <div>
+        <Container className={`${styles.entryList} ${classes.entryList}`}>
             <Route exact path="/entries">
+
+                <Container className={classes.createButtonContainer}>
+                    <Link className={styles.link} to="/entries/createEntry">
+                        <Button className={`${classes.createButton} ${classes.button}`}>Create a new Entry</Button>
+                    </Link>
+                </Container>
+
                 {entries.map((entry) => (
                     <Entry
                         key={entry._id}
@@ -40,9 +56,6 @@ const EntryList = (props) => {
                         userType={userType}
                     />
                 ))}
-                <Link to="/entries/createEntry">
-                    <button type="button">Create a new Entry</button>
-                </Link>
             </Route>
 
             <Route path="/entries/createEntry" render={() => (
@@ -78,8 +91,8 @@ const EntryList = (props) => {
                     setSelectedEntry={setSelectedEntry}
                 />
             )}/>
-        </div>
+        </Container>
     );
 }
 
-export default EntryList;
+export default withStyles(entryListStyles)(EntryList);
