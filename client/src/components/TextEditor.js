@@ -28,9 +28,15 @@ const TextEditor = (props) => {
         setNewEntry
     } = props;
 
+    let content;
+    if(entry.content === undefined) {
+        content = "";
+    } else {
+        content = entry.content;
+    }
+
     return (
         <div>
-            <h3>actions</h3>
             <div className="toolbar">
                 <TextEditorToolButton
                     command="bold"
@@ -50,9 +56,9 @@ const TextEditor = (props) => {
             </div>
 
             <ContentEditable
-                className="content"
+                // className="content"
                 tagName="pre"
-                html={entry.content}
+                html={content}
                 disabled={false}
                 onChange={e => handleContentEditableChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
                 dangerouslySetInnerHTML={{__html: sanitize(entry.content)}}
