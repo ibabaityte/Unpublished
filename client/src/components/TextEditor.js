@@ -28,8 +28,6 @@ const TextEditor = (props) => {
         setNewEntry
     } = props;
 
-    // const styles = TextEditorStyles();
-
     return (
         <div>
             <h3>actions</h3>
@@ -59,6 +57,7 @@ const TextEditor = (props) => {
                 onChange={e => handleContentEditableChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
                 dangerouslySetInnerHTML={{__html: sanitize(entry.content)}}
             />
+
         </div>
     )
 }

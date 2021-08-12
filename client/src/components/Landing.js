@@ -28,7 +28,7 @@ const Landing = (props) => {
         <div>
             <img className={styles.img} src="/images/landing images/detail.jpg" alt=""/>
             <div className={styles.imgOverlay}/>
-            <Grid container lg={12} md={12} sm={12} className={styles.container}>
+            <Grid container className={styles.container}>
                 <Grid item lg={7} md={12} sm={12} className={styles.landingTextGrid}>
                     <h1 className={styles.landingH1}>Unpublished</h1>
                     <h2 className={styles.landingH2}>Your personal online Diary</h2>

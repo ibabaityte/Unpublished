@@ -7,14 +7,14 @@ const handleEntry = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNew
     if (entry._id) {
         setSelectedEntry({
                 ...selectedEntry,
-                [e.target.className]: e.target.value
+                [e.target.name]: e.target.value
             }
         );
     }
     else {
         setNewEntry({
                 ...newEntry,
-                [e.target.className]: e.target.value
+                [e.target.name]: e.target.value
             }
         );
     }

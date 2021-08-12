@@ -10,6 +10,10 @@ import {
     handleSubmit
 } from "../../utils/entries/entryHandlers";
 
+// style imports
+import {TitleInputStyles} from "../../utils/styles/titleInputStyles";
+import Container from "@material-ui/core/Container";
+
 const CreateEntry = (props) => {
     const {
         entry,
@@ -21,18 +25,25 @@ const CreateEntry = (props) => {
         setNewEntry
     } = props;
 
+    const styles = TitleInputStyles();
+
     return (
-        <div>
-            <div>Create Entry</div>
+        <Container>
+            <div className={styles.title}>Create Entry</div>
             <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry)}>
 
-                <input
-                    type="text"
-                    value={entry.title || ""}
-                    className="title"
-                    name="title"
-                    onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
-                />
+                <div className={styles.group}>
+                    <input
+                        type="text"
+                        value={entry.title || ""}
+                        // find how to merge className and name into one
+                        className={styles.field}
+                        name="title"
+                        placeholder="Title"
+                        onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
+                    />
+                    <label className={styles.label}>Title</label>
+                </div>
 
                 <TextEditor
                     entry={entry}
@@ -44,7 +55,7 @@ const CreateEntry = (props) => {
 
                 <input type="submit" value="Create" onClick={() => handleRedirect()}/>
             </form>
-        </div>
+        </Container>
     );
 }
 
