@@ -85,6 +85,7 @@ const EntryList = (props) => {
             <Route path="/entries/viewEntry" render={() => (
                 <ViewEntry
                     key={selectedEntry._id}
+                    userType={userType}
                     entries={entries}
                     setEntries={setEntries}
                     selectedEntry={selectedEntry}
