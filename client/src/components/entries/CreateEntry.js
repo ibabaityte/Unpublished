@@ -11,8 +11,9 @@ import {
 } from "../../utils/entries/entryHandlers";
 
 // style imports
-import {TitleInputStyles} from "../../utils/styles/titleInputStyles";
+import {EntryInputStyles} from "../../utils/styles/entryInputStyles";
 import Container from "@material-ui/core/Container";
+import Button from '@material-ui/core/Button';
 
 const CreateEntry = (props) => {
     const {
@@ -25,25 +26,23 @@ const CreateEntry = (props) => {
         setNewEntry
     } = props;
 
-    const styles = TitleInputStyles();
+    const styles = EntryInputStyles();
 
     return (
         <Container>
             <div className={styles.title}>Create Entry</div>
             <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry)}>
 
-                <div className={styles.group}>
-                    <input
-                        type="text"
-                        value={entry.title || ""}
-                        // find how to merge className and name into one
-                        className={styles.field}
-                        name="title"
-                        placeholder="Title"
-                        onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
-                    />
-                    <label className={styles.label}>Title</label>
-                </div>
+                <span className={styles.label}>Title</span>
+                <br/>
+                <input
+                    type="text"
+                    value={entry.title || ""}
+                    // find how to merge className and name into one
+                    className={`${styles.field} ${styles.titleField}`}
+                    name="title"
+                    onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
+                />
 
                 <TextEditor
                     entry={entry}
@@ -53,7 +52,7 @@ const CreateEntry = (props) => {
                     setNewEntry={setNewEntry}
                 />
 
-                <input type="submit" value="Create" onClick={() => handleRedirect()}/>
+                <Button className={styles.btn} type="submit" value="Create" onClick={() => handleRedirect()}>Create</Button>
             </form>
         </Container>
     );

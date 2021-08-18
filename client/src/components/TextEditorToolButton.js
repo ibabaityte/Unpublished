@@ -1,4 +1,5 @@
 import React from "react";
+import {TextEditorStyles} from "../utils/styles/textEditorStyles";
 
 const TextEditorToolButton = (props) => {
     const {
@@ -6,8 +7,14 @@ const TextEditorToolButton = (props) => {
         argument
     } = props;
 
+    const styles = TextEditorStyles();
+
+
     return(
-        <button key={command} onClick={e => {
+        <button
+            key={command}
+            className={styles.button}
+            onClick={e => {
             e.preventDefault();
             document.execCommand(command, false, argument);
         }}>
