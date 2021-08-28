@@ -16,9 +16,26 @@ const EntryListStyles = makeStyles({
         fontSize: "2em",
         textShadow: "0px 0px 0.5px black"
     },
+    contentOverlay: {
+        position: "absolute",
+        zIndex: "2",
+        marginTop: "10px",
+        width: "100%",
+        maxHeight: "100px",
+        height: "100%",
+        background: "linear-gradient(rgba(0,0,0,0), #81CEE0)"
+    },
     content: {
+        position: "relative",
+        zIndex: "1",
         marginTop: "20px",
-        fontSize: "1.3em"
+        width: "100%",
+        maxHeight: "100px",
+        fontSize: "1.3em",
+        fontWeight: "300",
+        overflow: "hidden",
+        wordBreak: "break-all",
+        lineHeight: "2rem"
     },
     deleteIcon: {
         verticalAlign: "middle",
@@ -45,13 +62,15 @@ const entryListStyles = {
     },
     button: {
         margin: "20px 10px 0px 10px",
-        backgroundColor: "rgba(153, 153, 153, 0.3)"
+        backgroundColor: "rgba(153, 153, 153, 0.3)",
     },
     createButton: {
         marginBottom: "40px",
         marginLeft: "0",
         fontSize: "1.2em",
-        textShadow: "0px 0px 0.5px black"
+        textShadow: "0px 0px 0.5px black",
+        backgroundColor: "rgba(230, 230, 230, 0.5)",
+        padding: "10px"
     },
     createButtonContainer: {
         width: "90%",
