@@ -1,6 +1,7 @@
 import {
     makeStyles
 } from "@material-ui/core/styles";
+import styleConstants from "./constants";
 
 const EntryListStyles = makeStyles({
     entryList: {
@@ -69,7 +70,7 @@ const entryListStyles = {
         marginLeft: "0",
         fontSize: "1.2em",
         textShadow: "0px 0px 0.5px black",
-        backgroundColor: "rgba(230, 230, 230, 0.5)",
+        backgroundColor: styleConstants.buttonColor,
         padding: "10px"
     },
     createButtonContainer: {

@@ -2,7 +2,7 @@ import {
     makeStyles
 } from "@material-ui/core/styles";
 
-const HeaderStyles = makeStyles({
+const HeaderStyles = makeStyles((theme) => ({
     header: {
         margin: "40px 80px 40px 80px",
         width: "100%"
@@ -16,9 +16,9 @@ const HeaderStyles = makeStyles({
         textAlign: "center"
     },
     logoPanel: {
-        ['@media only screen and (min-width: 600px)']: {
-            margin: "0 auto"
-        }
+        [theme.breakpoints.up('sm')]: {
+            margin: "0 auto",
+        },
     },
     home: {
         textDecoration: "none",
@@ -31,11 +31,8 @@ const HeaderStyles = makeStyles({
     panel: {
         display: "inline",
         textAlign: "right",
-        ['@media only screen and (min-width: 600px)']: {
-            margin: "0 auto"
-        },
-        ['@media only screen and (min-width: 768px)']: {
-            margin: "0 auto"
+        [theme.breakpoints.up(768)]: {
+            margin: "0 auto",
         }
     },
     username: {
@@ -48,7 +45,7 @@ const HeaderStyles = makeStyles({
         marginRight: "15px",
         fontSize: "1.2em"
     }
-});
+}));
 
 export {
     HeaderStyles

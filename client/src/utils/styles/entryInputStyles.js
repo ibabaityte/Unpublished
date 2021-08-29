@@ -1,6 +1,7 @@
 import {
     makeStyles
 } from "@material-ui/core/styles";
+import styleConstants from "./constants";
 
 const EntryInputStyles = makeStyles({
     title: {
@@ -33,14 +34,14 @@ const EntryInputStyles = makeStyles({
     },
     titleField: {
         width: "70%",
-        backgroundColor: "rgba(255, 255, 255, 0.3)"
+        backgroundColor: styleConstants.backgroundColor
     },
     label: {
         fontSize: "1.5em",
         textShadow: "0px 0px 0.5px black"
     },
     editor: {
-        backgroundColor: "rgba(255, 255, 255, 0.3)"
+        backgroundColor: styleConstants.backgroundColor
     },
     btn: {
         width: "120px",
@@ -48,7 +49,7 @@ const EntryInputStyles = makeStyles({
         marginTop: "30px",
         marginBottom: "30px",
         fontSize: "1.2rem",
-        backgroundColor: "rgba(230, 230, 230, 0.5)",
+        backgroundColor: styleConstants.buttonColor,
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
         borderRadius: "8px",
     }

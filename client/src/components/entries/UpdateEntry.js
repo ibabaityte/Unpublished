@@ -52,7 +52,7 @@ const UpdateEntry = (props) => {
                     setNewEntry={setNewEntry}
                 />
 
-                <Button className={styles.btn} type="text" value="Update" onClick={() => handleRedirect()}>Update</Button>
+                <Button className={styles.btn} type="submit" value="Update" onClick={() => handleRedirect()}>Update</Button>
             </form>
         </Container>
     );

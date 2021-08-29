@@ -1,6 +1,7 @@
 import {
     makeStyles
 } from "@material-ui/core/styles";
+import styleConstants from "./constants";
 
 const ViewEntryStyles = makeStyles({
     container: {
@@ -26,7 +27,7 @@ const ViewEntryStyles = makeStyles({
         height: "45px",
         margin: "15px 15px 30px 0",
         fontSize: "1rem",
-        backgroundColor: "rgba(230, 230, 230, 0.5)",
+        backgroundColor: styleConstants.buttonColor,
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
         borderRadius: "8px",
     },
