@@ -5,16 +5,16 @@ import styleConstants from "./constants";
 
 const ViewEntryStyles = makeStyles({
     container: {
-        padding: "50px"
+        width: "90%",
+        padding: "0",
+        marginTop: "40px"
     },
-    title: {
-        fontSize: "2em",
-        textShadow: "0px 0px 0.8px black"
+    dateContainer: {
+        display: "flex",
+        justifyContent: "space-between"
     },
     date: {
-        display: "flex",
-        justifyContent: "space-between",
-        fontSize: "1.1em"
+        margin: "0"
     },
     deleteIcon: {
         verticalAlign: "middle",
@@ -35,7 +35,8 @@ const ViewEntryStyles = makeStyles({
         textDecoration: "none"
     },
     content: {
-        fontSize: "1.3em"
+        // fontSize: "1.3em"
+        fontWeight: "lighter"
     }
 });
 

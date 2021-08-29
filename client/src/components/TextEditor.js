@@ -44,7 +44,7 @@ const TextEditor = (props) => {
 
     return (
         <div>
-            <span className={styles2.label}>Content</span>
+            <h2 className={styles2.label}>Content</h2>
             <div className={styles2.editor}>
                 <div className={styles1.toolbar}>
                     <TextEditorToolButton

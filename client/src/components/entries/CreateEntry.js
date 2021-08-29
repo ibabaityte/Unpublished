@@ -30,11 +30,10 @@ const CreateEntry = (props) => {
 
     return (
         <Container>
-            <div className={styles.title}>Create Entry</div>
+            <h1 className={styles.title}>Create Entry</h1>
             <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry)}>
 
-                <span className={styles.label}>Title</span>
-                <br/>
+                <h2 className={styles.label}>Title</h2>
                 <input
                     type="text"
                     value={entry.title || ""}

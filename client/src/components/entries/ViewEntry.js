@@ -26,21 +26,19 @@ const ViewEntry = (props) => {
 
     return (
         <Container className={styles.container}>
-            <div className={styles.title}>
-                {selectedEntry.title}
-            </div>
+            <h1 className={styles.title}>{selectedEntry.title}</h1>
 
-            <div className={styles.date}>
-                <div>
+            <div className={styles.dateContainer}>
+                <h4 className={styles.date}>
                     {moment(selectedEntry.createdAt).format("L")}
-                </div>
+                </h4>
 
-                <div>
+                <h4 className={styles.date}>
                     Updated: {
                     moment(selectedEntry.updatedAt).format("L") +
                     moment(selectedEntry.updatedAt).format(" LT")
                 }
-                </div>
+                </h4>
             </div>
 
             <Button className={styles.btn} onClick={() => deleteEntry(userType, selectedEntry._id, entries, setEntries)}>Delete</Button>
@@ -49,10 +47,10 @@ const ViewEntry = (props) => {
                 <Button className={styles.btn} onClick={() => setSelectedEntry(selectedEntry)}>Update</Button>
             </Link>
 
-            <div><span
+            <h2><span
                 className={styles.content}
                 dangerouslySetInnerHTML={{__html: sanitize(selectedEntry.content)}}
-            /></div>
+            /></h2>
 
 
         </Container>

@@ -30,11 +30,10 @@ const UpdateEntry = (props) => {
 
     return (
         <Container>
-            <div className={styles.title}>Update Entry</div>
+            <h1 className={styles.title}>Update Entry</h1>
             <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry)}>
 
-                <span className={styles.label}>Title</span>
-                <br/>
+                <h2 className={styles.label}>Title</h2>
                 <input
                     type="text"
                     value={selectedEntry.title}

@@ -5,7 +5,7 @@ import styleConstants from "./constants";
 
 const EntryListStyles = makeStyles({
     entryList: {
-        backgroundColor: "rgba(255, 255, 255, 0.3)",
+        backgroundColor: styleConstants.backgroundColor,
         borderRadius: "20px",
         display: "flex",
         flexDirection: "column",
@@ -14,8 +14,7 @@ const EntryListStyles = makeStyles({
         marginBottom: "40px"
     },
     title: {
-        fontSize: "2em",
-        textShadow: "0px 0px 0.5px black"
+        margin: "0"
     },
     contentOverlay: {
         position: "absolute",

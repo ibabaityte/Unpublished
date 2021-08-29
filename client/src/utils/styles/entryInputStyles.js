@@ -4,12 +4,6 @@ import {
 import styleConstants from "./constants";
 
 const EntryInputStyles = makeStyles({
-    title: {
-        fontSize: "2em",
-        marginTop: "20px",
-        marginBottom: "40px",
-        textShadow: "0px 0px 0.8px black"
-    },
     field: {
         top: "0",
         left: "0",
@@ -28,6 +22,9 @@ const EntryInputStyles = makeStyles({
             borderBottom: "5px solid #0f7ef1",
         }
     },
+    title: {
+        marginBottom: "40px"
+    },
     contentField: {
         minHeight: "25vh",
         height: "auto",
@@ -37,8 +34,7 @@ const EntryInputStyles = makeStyles({
         backgroundColor: styleConstants.backgroundColor
     },
     label: {
-        fontSize: "1.5em",
-        textShadow: "0px 0px 0.5px black"
+        margin: "0"
     },
     editor: {
         backgroundColor: styleConstants.backgroundColor

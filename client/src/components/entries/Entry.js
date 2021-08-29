@@ -33,13 +33,13 @@ const Entry = (props) => {
 
     return (
         <Container className={classes.entry}>
-            <div className={styles.title}>
+            <h1 className={styles.title}>
                 {entry.title}
                 <DeleteIcon
                     className={styles.deleteIcon}
                     onClick={() => deleteEntry(userType, entry._id, entries, setEntries)}
                 />
-            </div>
+            </h1>
 
             <div>{moment(entry.createdAt).format("L")}</div>
 
