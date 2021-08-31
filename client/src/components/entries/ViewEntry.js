@@ -26,7 +26,7 @@ const ViewEntry = (props) => {
 
     return (
         <Container className={styles.container}>
-            <h1 className={styles.title}>{selectedEntry.title}</h1>
+            <h1>{selectedEntry.title}</h1>
 
             <div className={styles.dateContainer}>
                 <h4 className={styles.date}>
@@ -43,9 +43,13 @@ const ViewEntry = (props) => {
 
             <Button className={styles.btn} onClick={() => deleteEntry(userType, selectedEntry._id, entries, setEntries)}>Delete</Button>
 
-            <Link className={styles.link} to="/entries/updateEntry">
-                <Button className={styles.btn} onClick={() => setSelectedEntry(selectedEntry)}>Update</Button>
-            </Link>
+            {
+                userType === "USER" ?
+                    <Link className={styles.link} to="/home/entries/updateEntry">
+                        <Button className={styles.btn} onClick={() => setSelectedEntry(selectedEntry)}>Update</Button>
+                    </Link>
+                    : null
+            }
 
             <h2><span
                 className={styles.content}

@@ -18,7 +18,7 @@ const handleEntry = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNew
             }
         );
     }
-}
+};
 
 const handleEntryContent = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry) => {
     if (entry._id) {
@@ -40,11 +40,11 @@ const handleEntryContent = (e, entry, selectedEntry, setSelectedEntry, newEntry,
 const handleChange = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry) => {
     e.preventDefault();
     handleEntry(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry);
-}
+};
 
 const handleContentEditableChange = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry) => {
     handleEntryContent(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry);
-}
+};
 
 const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedEntry) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedE
         createEntry(entry, entries, setEntries);
         console.log(entry);
     }
-}
+};
 
 export {
     handleChange,

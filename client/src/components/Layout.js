@@ -7,6 +7,7 @@ import EntryList from "./entries/EntryList";
 
 // styles imports
 import Grid from "@material-ui/core/Grid";
+import AdminPanelComponent from "./admin/Admin";
 
 const Layout = (props) => {
 
@@ -25,11 +26,21 @@ const Layout = (props) => {
             </Grid>
 
             <Grid container>
-                <Route path="/entries">
-                    <EntryList
-                        userType={userType}
-                    />
-                </Route>
+                {
+                    userType === "ADMIN" ?
+                        <Route path="/home/admin">
+                            <AdminPanelComponent
+                                username={username}
+                                userType={userType}
+                            />
+                        </Route>
+                        :
+                        <Route path="/home/entries">
+                            <EntryList
+                                userType={userType}
+                            />
+                        </Route>
+                }
             </Grid>
         </div>
     )

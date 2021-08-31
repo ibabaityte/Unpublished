@@ -36,7 +36,9 @@ const deleteEntry = (userType, entryId, entries, setEntries) => {
         const updatedEntries = entries.filter(entry => entry._id !== entryId);
         setEntries(updatedEntries);
         if(userType === "USER") {
-            window.location.href = "/entries"
+            window.location.href = "/home/entries"
+        } else {
+            window.location.href = "/home/admin/allEntries"
         }
     }).catch(err => {
         console.log(err);

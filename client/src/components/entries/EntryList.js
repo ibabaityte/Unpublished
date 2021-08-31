@@ -38,10 +38,10 @@ const EntryList = (props) => {
 
     return (
         <Container className={`${styles.entryList} ${classes.entryList}`}>
-            <Route exact path="/entries">
+            <Route exact path="/home/entries">
 
                 <Container className={classes.createButtonContainer}>
-                    <Link className={styles.link} to="/entries/createEntry">
+                    <Link className={styles.link} to="/home/entries/createEntry">
                         <Button className={`${classes.createButton} ${classes.button}`}>Create a new Entry</Button>
                     </Link>
                 </Container>
@@ -58,7 +58,7 @@ const EntryList = (props) => {
                 ))}
             </Route>
 
-            <Route path="/entries/createEntry" render={() => (
+            <Route path="/home/entries/createEntry" render={() => (
                 <CreateEntry
                     entry={newEntry}
                     entries={entries}
@@ -70,7 +70,7 @@ const EntryList = (props) => {
                 />
             )}/>
 
-            <Route path="/entries/updateEntry">
+            <Route path="/home/entries/updateEntry">
                 <UpdateEntry
                     entry={selectedEntry}
                     entries={entries}
@@ -82,7 +82,7 @@ const EntryList = (props) => {
                 />
             </Route>
 
-            <Route path="/entries/viewEntry" render={() => (
+            <Route path="/home/entries/viewEntry" render={() => (
                 <ViewEntry
                     key={selectedEntry._id}
                     userType={userType}

@@ -4,7 +4,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 // component imports
 import Landing from "./components/Landing";
 import Layout from "./components/Layout";
-import AdminPanelComponent from "./components/admin/Admin";
 
 // style imports
 import './App.css';
@@ -53,15 +52,8 @@ const App = () => {
                            }>
                     </Route>
 
-                    <Route path="/entries">
+                    <Route path="/home">
                         <Layout
-                            username={Username}
-                            userType={UserType}
-                        />
-                    </Route>
-
-                    <Route path="/admin">
-                        <AdminPanelComponent
                             username={Username}
                             userType={UserType}
                         />

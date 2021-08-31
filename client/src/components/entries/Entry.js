@@ -51,14 +51,24 @@ const Entry = (props) => {
                 />
             </div>
 
-            <Link className={styles.link} to="/entries/viewEntry">
-                <Button className={classes.button} onClick={() => setSelectedEntry(entry)}>View</Button>
-            </Link>
+            {
+                userType === "USER" ?
+                    <Link className={styles.link} to="/home/entries/viewEntry">
+                        <Button className={classes.button} onClick={() => setSelectedEntry(entry)}>View</Button>
+                    </Link>
+                    :
+                    <Link className={styles.link} to="/home/admin/allEntries/viewEntry">
+                        <Button className={classes.button} onClick={() => setSelectedEntry(entry)}>View</Button>
+                    </Link>
+            }
 
-            <Link className={styles.link} to="/entries/updateEntry">
-                <Button className={classes.button} onClick={() => setSelectedEntry(entry)}>Update</Button>
-            </Link>
 
+            {userType === "USER" ?
+                <Link className={styles.link} to="/home/entries/updateEntry">
+                    <Button className={classes.button} onClick={() => setSelectedEntry(entry)}>Update</Button>
+                </Link>
+                : null
+            }
         </Container>
     );
 };

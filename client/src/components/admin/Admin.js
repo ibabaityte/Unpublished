@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 
 // component imports
-import Header from "../header/Header";
 import AdminUserList from "./AdminUserList";
 import AdminEntryList from "./AdminEntryList";
 
@@ -16,12 +15,20 @@ import {
     adminDeleteProfile
 } from "../../utils/admin/adminUtils";
 
+// style imports
+import {withStyles} from '@material-ui/core/styles';
+import adminPanelStyles, {AdminStyles} from "../../utils/styles/adminStyles";
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+
 const AdminPanelComponent = (props) => {
 
     const {
-        username,
-        userType,
+        userType
     } = props;
+
+    const styles = AdminStyles();
+    const classes = props.classes;
 
     const [adminEntries, setAdminEntries] = useState([]);
     const [adminUsers, setAdminUsers] = useState([]);
@@ -32,28 +39,26 @@ const AdminPanelComponent = (props) => {
     }, []);
 
     return (
-        <div>
-            <Header
-                username={username}
-                userType={userType}
-            />
+        <Container className={styles.container}>
+            <h1 className={styles.title}>ADMIN PANEL</h1>
+            <Container className={styles.buttonContainer}>
+                <Link className={styles.link} to="/home/admin/allUsers">
+                    <Button className={`${classes.panelButton} ${classes.button}`}>See all users</Button>
+                </Link>
+                <Link className={styles.link} to="/home/admin/allEntries">
+                    <Button className={`${classes.panelButton} ${classes.button}`}>See all entries</Button>
+                </Link>
+            </Container>
 
-            <div>ADMIN PANEL</div>
-            <Link to="/admin/allUsers">
-                <button>See all users</button>
-            </Link>
-            <Link to="/admin/allEntries">
-                <button>See all entries</button>
-            </Link>
-
-            <Route path="/admin/allUsers" render={() => (
+            <Route path="/home/admin/allUsers" render={() => (
                 <AdminUserList
                     adminUsers={adminUsers}
+                    setAdminUsers={setAdminUsers}
                     handleProfileDelete={adminDeleteProfile}
                 />
             )}/>
 
-            <Route path="/admin/allEntries" render={() => (
+            <Route path="/home/admin/allEntries" render={() => (
                 <AdminEntryList
                     userType={userType}
                     adminEntries={adminEntries}
@@ -61,8 +66,8 @@ const AdminPanelComponent = (props) => {
                 />
             )}/>
 
-        </div>
+        </Container>
     );
 }
 
-export default AdminPanelComponent;
+export default withStyles(adminPanelStyles)(AdminPanelComponent);

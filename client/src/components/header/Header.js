@@ -21,10 +21,20 @@ const Header = (props) => {
         <div className={styles.header}>
             <Grid container>
                 <Grid item lg={6} className={styles.logoPanel}>
-                    <Link className={styles.logo} to="/entries">unpublished</Link>
+                    {
+                        userType === "USER" ?
+                            <Link className={styles.logo} to="/home/entries">unpublished</Link>
+                            :
+                            <Link className={styles.logo} to="/home/admin/allEntries">unpublished</Link>
+                    }
                 </Grid>
                 <Grid item lg={6} className={styles.panel}>
-                    <Link className={styles.home} to="/entries">Home</Link>
+                    {
+                        userType === "USER" ?
+                            <Link className={styles.home} to="/home/entries">Home</Link>
+                            :
+                            <Link className={styles.home} to="/home/admin/allEntries">Home</Link>
+                    }
                     <HeaderPopper
                         username={username}
                         userType={userType}

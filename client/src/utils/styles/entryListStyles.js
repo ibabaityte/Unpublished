@@ -62,7 +62,7 @@ const entryListStyles = {
     },
     button: {
         margin: "20px 10px 0px 10px",
-        backgroundColor: "rgba(153, 153, 153, 0.3)",
+        backgroundColor: "rgba(163, 163, 163, 0.4)"
     },
     createButton: {
         marginBottom: "40px",

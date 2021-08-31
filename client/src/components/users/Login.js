@@ -26,11 +26,11 @@ const Login = (props) => {
 
     // will have to delete this later
     if (user.UserType === "ADMIN") {
-        return <Redirect to="/admin"/>
+        return <Redirect to="/home/admin"/>
     }
 
     if (user.UserType === "USER") {
-        return <Redirect to="/entries"/>
+        return <Redirect to="/home/entries"/>
     }
 
     return (

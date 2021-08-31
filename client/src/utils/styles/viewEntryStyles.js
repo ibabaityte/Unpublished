@@ -7,7 +7,8 @@ const ViewEntryStyles = makeStyles({
     container: {
         width: "90%",
         padding: "0",
-        marginTop: "40px"
+        marginTop: "40px",
+        marginBottom: "40px"
     },
     dateContainer: {
         display: "flex",
@@ -35,7 +36,6 @@ const ViewEntryStyles = makeStyles({
         textDecoration: "none"
     },
     content: {
-        // fontSize: "1.3em"
         fontWeight: "lighter"
     }
 });
