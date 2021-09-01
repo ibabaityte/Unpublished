@@ -3,7 +3,7 @@ import {
 } from "@material-ui/core/styles";
 import styleConstants from "./constants";
 
-const AdminStyles = makeStyles({
+const AdminStyles = makeStyles((theme) => ({
     container: {
         backgroundColor: styleConstants.backgroundColor,
         borderRadius: "20px",
@@ -19,15 +19,32 @@ const AdminStyles = makeStyles({
         padding: "30px"
     },
     buttonContainer: {
-        margin: "0 auto",
-        width: "auto",
+        display: "flex",
+        justifyContent: "space-evenly",
+        width: "40%",
+        [theme.breakpoints.up("lg")]: {
+            width: "50%"
+        },
+        [theme.breakpoints.up("md")]: {
+            width: "60%"
+        },
+        [theme.breakpoints.up("sm")]: {
+            width: "78%"
+        },
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column"
+        }
     },
     link: {
-        textDecoration: "none"
+        textDecoration: "none",
+        [theme.breakpoints.down("sm")]: {
+            display: "flex",
+            justifyContent: "center",
+        }
     },
     userListContainer: {
         margin: "0 auto",
-        width: "100%",
+        width: "90%",
         flexDirection: "column",
     },
     containerItem: {
@@ -36,28 +53,49 @@ const AdminStyles = makeStyles({
         display: "flex",
         width: "100%",
         backgroundColor: "rgba(255, 255, 255, 0.2)",
-        borderRadius: "20px"
+        borderRadius: "20px",
+        [theme.breakpoints.down(1000)]: {
+            padding: "30px 0 30px 0"
+        }
+    },
+    wrapper: {
+        width: "80%",
+        display: "flex",
+        flexDirection: "row",
+        margin: "0 auto",
+        [theme.breakpoints.down(1000)]: {
+            flexDirection: "column"
+        }
     },
     button: {
-        backgroundColor: "rgba(163, 163, 163, 0.4)"
+        backgroundColor: "rgba(163, 163, 163, 0.4)",
+        [theme.breakpoints.down(1000)]: {
+            margin: "20px auto"
+        }
     },
     buttonDiv: {
         display: "flex",
-        width: "15%",
-        paddingLeft: "0",
+        width: "30%",
+        justifyContent: "flex-end",
+        [theme.breakpoints.down(1000)]: {
+            width: "100%"
+        }
     },
-    username: {
+    usernameDiv: {
         display: "flex",
+        width: "70%",
+        height: "50px",
         justifyContent: "flex-start",
-        margin: "0",
-        width: "85%",
-        paddingLeft: "70px"
+        [theme.breakpoints.down(1000)]: {
+            width: "100%",
+            justifyContent: "center",
+        }
     }
-});
+}));
 
 const adminPanelStyles = {
     button: {
-        margin: "0 10px 0px 10px",
+        margin: "0 10px 0px 10px"
     },
     panelButton: {
         margin: "20px 20px 40px 20px",

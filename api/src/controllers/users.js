@@ -57,7 +57,8 @@ const auth = (req, res) => {
                     const token = jwt.sign({
                         username: user.username,
                         userId: user._id,
-                        userType: user.userType
+                        userType: user.userType,
+                        expirationTimestamp: Date.now()
                     }, secretKey, {
                         expiresIn: "1h"
                     });
@@ -68,7 +69,8 @@ const auth = (req, res) => {
                         token: token,
                         userId: user._id,
                         userType: user.userType,
-                        username: user.username
+                        username: user.username,
+                        expirationTimestamp: Date.now() + 1000 * 60 * 60
                     });
                 } else {
                     res.status(401).send({

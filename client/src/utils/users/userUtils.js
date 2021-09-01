@@ -3,12 +3,13 @@ import {generateRequestConfig} from "./headerUtils";
 import {API_URL, AUTH_URL, REGISTER_URL} from "../constants/apiConstants";
 
 const getUserData = () => {
-    const {LoginToken, UserId, UserType, Username} = localStorage;
+    const {LoginToken, UserId, UserType, Username, ExpirationTimestamp} = localStorage;
     return {
         LoginToken,
         UserId,
         UserType,
-        Username
+        Username,
+        ExpirationTimestamp
     }
 };
 
@@ -32,6 +33,7 @@ const login = (user, setUser, checkAuth, setIsAuthenticated) => {
             localStorage.setItem('UserId', result.data.userId);
             localStorage.setItem('UserType', result.data.userType);
             localStorage.setItem('Username', result.data.username);
+            localStorage.setItem('ExpirationTimestamp', result.data.expirationTimestamp);
             checkAuth(result.status, setIsAuthenticated);
         });
 }

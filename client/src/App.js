@@ -14,7 +14,8 @@ const App = () => {
         LoginToken,
         UserId,
         UserType,
-        Username
+        Username,
+        ExpirationTimestamp
     } = localStorage;
 
     const [user, setUser] = useState({});
@@ -31,7 +32,16 @@ const App = () => {
             UserType,
             Username
         });
-    }, [LoginToken, UserId, UserType, Username, isAuthenticated]);
+        const delay = ExpirationTimestamp - Date.now();
+        console.log(delay);
+        const expirationTimer = setTimeout(() => {
+            if(delay >= 0) {
+                localStorage.clear();
+                window.location = '/';
+            }
+        }, delay);
+        return () => clearTimeout(expirationTimer);
+    }, [LoginToken, UserId, UserType, Username, isAuthenticated, ExpirationTimestamp]);
 
     const styles = Background();
 

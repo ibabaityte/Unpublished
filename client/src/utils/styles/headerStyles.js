@@ -31,7 +31,7 @@ const HeaderStyles = makeStyles((theme) => ({
     panel: {
         display: "inline",
         textAlign: "right",
-        [theme.breakpoints.up(768)]: {
+        [theme.breakpoints.up("sm")]: {
             margin: "0 auto",
         }
     },

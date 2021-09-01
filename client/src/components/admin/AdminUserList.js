@@ -13,9 +13,13 @@ const AdminUserList = (props) => {
             {
                 adminUsers.map((user) => (
                     <div className={styles.containerItem} key={user.username}>
-                        <h2 className={styles.username}>{user.username}</h2>
-                        <div className={styles.buttonDiv}>
-                            <Button className={styles.button} onClick={() => handleProfileDelete(user._id, adminUsers, setAdminUsers)}>Delete profile</Button>
+                        <div className={styles.wrapper}>
+                            <div className={styles.usernameDiv}>
+                                <h2>{user.username}</h2>
+                            </div>
+                            <div className={styles.buttonDiv}>
+                                <Button className={styles.button} onClick={() => handleProfileDelete(user._id, adminUsers, setAdminUsers)}>Delete profile</Button>
+                            </div>
                         </div>
                     </div>
                 ))
