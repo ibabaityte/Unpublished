@@ -33,7 +33,6 @@ const App = () => {
             Username
         });
         const delay = ExpirationTimestamp - Date.now();
-        console.log(delay);
         const expirationTimer = setTimeout(() => {
             if(delay >= 0) {
                 localStorage.clear();

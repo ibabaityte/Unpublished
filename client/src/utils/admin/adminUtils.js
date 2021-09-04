@@ -21,9 +21,8 @@ const getAdminEntryList = (setState) => {
 }
 
 const adminDeleteProfile = (id, list, setState) => {
-    console.log(API_URL);
     axios.delete(`${API_URL}/${id}`, generateRequestConfig()).then((response) => {
-        console.log(response);
+        // console.log(response);
         const updatedUsers = list.filter(user => user._id !== id);
         setState(updatedUsers);
     });

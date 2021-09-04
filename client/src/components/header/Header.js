@@ -25,7 +25,7 @@ const Header = (props) => {
                         userType === "USER" ?
                             <Link className={styles.logo} to="/home/entries">unpublished</Link>
                             :
-                            <Link className={styles.logo} to="/home/admin/allEntries">unpublished</Link>
+                            <Link className={styles.logo} to="/home/admin">unpublished</Link>
                     }
                 </Grid>
                 <Grid item lg={6} className={styles.panel}>

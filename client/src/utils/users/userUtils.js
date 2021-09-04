@@ -58,7 +58,7 @@ const logout = (e, anchorRef, setOpen) => {
 
 const deleteProfile = (e, anchorRef, setOpen) => {
     const userId = localStorage.getItem('UserId');
-    axios.delete(`${API_URL}${userId}`, generateRequestConfig()).then((response) => {
+    axios.delete(`${API_URL}/${userId}`, generateRequestConfig()).then((response) => {
         console.log(response);
         localStorage.clear();
         window.location.href = "/";
