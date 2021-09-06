@@ -1,7 +1,7 @@
 import {
     createEntry,
     updateEntry
-} from "./entryListUtils";
+} from "./entryUtils";
 
 const handleEntry = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry) => {
     if (entry._id) {
@@ -46,14 +46,14 @@ const handleContentEditableChange = (e, entry, selectedEntry, setSelectedEntry, 
     handleEntryContent(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry);
 };
 
-const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedEntry) => {
+const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus) => {
     e.preventDefault();
     if (entry._id) {
-        updateEntry(entry._id, entry, entries, setEntries, selectedEntry, setSelectedEntry);
+        updateEntry(entry._id, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus);
     }
     else {
-        createEntry(entry, entries, setEntries);
-        console.log(entry);
+        createEntry(entry, entries, setEntries, setStatus);
+        // console.log(entry);
     }
 };
 

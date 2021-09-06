@@ -14,14 +14,14 @@ const handleChangeRegister = (e, newUser, setNewUser) => {
     setNewUser(newUserCopy);
 }
 
-const handleLogin = (e, user, setUser, setIsAuthenticated) => {
+const handleLogin = (e, user, setUser, setIsAuthenticated, setStatus) => {
     e.preventDefault();
-    login(user, setUser, checkAuth, setIsAuthenticated);
+    login(user, setUser, checkAuth, setIsAuthenticated, setStatus);
 }
 
-const handleRegister = (e, newUser, setNewUser) => {
+const handleRegister = (e, newUser, setNewUser, setStatus) => {
     e.preventDefault();
-    register(newUser, setNewUser);
+    register(newUser, setNewUser, setStatus);
 }
 
 export {

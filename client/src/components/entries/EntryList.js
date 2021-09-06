@@ -28,6 +28,7 @@ const EntryList = (props) => {
     const [entries, setEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({});
     const [selectedEntry, setSelectedEntry] = useState({});
+    const [status, setStatus] = useState({});
 
     const styles = EntryListStyles();
     const classes = props.classes;
@@ -67,6 +68,8 @@ const EntryList = (props) => {
                     setSelectedEntry={setSelectedEntry}
                     newEntry={newEntry}
                     setNewEntry={setNewEntry}
+                    status={status}
+                    setStatus={setStatus}
                 />
             )}/>
 
@@ -79,6 +82,8 @@ const EntryList = (props) => {
                     setSelectedEntry={setSelectedEntry}
                     newEntry={newEntry}
                     setNewEntry={setNewEntry}
+                    status={status}
+                    setStatus={setStatus}
                 />
             </Route>
 

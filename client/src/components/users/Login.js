@@ -12,13 +12,15 @@ import TextField from '@material-ui/core/TextField';
 import {
     handleChangeLogin,
     handleLogin,
-} from "../../utils/users/loginRegisterUtils";
+} from "../../utils/users/userHandlers";
 
 const Login = (props) => {
     const {
         user,
         setUser,
-        setIsAuthenticated
+        setIsAuthenticated,
+        status,
+        setStatus
     } = props;
 
     const styles = UserFormStyles();
@@ -37,7 +39,9 @@ const Login = (props) => {
         <div className={styles.userForm}>
             <div className={styles.label}>Sign In to your account</div>
 
-            <form onSubmit={e => handleLogin(e, user, setUser, setIsAuthenticated)}>
+            <form onSubmit={e => handleLogin(e, user, setUser, setIsAuthenticated, setStatus)}>
+                <h2>{status.message}</h2>
+
                 <div className="inputs">
 
                     <TextField

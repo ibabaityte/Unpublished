@@ -19,7 +19,9 @@ const Landing = (props) => {
         setUser,
         newUser,
         setNewUser,
-        setIsAuthenticated
+        setIsAuthenticated,
+        status,
+        setStatus
     } = props;
 
     const styles = LandingStyles();
@@ -42,12 +44,16 @@ const Landing = (props) => {
                                 user={user}
                                 setUser={setUser}
                                 setIsAuthenticated={setIsAuthenticated}
+                                status={status}
+                                setStatus={setStatus}
                             />
                         )}/>
                         <Route path="/register" render={() => (
                             <Register
                                 newUser={newUser}
                                 setNewUser={setNewUser}
+                                status={status}
+                                setStatus={setStatus}
                             />
                         )}/>
                 </Grid>

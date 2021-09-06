@@ -4,7 +4,6 @@ import React from "react";
 import TextEditor from "../TextEditor";
 
 // util imports
-import {handleRedirect} from "../../utils/entries/redirectUtils";
 import {
     handleChange,
     handleSubmit
@@ -23,7 +22,9 @@ const CreateEntry = (props) => {
         selectedEntry,
         setSelectedEntry,
         newEntry,
-        setNewEntry
+        setNewEntry,
+        status,
+        setStatus
     } = props;
 
     const styles = EntryInputStyles();
@@ -31,7 +32,8 @@ const CreateEntry = (props) => {
     return (
         <Container>
             <h1 className={styles.title}>Create Entry</h1>
-            <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry)}>
+            <h2>{status.message}</h2>
+            <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus)}>
 
                 <h2 className={styles.label}>Title</h2>
                 <input
@@ -51,7 +53,7 @@ const CreateEntry = (props) => {
                     setNewEntry={setNewEntry}
                 />
 
-                <Button className={styles.btn} type="submit" value="Create" onClick={() => handleRedirect()}>Create</Button>
+                <Button className={styles.btn} type="submit" value="Create">Create</Button>
             </form>
         </Container>
     );

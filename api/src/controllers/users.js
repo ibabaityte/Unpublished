@@ -9,21 +9,32 @@ const secretKey = process.env.JWT_SECRET;
 
 const register = (req, res) => {
     if (!req.body.username || !req.body.password) {
-        return res.status(400).json({
-            message: "Username and password can not be empty"
+        return res.status(400).send({
+            code: "400",
+            message: "Username and password can not be empty."
+        });
+    }
+
+    const number = /\d/;
+    if(number.test(req.body.password)){
+        return res.status(400).send({
+            code: "400",
+            message: "Password has to contain at least one number."
         });
     }
 
     User.findOne({username: req.body.username}).then(user => {
         if (user) {
             return res.status(409).send({
-                message: "Username already exists"
+                code: "409",
+                message: "This username already exists. Try again."
             });
         } else {
             bcrypt.hash(req.body.password, 10, (err, hash) => {
                 if (err) {
                     return res.status(500).send({
-                        message: err.message
+                        code: "500",
+                        message: "Something went wrong during register. Try again."
                     });
                 } else {
                     //create new users
@@ -32,11 +43,13 @@ const register = (req, res) => {
                         password: hash
                     });
                     //save users in database
-                    newUser.save().then(data => {
-                        res.send(data);
-                    }).catch(err => {
-                        res.send({
-                            message: err.message
+                    newUser.save()
+                        .then(data => {
+                            res.send(data);
+                        }).catch(() => {
+                        res.status(500).send({
+                            code: "500",
+                            message: "Something went wrong during register. Try again."
                         });
                     });
                 }
@@ -49,37 +62,43 @@ const auth = (req, res) => {
     User.findOne({username: req.body.username}).then(user => {
         if (!user) {
             return res.status(401).send({
-                message: "Auth failed"
+                message: "There is no such user. Try again."
             });
         } else {
-            bcrypt.compare(req.body.password, user.password).then(result => {
-                if (result) {
-                    const token = jwt.sign({
-                        username: user.username,
-                        userId: user._id,
-                        userType: user.userType,
-                        expirationTimestamp: Date.now()
-                    }, secretKey, {
-                        expiresIn: "1h"
+            bcrypt.compare(req.body.password, user.password)
+                .then(result => {
+                    if (result) {
+                        const token = jwt.sign({
+                            username: user.username,
+                            userId: user._id,
+                            userType: user.userType,
+                            expirationTimestamp: Date.now()
+                        }, secretKey, {
+                            expiresIn: "1h"
+                        });
+                        // console.log(token);
+                        return res.status(200).send({
+                            message: "Logged in successfully.",
+                            token: token,
+                            userId: user._id,
+                            userType: user.userType,
+                            username: user.username,
+                            expirationTimestamp: Date.now() + 1000 * 60 * 60
+                        });
+                    } else {
+                        res.status(401).send({
+                            code: "401",
+                            message: "Something went wrong during login. Try again."
+                        });
+                    }
+                })
+                .catch(() => {
+                    res.status(500).send({
+                        code: "500",
+                        message: "Something went wrong during login. Try again."
                     });
-
-                    // console.log(token);
-                    return res.status(200).send({
-                        message: "Auth successful",
-                        token: token,
-                        userId: user._id,
-                        userType: user.userType,
-                        username: user.username,
-                        expirationTimestamp: Date.now() + 1000 * 60 * 60
-                    });
-                } else {
-                    res.status(401).send({
-                        message: "Auth failed"
-                    });
-                }
-            }).catch(err => console.log(err));
+                });
         }
-
     });
 };
 

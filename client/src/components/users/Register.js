@@ -11,10 +11,15 @@ import TextField from '@material-ui/core/TextField';
 import {
     handleChangeRegister,
     handleRegister
-} from "../../utils/users/loginRegisterUtils";
+} from "../../utils/users/userHandlers";
 
 const Register = (props) => {
-    const {newUser, setNewUser} = props;
+    const {
+        newUser,
+        setNewUser,
+        status,
+        setStatus
+    } = props;
 
     const styles = UserFormStyles();
     const classes = props.classes;
@@ -22,8 +27,9 @@ const Register = (props) => {
     return (
         <div className={styles.userForm}>
             <div className={styles.label}>Sign Up in to your account</div>
+            <h2>{status.message}</h2>
 
-            <form onSubmit={e => handleRegister(e, newUser, setNewUser)}>
+            <form onSubmit={e => handleRegister(e, newUser, setNewUser, setStatus)}>
                 <div className="inputs">
 
                     <TextField

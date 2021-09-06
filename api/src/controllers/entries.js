@@ -4,7 +4,10 @@ import Entry from "../models/entry";
 const create = (req, res) => {
     //Validate request
     if (!req.body.content) {
-        return res.status(400).send({message: "Content can not be empty"});
+        return res.status(400).send({
+            code: "400",
+            message: "Content can not be empty"
+        });
     }
 
     //Create an entry
@@ -17,9 +20,14 @@ const create = (req, res) => {
 
     //Save entry in the database
     newEntry.save().then(data => {
-        res.status(200).send({message: "all is good", data: data});
+        res.status(200).send({
+            code: "200",
+            message: "New entry is created successfully",
+            data: data
+        });
     }).catch(err => {
         res.status(500).send({
+            code: "500",
             message: err.message || "Some error occurred while creating your entry"
         });
     });
@@ -29,9 +37,10 @@ const create = (req, res) => {
 const list = (req, res) => {
     Entry.find({'author': req.decodedToken.userId}).then(data => {
         res.status(200).send(data);
-    }).catch(err => {
+    }).catch(() => {
         res.status(500).send({
-            message: err.message || "An error occurred while retrieving your entries"
+            code: "500",
+            message: "An error occurred while retrieving your entries"
         });
     });
 };
@@ -40,9 +49,10 @@ const list = (req, res) => {
 const listAllEntries = (req, res) => {
     Entry.find({authorType: "USER"}).then(data => {
         res.status(200).send(data);
-    }).catch(err => {
+    }).catch(() => {
         res.status(500).send({
-            message: err.message || "An error occurred while retrieving all entries"
+            code: "500",
+            message: "An error occurred while retrieving all entries"
         });
     });
 };
@@ -52,6 +62,7 @@ const get = (req, res) => {
     Entry.findById(req.params.id).then(entry => {
         if (!entry) {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id" + req.params.id
             });
         }
@@ -59,10 +70,12 @@ const get = (req, res) => {
     }).catch(err => {
         if (err.kind === "ObjectId") {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
         return res.status(500).send({
+            code: "500",
             message: "Error retrieving entry with id " + req.params.id
         });
     });
@@ -70,8 +83,10 @@ const get = (req, res) => {
 
 //Update a note identified by the entryId in the request
 const update = (req, res) => {
+    // validating
     if (!req.body.content) {
         return res.status(400).send({
+            code: "400",
             message: "Content can not be empty"
         });
     }
@@ -83,6 +98,7 @@ const update = (req, res) => {
     }, {new: true}).then(entry => {
         if (!entry) {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
@@ -90,11 +106,13 @@ const update = (req, res) => {
     }).catch(err => {
         if (err.kind === "ObjectId") {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
         return res.status(500).send({
-            message: "Error updating with entry id " + req.params.id
+            code: "500",
+            message: "Some error occurred while updating your entry"
         });
     });
 };
@@ -104,6 +122,7 @@ const remove = (req, res) => {
     Entry.findByIdAndRemove(req.params.id).then(entry => {
         if (!entry) {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
@@ -111,11 +130,13 @@ const remove = (req, res) => {
     }).catch(err => {
         if (err.kind === "ObjectId" || err.name === "NotFound") {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
         return res.status(500).send({
-            message: "Could not delete your entry with id " + req.params.id
+            code: "500",
+            message: "Could not delete this entry"
         });
     });
 };

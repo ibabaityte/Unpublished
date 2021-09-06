@@ -6,7 +6,7 @@ import styleConstants from "./constants";
 const UserFormStyles = makeStyles({
     userForm: {
         position: "relative",
-        height: "415px",
+        minHeight: "415px",
         width: "500px",
         backgroundColor: styleConstants.buttonColor,
         border: "1px solid rgba(0, 0, 0, 0.1)",
@@ -38,7 +38,7 @@ const UserFormStyles = makeStyles({
 
 const userFormStyles = {
     btn: {
-        marginTop: "75px"
+        margin: "75px 0 30px 0"
     },
     input: {
         marginTop: "25px"

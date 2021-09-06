@@ -42,7 +42,7 @@ const EntryInputStyles = makeStyles({
     btn: {
         width: "120px",
         height: "60px",
-        marginTop: "30px",
+        margin: "30px",
         marginBottom: "30px",
         fontSize: "1.2rem",
         backgroundColor: styleConstants.buttonColor,

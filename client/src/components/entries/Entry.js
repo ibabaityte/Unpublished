@@ -6,7 +6,7 @@ import sanitize from "sanitize-html";
 import moment from "moment";
 
 // util imports
-import {deleteEntry} from "../../utils/entries/entryListUtils";
+import {deleteEntry} from "../../utils/entries/entryUtils";
 
 // style imports
 import {withStyles} from '@material-ui/core/styles';
