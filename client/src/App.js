@@ -5,6 +5,9 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Landing from "./components/Landing";
 import Layout from "./components/Layout";
 
+// util imports
+import {automaticLogout} from "./utils/users/userUtils";
+
 // style imports
 import './App.css';
 import {Background} from "./utils/styles/background";
@@ -21,10 +24,11 @@ const App = () => {
     const [user, setUser] = useState({});
     const [newUser, setNewUser] = useState({});
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [status, setStatus] = useState({});
 
     // will need useEffect hook to init state with users details and isAuthenticated
     useEffect(() => {
-        if(!isAuthenticated) {
+        if (!isAuthenticated) {
             setIsAuthenticated(!!LoginToken);
         }
         setUser({
@@ -32,14 +36,7 @@ const App = () => {
             UserType,
             Username
         });
-        const delay = ExpirationTimestamp - Date.now();
-        const expirationTimer = setTimeout(() => {
-            if(delay >= 0) {
-                localStorage.clear();
-                window.location = '/';
-            }
-        }, delay);
-        return () => clearTimeout(expirationTimer);
+        automaticLogout(ExpirationTimestamp);
     }, [LoginToken, UserId, UserType, Username, isAuthenticated, ExpirationTimestamp]);
 
     const styles = Background();
@@ -57,6 +54,8 @@ const App = () => {
                                    newUser={newUser}
                                    setNewUser={setNewUser}
                                    setIsAuthenticated={setIsAuthenticated}
+                                   status={status}
+                                   setStatus={setStatus}
                                /> : null
                            }>
                     </Route>

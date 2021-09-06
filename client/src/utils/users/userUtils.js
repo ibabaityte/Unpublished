@@ -19,7 +19,7 @@ const checkAuth = (status, setState) => {
     }
 };
 
-const login = (user, setUser, checkAuth, setIsAuthenticated) => {
+const login = (user, setUser, checkAuth, setIsAuthenticated, setStatus) => {
     const {username, password} = user;
     const {UserId, UserType, Username} = getUserData();
     axios.post(AUTH_URL, {username, password})
@@ -35,16 +35,23 @@ const login = (user, setUser, checkAuth, setIsAuthenticated) => {
             localStorage.setItem('Username', result.data.username);
             localStorage.setItem('ExpirationTimestamp', result.data.expirationTimestamp);
             checkAuth(result.status, setIsAuthenticated);
+        })
+        .catch((err) => {
+            setStatus(err.response.data);
         });
 }
 
-const register = (newUser, setNewUser) => {
+const register = (newUser, setNewUser, setStatus) => {
     const {username, password} = newUser;
-    axios.post(REGISTER_URL, {username, password}).then((result) => {
-        console.log(result);
-        setNewUser(newUser);
-        window.location.href = "/auth"
-    });
+    axios.post(REGISTER_URL, {username, password})
+        .then((result) => {
+            console.log(result);
+            setNewUser(newUser);
+            window.location.href = "/auth"
+        })
+        .catch((err) => {
+            setStatus(err.response.data);
+        });
 }
 
 const logout = (e, anchorRef, setOpen) => {
@@ -55,6 +62,17 @@ const logout = (e, anchorRef, setOpen) => {
     }
     setOpen(false);
 }
+
+const automaticLogout = (ExpirationTimestamp) => {
+    const delay = ExpirationTimestamp - Date.now();
+    const expirationTimer = setTimeout(() => {
+        if(delay >= 0) {
+            localStorage.clear();
+            window.location = '/';
+        }
+    }, delay);
+    return () => clearTimeout(expirationTimer);
+};
 
 const deleteProfile = (e, anchorRef, setOpen) => {
     const userId = localStorage.getItem('UserId');
@@ -76,5 +94,6 @@ export {
     login,
     register,
     logout,
+    automaticLogout,
     deleteProfile
 }
