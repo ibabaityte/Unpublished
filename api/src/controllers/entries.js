@@ -2,6 +2,7 @@ import Entry from "../models/entry";
 
 //Create and save a new entry
 const create = (req, res) => {
+    console.log(req);
     //Validate request
     if (!req.body.content) {
         return res.status(400).send({
@@ -33,7 +34,7 @@ const create = (req, res) => {
     });
 };
 
-//Retrieve and return all entries which belong to logged in users from the db
+//Retrieve and return all entries which belong to logged in user from the db
 const list = (req, res) => {
     Entry.find({'author': req.decodedToken.userId}).then(data => {
         res.status(200).send(data);
@@ -41,6 +42,20 @@ const list = (req, res) => {
         res.status(500).send({
             code: "500",
             message: "An error occurred while retrieving your entries"
+        });
+    });
+};
+
+//Retrieve and return all entries that match the search query
+const listSearchEntries = (req, res) => {
+    // checking if title contains a search query string
+    // '$options' : 'i'   is for case insensitivity
+    Entry.find({'title': {'$regex' : '.*' + req.query.query + '.*i', '$options' : 'i'}, 'author': req.decodedToken.userId}).then(data => {
+        res.status(200).send(data);
+    }).catch(() => {
+        res.status(500).send({
+            code: "500",
+            message: "There is no such entry"
         });
     });
 };
@@ -144,6 +159,7 @@ const remove = (req, res) => {
 module.exports = {
     create,
     list,
+    listSearchEntries,
     listAllEntries,
     get,
     update,

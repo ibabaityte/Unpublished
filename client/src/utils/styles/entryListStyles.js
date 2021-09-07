@@ -3,7 +3,7 @@ import {
 } from "@material-ui/core/styles";
 import styleConstants from "./constants";
 
-const EntryListStyles = makeStyles({
+const EntryListStyles = makeStyles((theme) => ({
     entryList: {
         backgroundColor: styleConstants.backgroundColor,
         borderRadius: "20px",
@@ -45,10 +45,43 @@ const EntryListStyles = makeStyles({
     },
     link: {
         textDecoration: "none",
+    },
+    addIcon: {
+        padding: "5px",
+        fontSize: "1.5em"
+    },
+    searchBar: {
+        width: "50%",
+        padding: "10px",
+        backgroundColor: "rgba(255, 255, 255, 0.2)",
+        borderRadius: "5px",
+        "& .MuiFormLabel-root": {
+            margin: "10px"
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+        }
+    },
+    form: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row",
+        minHeight: "100px",
+        marginBottom: "20px",
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column"
+        }
+    },
+    searchButtonContainer: {
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+            display: "flex",
+            justifyContent: "center"
+        }
     }
-});
+}));
 
-const entryListStyles = {
+const entryListStyles = (theme) => ({
     entry: {
         marginBottom: "40px",
         width: "90%",
@@ -64,19 +97,28 @@ const entryListStyles = {
         margin: "20px 10px 0px 10px",
         backgroundColor: "rgba(163, 163, 163, 0.4)"
     },
+    searchButton: {
+        padding: "10px",
+        backgroundColor: "rgba(163, 163, 163, 0.4)",
+        fontSize: "1.1em",
+        marginLeft: "20px",
+        [theme.breakpoints.down('sm')]: {
+            margin: "20px 10px 0 10px"
+        }
+    },
     createButton: {
         marginBottom: "40px",
         marginLeft: "0",
-        fontSize: "1.2em",
+        fontSize: "1.5em",
         textShadow: "0px 0px 0.5px black",
         backgroundColor: styleConstants.buttonColor,
         padding: "10px"
     },
-    createButtonContainer: {
+    container: {
         width: "90%",
         padding: "0"
     }
-};
+});
 
 export {
     EntryListStyles

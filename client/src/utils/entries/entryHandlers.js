@@ -37,6 +37,11 @@ const handleEntryContent = (e, entry, selectedEntry, setSelectedEntry, newEntry,
     }
 };
 
+const handleSearchEntry = (e, setQuery) => {
+    e.preventDefault();
+    setQuery(e.currentTarget.value);
+};
+
 const handleChange = (e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry) => {
     e.preventDefault();
     handleEntry(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry);
@@ -58,6 +63,7 @@ const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedE
 };
 
 export {
+    handleSearchEntry,
     handleChange,
     handleContentEditableChange,
     handleSubmit

@@ -1,5 +1,8 @@
-let generateRequestConfig = () => {
+let generateRequestConfig = (query) => {
     return {
+        'params': {
+            'query': query
+        },
         'headers': {
             'Authorization': localStorage.getItem('LoginToken')
         }

@@ -1,12 +1,11 @@
 import axios from "axios";
+import {
+    generateRequestConfig
+} from "../users/headerUtils";
+import {ENTRIES_URL} from "../constants/apiConstants";
 
 const init = (setEntries) => {
-    const loginToken = localStorage.getItem('LoginToken');
-    const url = "http://localhost:8081/entries";
-    const headers = {
-        'Authorization': loginToken
-    }
-    axios.get(url, {headers}).then((response) => {
+    axios.get(ENTRIES_URL, generateRequestConfig()).then((response) => {
         setEntries(response.data);
     });
 }

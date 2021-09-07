@@ -17,7 +17,6 @@ import Button from '@material-ui/core/Button';
 
 // icon imports
 import DeleteIcon from '@material-ui/icons/Delete';
-// import {init} from "../../utils/entries/initUtils";
 
 const Entry = (props) => {
     const {
