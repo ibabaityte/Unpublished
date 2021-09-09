@@ -1,4 +1,5 @@
 import Entry from "../models/entry";
+import {generateSearchConfig} from "../utils/searchUtils";
 
 //Create and save a new entry
 const create = (req, res) => {
@@ -48,9 +49,8 @@ const list = (req, res) => {
 
 //Retrieve and return all entries that match the search query
 const listSearchEntries = (req, res) => {
-    // checking if title contains a search query string
-    // '$options' : 'i'   is for case insensitivity
-    Entry.find({'title': {'$regex' : '.*' + req.query.query + '.*i', '$options' : 'i'}, 'author': req.decodedToken.userId}).then(data => {
+    console.log(generateSearchConfig(req));
+    Entry.find(generateSearchConfig(req)).then(data => {
         res.status(200).send(data);
     }).catch(() => {
         res.status(500).send({

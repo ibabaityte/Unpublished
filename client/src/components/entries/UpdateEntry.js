@@ -7,7 +7,7 @@ import TextEditor from "../TextEditor";
 import {
     handleChange,
     handleSubmit
-} from "../../utils/entries/entryHandlers";
+} from "../../utils/entries/entries/entryHandlers";
 
 // style imports
 import {EntryInputStyles} from "../../utils/styles/entryInputStyles";

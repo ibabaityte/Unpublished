@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import moment from "moment";
 
 // util imports
-import {deleteEntry} from "../../utils/entries/entryUtils";
+import {deleteEntry} from "../../utils/entries/entries/entryUtils";
 import sanitize from "sanitize-html";
 
 // style imports

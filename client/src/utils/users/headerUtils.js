@@ -1,7 +1,9 @@
-let generateRequestConfig = (query) => {
+let generateRequestConfig = (query, startDate, endDate) => {
     return {
         'params': {
-            'query': query
+            'keyword': query,
+            'startDate': startDate,
+            'endDate': endDate
         },
         'headers': {
             'Authorization': localStorage.getItem('LoginToken')

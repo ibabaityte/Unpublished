@@ -3,7 +3,7 @@ import ContentEditable from "react-contenteditable";
 import sanitize from "sanitize-html";
 
 // util imports
-import {handleContentEditableChange} from "../utils/entries/entryHandlers";
+import {handleContentEditableChange} from "../utils/entries/entries/entryHandlers";
 
 // icons
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';

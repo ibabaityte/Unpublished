@@ -64,6 +64,10 @@ const EntryListStyles = makeStyles((theme) => ({
     },
     form: {
         display: "flex",
+        flexDirection: "column"
+    },
+    formContainer: {
+        display: "flex",
         alignItems: "center",
         flexDirection: "row",
         minHeight: "100px",
@@ -73,11 +77,15 @@ const EntryListStyles = makeStyles((theme) => ({
         }
     },
     searchButtonContainer: {
+        width: "50%",
         [theme.breakpoints.down('sm')]: {
             width: "100%",
             display: "flex",
             justifyContent: "center"
         }
+    },
+    dateContainer: {
+        width: "100%"
     }
 }));
 

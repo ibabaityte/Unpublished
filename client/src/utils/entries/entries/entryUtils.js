@@ -2,11 +2,9 @@ import axios from "axios";
 
 import {
     generateRequestConfig
-} from "../users/headerUtils";
-import {ENTRIES_URL} from "../constants/apiConstants";
-import {handleRedirect} from "./redirectUtils";
-import {init} from "./initUtils";
-
+} from "../../users/headerUtils";
+import {ENTRIES_URL} from "../../constants/apiConstants";
+import {handleRedirect} from "../../redirectUtils";
 
 const createEntry = (entry, entries, setEntries, setStatus) => {
     const {title, content} = entry;
@@ -54,32 +52,8 @@ const deleteEntry = (userType, entryId, entries, setEntries) => {
     });
 };
 
-const searchEntries = (e, setEntries, query, setStatus) => {
-    e.preventDefault();
-    const url = `${ENTRIES_URL}/search`;
-    axios.get(url, generateRequestConfig(query)).then((response) => {
-        if(response.data.length === 0 || response.data.length < 1) {
-            setEntries([]);
-            setStatus({code: "404", message: "There is no such entry"});
-        } else {
-            setEntries(response.data);
-            setStatus({code: "200", message: ""});
-        }
-    }).catch(err => {
-        console.log(err);
-    });
-};
-
-const clearSearch = (setQuery, setEntries, setStatus) => {
-    init(setEntries);
-    setQuery("");
-    setStatus({code: "", message: ""});
-};
-
 export {
     createEntry,
     updateEntry,
-    deleteEntry,
-    searchEntries,
-    clearSearch
+    deleteEntry
 };
