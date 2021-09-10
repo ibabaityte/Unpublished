@@ -16,7 +16,7 @@ const register = (req, res) => {
     }
 
     const number = /\d/;
-    if(number.test(req.body.password)){
+    if(!number.test(req.body.password)){
         return res.status(400).send({
             code: "400",
             message: "Password has to contain at least one number."
@@ -60,6 +60,13 @@ const register = (req, res) => {
 
 const auth = (req, res) => {
     User.findOne({username: req.body.username}).then(user => {
+        if (!req.body.username || !req.body.password) {
+            return res.status(400).send({
+                code: "400",
+                message: "Username and password can not be empty."
+            });
+        }
+
         if (!user) {
             return res.status(401).send({
                 message: "There is no such user. Try again."
