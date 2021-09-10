@@ -3,7 +3,7 @@ import {
 } from "@material-ui/core/styles";
 import styleConstants from "./constants";
 
-const LandingStyles = makeStyles({
+const LandingStyles = makeStyles((theme) => ({
     img: {
         minHeight: "100%",
         minWidth: "1024px",
@@ -35,13 +35,19 @@ const LandingStyles = makeStyles({
         backgroundColor: styleConstants.buttonColor,
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
         borderRadius: "8px",
+        [theme.breakpoints.down('md')]: {
+            marginTop: "0"
+        }
     },
     landingLink: {
         textDecoration: "none"
     },
     container: {
         position: "absolute",
-        top: "200px"
+        top: "200px",
+        [theme.breakpoints.down('md')]: {
+            top: "20px",
+        }
     },
     landingTextGrid: {
         position: "relative",
@@ -61,7 +67,7 @@ const LandingStyles = makeStyles({
         fontSize: "2.1em",
         color: "rgb(240, 240, 240)",
     }
-});
+}));
 
 export {
     LandingStyles

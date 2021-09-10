@@ -3,17 +3,20 @@ import {
 } from "@material-ui/core/styles";
 import styleConstants from "./constants";
 
-const UserFormStyles = makeStyles({
+const UserFormStyles = makeStyles((theme)=> ({
     userForm: {
         position: "relative",
         minHeight: "415px",
         width: "500px",
         backgroundColor: styleConstants.buttonColor,
         border: "1px solid rgba(0, 0, 0, 0.1)",
-        // margin: "0 auto",
         borderRadius: "8px",
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
-        textAlign: "center"
+        textAlign: "center",
+        [theme.breakpoints.down('md')]: {
+            margin: "0 auto",
+            marginTop: "20px"
+        }
     },
     label: {
         textAlign: "center",
@@ -34,7 +37,7 @@ const UserFormStyles = makeStyles({
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
         borderRadius: "8px"
     }
-});
+}));
 
 const userFormStyles = {
     btn: {
