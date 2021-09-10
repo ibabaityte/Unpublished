@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 // styles imports
 import {withStyles} from "@material-ui/core/styles";
@@ -14,9 +14,15 @@ import {
 } from "../../utils/users/userHandlers";
 
 const Register = (props) => {
+
+    const [newUser, setNewUser] = useState({
+        username: "",
+        password: ""
+    });
+
+    console.log(newUser);
+
     const {
-        newUser,
-        setNewUser,
         status,
         setStatus
     } = props;

@@ -2,16 +2,20 @@ import {checkAuth, login, register} from "./userUtils";
 
 const handleChangeLogin = (e, user, setUser) => {
     e.preventDefault();
-    const userCopy = user;
-    userCopy[e.currentTarget.name] = e.currentTarget.value;
-    setUser(userCopy);
+    setUser({
+            ...user,
+            [e.currentTarget.name]: e.target.value
+        }
+    );
 }
 
 const handleChangeRegister = (e, newUser, setNewUser) => {
     e.preventDefault();
-    const newUserCopy = newUser;
-    newUserCopy[e.currentTarget.name] = e.currentTarget.value;
-    setNewUser(newUserCopy);
+    setNewUser({
+            ...newUser,
+            [e.currentTarget.name]: e.target.value
+        }
+    );
 }
 
 const handleLogin = (e, user, setUser, setIsAuthenticated, setStatus) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom'
 
 // styles imports
@@ -16,12 +16,17 @@ import {
 
 const Login = (props) => {
     const {
-        user,
-        setUser,
         setIsAuthenticated,
         status,
         setStatus
     } = props;
+
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    });
+
+    console.log(user);
 
     const styles = UserFormStyles();
     const classes = props.classes;
