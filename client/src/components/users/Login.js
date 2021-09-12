@@ -26,8 +26,6 @@ const Login = (props) => {
         password: ""
     });
 
-    console.log(user);
-
     const styles = UserFormStyles();
     const classes = props.classes;
 

@@ -47,8 +47,9 @@ const EntryList = (props) => {
 
                 <Container className={classes.container}>
                     <Link className={styles.link} to="/home/entries/createEntry">
-                        <Button className={`${classes.createButton} ${classes.button}`}><AddIcon
-                            className={styles.addIcon}/>Create a new Entry</Button>
+                        <Button className={`${classes.createButton}`}>
+                            <AddIcon className={styles.addIcon}/>
+                            Create a new Entry</Button>
                     </Link>
 
                     <Search

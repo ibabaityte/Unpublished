@@ -23,7 +23,7 @@ const EntryListStyles = makeStyles((theme) => ({
         width: "100%",
         maxHeight: "100px",
         height: "100%",
-        background: "linear-gradient(rgba(0,0,0,0), #81CEE0)"
+        background: "linear-gradient(rgba(0,0,0,0), #c4dce2)"
     },
     content: {
         position: "relative",
@@ -34,9 +34,16 @@ const EntryListStyles = makeStyles((theme) => ({
         fontSize: "1.3em",
         fontWeight: "300",
         overflow: "hidden",
+        lineHeight: "2rem",
         wordBreak: "break-all",
-        lineHeight: "2rem"
     },
+    contentSpan: {
+        display: "inline",
+        width: "10px",
+        overflow: "hidden",
+        inlineSize: "minContent",
+        wordBreak: "break-all"
+},
     deleteIcon: {
         verticalAlign: "middle",
         marginLeft: "10px",
@@ -45,6 +52,7 @@ const EntryListStyles = makeStyles((theme) => ({
     },
     link: {
         textDecoration: "none",
+        margin: "30px auto"
     },
     addIcon: {
         padding: "5px",
@@ -77,7 +85,9 @@ const EntryListStyles = makeStyles((theme) => ({
         }
     },
     searchButtonContainer: {
-        width: "50%",
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-start",
         [theme.breakpoints.down('sm')]: {
             width: "100%",
             display: "flex",
@@ -95,8 +105,9 @@ const entryListStyles = (theme) => ({
         width: "90%",
         paddingBottom: "20px",
         paddingTop: "20px",
-        backgroundColor: "rgba(255, 255, 255, 0.2)",
-        borderRadius: "20px"
+        backgroundColor: "#c4dce2",
+        borderRadius: "20px",
+        boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)"
     },
     entryList: {
         maxWidth: "70%"
@@ -115,16 +126,18 @@ const entryListStyles = (theme) => ({
         }
     },
     createButton: {
-        marginBottom: "40px",
-        marginLeft: "0",
         fontSize: "1.5em",
         textShadow: "0px 0px 0.5px black",
         backgroundColor: styleConstants.buttonColor,
-        padding: "10px"
+        padding: "10px 15px 10px 10px",
+        boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+        borderRadius: "12px"
     },
     container: {
         width: "90%",
-        padding: "0"
+        padding: "0",
+        display: "flex",
+        flexDirection: "column"
     }
 });
 
