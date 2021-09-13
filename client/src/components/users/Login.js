@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom'
 
 // styles imports
 import {withStyles} from "@material-ui/core/styles";
@@ -15,6 +14,7 @@ import {
 } from "../../utils/users/userHandlers";
 
 const Login = (props) => {
+
     const {
         setIsAuthenticated,
         status,
@@ -23,20 +23,14 @@ const Login = (props) => {
 
     const [user, setUser] = useState({
         username: "",
-        password: ""
+        password: "",
+        UserId: "",
+        UserType: "",
+        Username: ""
     });
 
     const styles = UserFormStyles();
     const classes = props.classes;
-
-    // will have to delete this later
-    if (user.UserType === "ADMIN") {
-        return <Redirect to="/home/admin"/>
-    }
-
-    if (user.UserType === "USER") {
-        return <Redirect to="/home/entries"/>
-    }
 
     return (
         <div className={styles.userForm}>

@@ -14,15 +14,12 @@ import {Background} from "./utils/styles/background";
 
 const App = () => {
     const {
-        LoginToken,
-        UserId,
-        UserType,
         Username,
+        UserType,
+        LoginToken,
         ExpirationTimestamp
     } = localStorage;
 
-    const [user, setUser] = useState({});
-    const [newUser, setNewUser] = useState({});
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [status, setStatus] = useState({});
 
@@ -31,13 +28,8 @@ const App = () => {
         if (!isAuthenticated) {
             setIsAuthenticated(!!LoginToken);
         }
-        setUser({
-            UserId,
-            UserType,
-            Username
-        });
         automaticLogout(ExpirationTimestamp);
-    }, [LoginToken, UserId, UserType, Username, isAuthenticated, ExpirationTimestamp]);
+    }, [LoginToken, isAuthenticated, ExpirationTimestamp]);
 
     const styles = Background();
 
@@ -49,10 +41,6 @@ const App = () => {
                     <Route path="/"
                            render={(location) => ["/", "/auth", "/register"].includes(location.location.pathname) ?
                                <Landing
-                                   user={user}
-                                   setUser={setUser}
-                                   newUser={newUser}
-                                   setNewUser={setNewUser}
                                    setIsAuthenticated={setIsAuthenticated}
                                    status={status}
                                    setStatus={setStatus}
