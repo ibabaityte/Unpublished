@@ -16,7 +16,7 @@ const create = (req, res) => {
     const newEntry = new Entry({
         title: req.body.title || "Untitled note",
         content: req.body.content,
-        author: req.decodedToken.userId,
+        authorId: req.decodedToken.userId,
         authorType: req.decodedToken.userType
     });
 
@@ -37,7 +37,7 @@ const create = (req, res) => {
 
 //Retrieve and return all entries which belong to logged in user from the db
 const list = (req, res) => {
-    Entry.find({'author': req.decodedToken.userId}).then(data => {
+    Entry.find({'authorId': req.decodedToken.userId}).then(data => {
         res.status(200).send(data);
     }).catch(() => {
         res.status(500).send({
