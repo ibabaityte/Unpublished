@@ -1,5 +1,5 @@
 const handleRedirect = () => {
-    window.location.href = "/home/entries"
+    window.location.href = "/home/entries";
 }
 
 export {

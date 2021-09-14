@@ -96,6 +96,9 @@ const EntryListStyles = makeStyles((theme) => ({
     },
     dateContainer: {
         width: "100%"
+    },
+    statusMessage: {
+        height: "auto"
     }
 }));
 

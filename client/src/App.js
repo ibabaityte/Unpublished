@@ -21,7 +21,10 @@ const App = () => {
     } = localStorage;
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [status, setStatus] = useState({});
+    const [status, setStatus] = useState({
+        statusCode: localStorage.getItem('StatusCode'),
+        statusText: localStorage.getItem('StatusText')
+    });
 
     // will need useEffect hook to init state with users details and isAuthenticated
     useEffect(() => {

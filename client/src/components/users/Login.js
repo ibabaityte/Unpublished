@@ -64,7 +64,6 @@ const Login = (props) => {
                 </div>
                 <Button className={`${styles.btn} ${classes.btn}`} type="submit">Sign In</Button>
             </form>
-
         </div>
     );
 }

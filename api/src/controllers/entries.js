@@ -117,7 +117,11 @@ const update = (req, res) => {
                 message: "Entry not found with id " + req.params.id
             });
         }
-        res.status(200).send(entry);
+        res.status(200).send({
+            code: "200",
+            message: "Entry updated successfully",
+            data: entry
+        });
     }).catch(err => {
         if (err.kind === "ObjectId") {
             return res.status(404).send({

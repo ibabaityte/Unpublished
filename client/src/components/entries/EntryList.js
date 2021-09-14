@@ -30,9 +30,10 @@ const EntryList = (props) => {
     const [entries, setEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({});
     const [selectedEntry, setSelectedEntry] = useState({});
-    const [status, setStatus] = useState({});
-
-    // console.log(new Date(Date.now()).toISOString());
+    const [status, setStatus] = useState({
+        statusCode: localStorage.getItem('StatusCode'),
+        statusText: localStorage.getItem('StatusText')
+    });
 
     const styles = EntryListStyles();
     const classes = props.classes;
@@ -41,12 +42,28 @@ const EntryList = (props) => {
         init(setEntries);
     }, []);
 
+    setTimeout(() => {
+        // setStatus({});
+        localStorage.removeItem('StatusCode');
+        localStorage.removeItem('StatusText');
+    }, 8000);
+
+
     return (
         <Container className={`${styles.entryList} ${classes.entryList}`}>
             <Route exact path="/home/entries">
 
+                {
+                    status.statusCode !== "200" ?
+                        null :
+                        <h2 className={styles.statusMessage}>{status.statusText}</h2>
+
+                }
+
                 <Container className={classes.container}>
-                    <Link className={styles.link} to="/home/entries/createEntry">
+                    <Link onClick={() => {
+                        setStatus({})
+                    }} className={styles.link} to="/home/entries/createEntry">
                         <Button className={`${classes.createButton}`}>
                             <AddIcon className={styles.addIcon}/>
                             Create a new Entry</Button>

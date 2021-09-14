@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 // component imports
 import TextEditor from "../TextEditor";
@@ -29,11 +29,17 @@ const UpdateEntry = (props) => {
 
     const styles = EntryInputStyles();
 
+    useEffect(() => {
+        setStatus({});
+        localStorage.removeItem('StatusCode');
+        localStorage.removeItem('StatusText');
+    }, []);
+
     return (
         <Container>
             <h1 className={styles.title}>Update Entry</h1>
             <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus)}>
-                <h2>{status.message}</h2>
+                <h2>{status.statusText}</h2>
 
                 <h2 className={styles.label}>Title</h2>
                 <input

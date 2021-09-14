@@ -53,7 +53,6 @@ const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedE
     }
     else {
         createEntry(entry, entries, setEntries, setStatus);
-        // console.log(entry);
     }
 };
 

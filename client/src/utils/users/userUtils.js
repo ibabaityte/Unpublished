@@ -21,15 +21,15 @@ const checkAuth = (status, setState) => {
 
 const login = (user, setUser, checkAuth, setIsAuthenticated, setStatus) => {
     const {username, password} = user;
-    const {UserId, UserType, Username} = getUserData();
+    const {UserType} = getUserData();
     axios.post(AUTH_URL, {username, password})
         .then((result) => {
             setUser({
                 username: "",
                 password: "",
-                UserId,
-                UserType,
-                Username
+                UserId: "",
+                UserType: "",
+                Username: ""
             });
             localStorage.setItem('LoginToken', result.data.token);
             localStorage.setItem('UserId', result.data.userId);
@@ -37,7 +37,6 @@ const login = (user, setUser, checkAuth, setIsAuthenticated, setStatus) => {
             localStorage.setItem('Username', result.data.username);
             localStorage.setItem('ExpirationTimestamp', result.data.expirationTimestamp);
             checkAuth(result.status, setIsAuthenticated);
-            console.log(result);
             if(UserType === "ADMIN") {
                 window.location.href = "/home/admin"
             } else {
@@ -46,6 +45,7 @@ const login = (user, setUser, checkAuth, setIsAuthenticated, setStatus) => {
         })
         .catch((err) => {
             setStatus(err.response.data);
+            console.log(err.response.data.message);
         });
 }
 
