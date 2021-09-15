@@ -38,7 +38,7 @@ const Login = (props) => {
             statusCode: null,
             statusText: null
         });
-    }, []);
+    }, [setStatus]);
 
     return (
         <div className={styles.userForm}>
