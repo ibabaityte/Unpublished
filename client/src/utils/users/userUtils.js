@@ -21,7 +21,6 @@ const checkAuth = (status, setState) => {
 
 const login = (user, setUser, checkAuth, setIsAuthenticated, setStatus) => {
     const {username, password} = user;
-    const {UserType} = getUserData();
     axios.post(AUTH_URL, {username, password})
         .then((result) => {
             setUser({
@@ -37,6 +36,7 @@ const login = (user, setUser, checkAuth, setIsAuthenticated, setStatus) => {
             localStorage.setItem('Username', result.data.username);
             localStorage.setItem('ExpirationTimestamp', result.data.expirationTimestamp);
             checkAuth(result.status, setIsAuthenticated);
+            const {UserType} = getUserData();
             if(UserType === "ADMIN") {
                 window.location.href = "/home/admin"
             } else {

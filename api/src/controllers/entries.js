@@ -49,7 +49,6 @@ const list = (req, res) => {
 
 //Retrieve and return all entries that match the search query
 const listSearchEntries = (req, res) => {
-    console.log(generateSearchConfig(req));
     Entry.find(generateSearchConfig(req)).then(data => {
         res.status(200).send(data);
     }).catch(() => {

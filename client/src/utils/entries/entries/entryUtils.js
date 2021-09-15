@@ -32,7 +32,6 @@ const updateEntry = (id, entry, setStatus) => {
     const {title, content} = entry;
     const url = `${ENTRIES_URL}/${id}`;
     axios.put(url, {title, content}, generateRequestConfig()).then((result) => {handleRedirect();
-        console.log(result.data.code);
         const statusCode = result.data.code;
         const statusText = result.data.message;
         localStorage.setItem('ListStatusCode', statusCode.toString());
