@@ -46,13 +46,13 @@ const handleContentEditableChange = (e, entry, selectedEntry, setSelectedEntry, 
     handleEntryContent(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry);
 };
 
-const handleSubmit = (e, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus) => {
+const handleSubmit = (e, entry, setStatus) => {
     e.preventDefault();
     if (entry._id) {
-        updateEntry(entry._id, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus);
+        updateEntry(entry._id, entry, setStatus);
     }
     else {
-        createEntry(entry, entries, setEntries, setStatus);
+        createEntry(entry, setStatus);
     }
 };
 

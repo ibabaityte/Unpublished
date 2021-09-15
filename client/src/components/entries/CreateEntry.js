@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 // component imports
 import TextEditor from "../TextEditor";
@@ -17,29 +17,27 @@ import Button from '@material-ui/core/Button';
 const CreateEntry = (props) => {
     const {
         entry,
-        entries,
-        setEntries,
         selectedEntry,
         setSelectedEntry,
         newEntry,
         setNewEntry,
         status,
-        setStatus
+        setStatus,
     } = props;
 
     const styles = EntryInputStyles();
 
-    useEffect(() => {
-        setStatus({});
-        localStorage.removeItem('StatusCode');
-        localStorage.removeItem('StatusText');
-    }, []);
-
     return (
         <Container>
             <h1 className={styles.title}>Create Entry</h1>
-            <h2>{status.statusText}</h2>
-            <form onSubmit={e => handleSubmit(e, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus)}>
+            {
+                status.statusText !== null ?
+                    <div className={`${styles.statusText} ${'alert'} ${'alert-danger'}`} role="alert">
+                        {status.statusText}
+                    </div> :
+                    null
+            }
+            <form onSubmit={e => handleSubmit(e, entry, setStatus)}>
 
                 <h2 className={styles.label}>Title</h2>
                 <input

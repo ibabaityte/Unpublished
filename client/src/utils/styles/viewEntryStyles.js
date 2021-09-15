@@ -15,7 +15,8 @@ const ViewEntryStyles = makeStyles({
         justifyContent: "space-between"
     },
     date: {
-        margin: "0"
+        margin: "0",
+        textShadow: "0 0 3px currentColor"
     },
     deleteIcon: {
         verticalAlign: "middle",
@@ -36,7 +37,12 @@ const ViewEntryStyles = makeStyles({
         textDecoration: "none"
     },
     content: {
-        fontWeight: "lighter"
+        fontWeight: "lighter",
+    },
+    contentOverlay: {
+        fontSize: "1.7em",
+        fontWeight: "bold",
+        wordBreak: "break-all",
     }
 });
 

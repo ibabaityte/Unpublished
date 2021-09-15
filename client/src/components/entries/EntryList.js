@@ -30,6 +30,10 @@ const EntryList = (props) => {
     const [entries, setEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({});
     const [selectedEntry, setSelectedEntry] = useState({});
+    const [listStatus, setListStatus] = useState({
+        statusCode: localStorage.getItem('ListStatusCode'),
+        statusText: localStorage.getItem('ListStatusText')
+    });
     const [status, setStatus] = useState({
         statusCode: localStorage.getItem('StatusCode'),
         statusText: localStorage.getItem('StatusText')
@@ -38,32 +42,26 @@ const EntryList = (props) => {
     const styles = EntryListStyles();
     const classes = props.classes;
 
-    useEffect(() => {
-        init(setEntries);
-    }, []);
-
-    setTimeout(() => {
-        // setStatus({});
-        localStorage.removeItem('StatusCode');
-        localStorage.removeItem('StatusText');
+    const interval = () => setTimeout(() => {
+        setListStatus({});
+        localStorage.removeItem('ListStatusCode');
+        localStorage.removeItem('ListStatusText');
     }, 8000);
 
+    useEffect(() => {
+        init(setEntries);
+        interval();
+        return () => {
+            clearTimeout(interval());
+        };
+    }, []);
 
     return (
         <Container className={`${styles.entryList} ${classes.entryList}`}>
             <Route exact path="/home/entries">
 
-                {
-                    status.statusCode !== "200" ?
-                        null :
-                        <h2 className={styles.statusMessage}>{status.statusText}</h2>
-
-                }
-
                 <Container className={classes.container}>
-                    <Link onClick={() => {
-                        setStatus({})
-                    }} className={styles.link} to="/home/entries/createEntry">
+                    <Link className={styles.link} to="/home/entries/createEntry">
                         <Button className={`${classes.createButton}`}>
                             <AddIcon className={styles.addIcon}/>
                             Create a new Entry</Button>
@@ -74,6 +72,14 @@ const EntryList = (props) => {
                         setStatus={setStatus}
                         setEntries={setEntries}
                     />
+
+                    {
+                        listStatus.statusCode !== "200" ?
+                            null :
+                            <div className={`${styles.statusText} ${'alert'} ${'alert-success'}`} role="alert">
+                                {listStatus.statusText}
+                            </div>
+                    }
 
                 </Container>
 
@@ -100,6 +106,7 @@ const EntryList = (props) => {
                     setNewEntry={setNewEntry}
                     status={status}
                     setStatus={setStatus}
+                    setListStatus={setListStatus}
                 />
             )}/>
 
@@ -114,6 +121,7 @@ const EntryList = (props) => {
                     setNewEntry={setNewEntry}
                     status={status}
                     setStatus={setStatus}
+                    setListStatus={setListStatus}
                 />
             </Route>
 

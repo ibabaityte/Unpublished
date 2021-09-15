@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 // styles imports
 import {withStyles} from "@material-ui/core/styles";
@@ -29,15 +29,30 @@ const Login = (props) => {
         Username: ""
     });
 
+
     const styles = UserFormStyles();
     const classes = props.classes;
+
+    useEffect(() => {
+        setStatus({
+            statusCode: null,
+            statusText: null
+        });
+    }, []);
 
     return (
         <div className={styles.userForm}>
             <div className={styles.label}>Sign In to your account</div>
 
             <form onSubmit={e => handleLogin(e, user, setUser, setIsAuthenticated, setStatus)}>
-                <h2>{status.message}</h2>
+
+                {
+                    status.statusText !== null ?
+                        <div className={`${styles.status} ${'alert'} ${'alert-danger'}`} role="alert">
+                            {status.message}
+                        </div> :
+                        null
+                }
 
                 <div className="inputs">
 

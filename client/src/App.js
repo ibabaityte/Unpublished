@@ -13,6 +13,12 @@ import './App.css';
 import {Background} from "./utils/styles/background";
 
 const App = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [status, setStatus] = useState({
+        statusCode: localStorage.getItem('StatusCode'),
+        statusText: localStorage.getItem('StatusText')
+    });
+
     const {
         Username,
         UserType,
@@ -20,13 +26,7 @@ const App = () => {
         ExpirationTimestamp
     } = localStorage;
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [status, setStatus] = useState({
-        statusCode: localStorage.getItem('StatusCode'),
-        statusText: localStorage.getItem('StatusText')
-    });
-
-    // will need useEffect hook to init state with users details and isAuthenticated
+    //will need useEffect hook to init state with users details and isAuthenticated
     useEffect(() => {
         if (!isAuthenticated) {
             setIsAuthenticated(!!LoginToken);

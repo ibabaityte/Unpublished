@@ -6,47 +6,50 @@ import {
 import {ENTRIES_URL} from "../../constants/apiConstants";
 import {handleRedirect} from "../../redirectUtils";
 
-const createEntry = (entry, entries, setEntries, setStatus) => {
+const createEntry = (entry, setStatus) => {
     const {title, content} = entry;
     axios.post(ENTRIES_URL, {title, content}, generateRequestConfig()).then((result) => {
-        console.log(result.data);
+        handleRedirect();
+        const statusCode = result.data.code;
+        const statusText = result.data.message;
+        localStorage.setItem('ListStatusCode', statusCode.toString());
+        localStorage.setItem('ListStatusText', statusText);
+        // below logic is not needed because we have init() function which already fetches all information from db
+        // console.log(result.data);
         // entries.push(result.data.data);
         // setEntries(entries);
         // const response = result;
-        const statusCode = result.data.code;
-        const statusText = result.data.message;
-        localStorage.setItem('StatusCode', statusCode.toString());
-        localStorage.setItem('StatusText', statusText);
-        handleRedirect();
     }).catch(err => {
         console.log(err.response.data.message);
         setStatus({
-            status: err.response.data.code,
+            statusCode: err.response.data.code,
             statusText: err.response.data.message
         });
     });
 };
 
-const updateEntry = (id, entry, entries, setEntries, selectedEntry, setSelectedEntry, setStatus) => {
+const updateEntry = (id, entry, setStatus) => {
     const {title, content} = entry;
     const url = `${ENTRIES_URL}/${id}`;
-    axios.put(url, {title, content}, generateRequestConfig()).then((result) => {
+    axios.put(url, {title, content}, generateRequestConfig()).then((result) => {handleRedirect();
+        console.log(result.data.code);
+        const statusCode = result.data.code;
+        const statusText = result.data.message;
+        localStorage.setItem('ListStatusCode', statusCode.toString());
+        localStorage.setItem('ListStatusText', statusText);
+        // below logic is not needed because we have init() function which already fetches all information from db
         // const updatedEntry = result.data;
         // const entryInList = entries.find(entry => entry._id === result.data._id);
         // const index = entries.indexOf(entryInList);
         // setSelectedEntry(updatedEntry);
         // entries[index] = result.data;
         // setEntries(entries);
-        handleRedirect();
-        // setStatus(result.data);
-        console.log(result.data.code);
-        const statusCode = result.data.code;
-        const statusText = result.data.message;
-        localStorage.setItem('StatusCode', statusCode.toString());
-        localStorage.setItem('StatusText', statusText);
     }).catch(err => {
         console.log(err.response.data);
-        setStatus(err.response.data);
+        setStatus({
+            statusCode: err.response.data.code,
+            statusText: err.response.data.message
+        });
     });
 };
 

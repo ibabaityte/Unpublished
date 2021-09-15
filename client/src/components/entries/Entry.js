@@ -44,7 +44,7 @@ const Entry = (props) => {
 
             <div className={styles.content}>
                 <div className={styles.contentOverlay} />
-                <table
+                <div
                     className={styles.contentSpan}
                     dangerouslySetInnerHTML={{__html: sanitize(entry.content)}}
                 />

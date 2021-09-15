@@ -14,7 +14,8 @@ const EntryListStyles = makeStyles((theme) => ({
         marginBottom: "40px"
     },
     title: {
-        margin: "0"
+        margin: "0",
+        textShadow: "1px 1px 2px currentColor",
     },
     contentOverlay: {
         position: "absolute",
@@ -40,19 +41,25 @@ const EntryListStyles = makeStyles((theme) => ({
     contentSpan: {
         display: "inline",
         width: "10px",
-        overflow: "hidden",
-        inlineSize: "minContent",
-        wordBreak: "break-all"
-},
+        // overflow: "hidden",
+        // inlineSize: "minContent",
+        // wordBreak: "break-all"
+    },
     deleteIcon: {
         verticalAlign: "middle",
         marginLeft: "10px",
         opacity: "60%",
-        fontSize: "1em"
+        fontSize: "1em",
+        "&:hover": {
+            color: "red"
+        }
     },
     link: {
         textDecoration: "none",
-        margin: "30px auto"
+        margin: "30px auto",
+        '&:hover': {
+            textDecoration: "none"
+        }
     },
     addIcon: {
         padding: "5px",
@@ -97,8 +104,22 @@ const EntryListStyles = makeStyles((theme) => ({
     dateContainer: {
         width: "100%"
     },
-    statusMessage: {
-        height: "auto"
+    "@keyframes fadeIn": {
+        "80%": {
+            opacity: 1,
+        },
+        "100%": {
+            opacity: 0,
+        }
+    },
+    statusText: {
+        marginBottom: "20px",
+        fontSize: "1.1em",
+        fontWeight: "bold",
+        width: "100%",
+        margin: "auto",
+        textAlign: "center",
+        animation: "$fadeIn 8s linear"
     }
 }));
 

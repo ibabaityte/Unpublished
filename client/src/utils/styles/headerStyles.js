@@ -13,7 +13,14 @@ const HeaderStyles = makeStyles((theme) => ({
         fontSize: "3.5em",
         letterSpacing: "10px",
         width: "100%",
-        textAlign: "center"
+        textAlign: "center",
+        textShadow: "0px 0px 20px black",
+        transition: "text-shadow 0.5s",
+        '&:hover': {
+            textDecoration: "none",
+            color: "white",
+            textShadow: "0px 0px 0px transparent"
+        }
     },
     logoPanel: {
         [theme.breakpoints.up('sm')]: {
@@ -26,7 +33,14 @@ const HeaderStyles = makeStyles((theme) => ({
         fontSize: "2em",
         letterSpacing: "7px",
         verticalAlign: "middle",
-        paddingRight: "30px"
+        paddingRight: "30px",
+        textShadow: "0px 0px 20px black",
+        transition: "text-shadow 0.5s",
+        '&:hover': {
+            textDecoration: "none",
+            color: "white",
+            textShadow: "0px 0px 0px transparent"
+        }
     },
     panel: {
         display: "inline",
@@ -40,6 +54,16 @@ const HeaderStyles = makeStyles((theme) => ({
         fontSize: "2em",
         letterSpacing: "7px",
         textTransform: "none",
+        textShadow: "0px 0px 20px black",
+        transition: "text-shadow 0.5s",
+        '&:hover': {
+            textDecoration: "none",
+            color: "white",
+            textShadow: "0px 0px 0px transparent"
+        },
+        "&:focus": {
+            outline: "none"
+        }
     },
     icon: {
         marginRight: "15px",

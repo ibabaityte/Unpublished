@@ -27,7 +27,7 @@ const UserFormStyles = makeStyles((theme)=> ({
     },
     input: {
         fontSize: "1.5em",
-        width: "60%"
+        width: "70%"
     },
     btn: {
         width: "25%",
@@ -35,7 +35,15 @@ const UserFormStyles = makeStyles((theme)=> ({
         fontSize: "1.2rem",
         backgroundColor: styleConstants.buttonColor,
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
-        borderRadius: "8px"
+        borderRadius: "8px",
+        "&:focus": {
+            outline: "none"
+        }
+    },
+    status: {
+        marginTop: "30px",
+        width: "80%",
+        margin: "0 auto"
     }
 }));
 

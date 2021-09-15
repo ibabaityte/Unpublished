@@ -12,7 +12,7 @@ const EntryInputStyles = makeStyles({
         background: "none",
         fontSize: "1.2em",
         outline: "none",
-        height: "37px",
+        // height: "37px",
         padding: "16px",
         borderBottom: "3px solid black",
         border: "none",
@@ -23,7 +23,9 @@ const EntryInputStyles = makeStyles({
         }
     },
     title: {
-        marginBottom: "40px"
+        marginBottom: "40px",
+        marginTop: "30px",
+        fontWeight: "bold"
     },
     contentField: {
         minHeight: "25vh",
@@ -42,12 +44,19 @@ const EntryInputStyles = makeStyles({
     btn: {
         width: "120px",
         height: "60px",
-        margin: "30px 30px 30px 0",
-        marginBottom: "30px",
+        margin: "10px 30px 30px 0",
         fontSize: "1.2rem",
         backgroundColor: styleConstants.buttonColor,
         boxShadow: "rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px",
         borderRadius: "8px",
+    },
+    statusText: {
+        marginBottom: "20px",
+        fontSize: "1.1em",
+        fontWeight: "bold",
+        width: "100%",
+        margin: "auto",
+        textAlign: "center"
     }
 });
 

@@ -6,7 +6,6 @@ const SearchStyles = makeStyles((theme) => ({
     searchBar: {
         width: "100%",
         padding: "10px",
-        // backgroundColor: "rgba(255, 255, 255, 0.2)",
         borderRadius: "5px",
         "& .MuiFormLabel-root": {
             margin: "10px"
@@ -21,7 +20,6 @@ const SearchStyles = makeStyles((theme) => ({
         paddingRight: "20px"
     },
     formContainer: {
-        // display: "flex",
         alignItems: "center",
         flexDirection: "row",
         minHeight: "100px",
@@ -31,7 +29,6 @@ const SearchStyles = makeStyles((theme) => ({
         }
     },
     searchButtonContainer: {
-        // width: "50%",
         [theme.breakpoints.down('sm')]: {
             width: "100%",
             display: "flex",
@@ -63,9 +60,10 @@ const SearchStyles = makeStyles((theme) => ({
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
         }),
+        outline: "none !important"
     },
     expandOpen: {
-        transform: 'rotate(180deg)',
+        transform: 'rotate(180deg)'
     },
     cardHeading: {
         margin: "15px auto"
@@ -81,11 +79,12 @@ const searchStyles= (theme) => ({
         padding: "10px",
         backgroundColor: "rgba(163, 163, 163, 0.4)",
         fontSize: "1.1em",
-        // marginBottom: "25px",
-        // marginRight: "25px",
         margin: "0 25px 25px 10px",
         [theme.breakpoints.down('sm')]: {
             margin: "20px 10px 0 10px"
+        },
+        "&:focus": {
+            outline: "none"
         }
     },
     container: {

@@ -44,6 +44,7 @@ const login = (user, setUser, checkAuth, setIsAuthenticated, setStatus) => {
             }
         })
         .catch((err) => {
+            console.log(err);
             setStatus(err.response.data);
             console.log(err.response.data.message);
         });

@@ -37,10 +37,16 @@ const LandingStyles = makeStyles((theme) => ({
         borderRadius: "8px",
         [theme.breakpoints.down('md')]: {
             marginTop: "0"
+        },
+        "&:focus": {
+            outline: "none"
         }
     },
     landingLink: {
-        textDecoration: "none"
+        textDecoration: "none",
+        '&:hover': {
+            textDecoration: "none"
+        }
     },
     container: {
         position: "absolute",
@@ -62,10 +68,12 @@ const LandingStyles = makeStyles((theme) => ({
     landingH2: {
         fontSize: "2.5em",
         color: "rgb(240, 240, 240)",
+        marginBottom: "30px"
     },
     landingH3: {
         fontSize: "2.1em",
         color: "rgb(240, 240, 240)",
+        marginBottom: "50px"
     }
 }));
 

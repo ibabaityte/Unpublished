@@ -29,16 +29,16 @@ const ViewEntry = (props) => {
             <h1>{selectedEntry.title}</h1>
 
             <div className={styles.dateContainer}>
-                <h4 className={styles.date}>
+                <h5 className={styles.date}>
                     {moment(selectedEntry.createdAt).format("L")}
-                </h4>
+                </h5>
 
-                <h4 className={styles.date}>
+                <h5 className={styles.date}>
                     Updated: {
                     moment(selectedEntry.updatedAt).format("L") +
                     moment(selectedEntry.updatedAt).format(" LT")
                 }
-                </h4>
+                </h5>
             </div>
 
             <Button className={styles.btn} onClick={() => deleteEntry(userType, selectedEntry._id, entries, setEntries)}>Delete</Button>
@@ -51,10 +51,12 @@ const ViewEntry = (props) => {
                     : null
             }
 
-            <h2><span
+            <div className={styles.contentOverlay}>
+                <span
                 className={styles.content}
                 dangerouslySetInnerHTML={{__html: sanitize(selectedEntry.content)}}
-            /></h2>
+                />
+            </div>
 
 
         </Container>

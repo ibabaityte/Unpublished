@@ -10,8 +10,6 @@ import {withStyles} from "@material-ui/core/styles";
 import searchStyles, {SearchStyles} from "../../utils/styles/searchStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,7 +19,7 @@ import Container from '@material-ui/core/Container';
 const Search = (props) => {
 
     const {
-        status,
+        // status,
         setStatus,
         setEntries
     } = props;
@@ -45,9 +43,9 @@ const Search = (props) => {
             <Card className={styles.root}>
                     <h1 className={styles.cardHeading}>Search
                         <IconButton
-                            className={clsx(styles.expand, {
+                            className={`clsx(styles.expand, {
                                 [styles.expandOpen]: expanded,
-                            })}
+                            }) ${styles.expand}`}
                             onClick={handleExpandClick}
                             aria-expanded={expanded}
                             aria-label="show more"
@@ -112,7 +110,7 @@ const Search = (props) => {
                 </Collapse>
             </Card>
 
-            <h2>{status.message}</h2>
+            {/*<h2>{status.message}</h2>*/}
         </div>
     );
 };
