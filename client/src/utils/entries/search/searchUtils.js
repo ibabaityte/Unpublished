@@ -5,9 +5,9 @@ import {init} from "../entries/initUtils";
 
 const searchEntries = (e, setEntries, query, selectedDate, setStatus) => {
     e.preventDefault();
-    const { startDate, endDate } = selectedDate;
+    const { startDate, endDate, range } = selectedDate;
     const url = `${ENTRIES_URL}/search`;
-    axios.get(url, generateRequestConfig(query, startDate, endDate)).then((response) => {
+    axios.get(url, generateRequestConfig(query, startDate, endDate, range)).then((response) => {
         if (response.data.length === 0 || response.data.length < 1) {
             setEntries([]);
             setStatus({code: "404", message: "There is no such entry"});

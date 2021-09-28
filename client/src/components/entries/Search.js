@@ -15,6 +15,10 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
 
 const Search = (props) => {
 
@@ -32,11 +36,21 @@ const Search = (props) => {
     const [query, setQuery] = useState("");
     const [selectedDate, setSelectedDate] = useState({
         startDate: "",
-        endDate: ""
+        endDate: "",
+        range: ""
     });
 
     const styles = SearchStyles();
     const classes = props.classes;
+
+    // const handleChange = (e) => {
+    //     setSelectedDate({
+    //         ...selectedDate,
+    //         [e.target.name]: e.target.value
+    //     });
+    // };
+
+    console.log(selectedDate);
 
     return (
         <div>
@@ -69,20 +83,40 @@ const Search = (props) => {
                             />
 
                             <div className={styles.dateContainer}>
+                                <InputLabel id="demo-simple-select-label">Created since...</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={selectedDate.range}
+                                    onChange={(e) => handleDateChange(e, setSelectedDate)}
+                                    name="range"
+                                >
+                                    <MenuItem value="7days">Last 7 days</MenuItem>
+                                    <MenuItem value="thisMonth">This month</MenuItem>
+                                    <MenuItem value="lastMonth">Last month</MenuItem>
+                                    <MenuItem value="thisYear">This year</MenuItem>
+                                    <MenuItem value="lastYear">Last year</MenuItem>
+                                </Select>
+                            </div>
+
+                            {/*<h4>Or select custom date...</h4>*/}
+
+                            <div className={styles.dateContainer}>
                                 <TextField
                                     label="Start date"
+                                    id="startDate"
                                     type="date"
                                     value={selectedDate.startDate}
                                     className={styles.calender}
                                     onChange={(e) => handleDateChange(e, setSelectedDate)}
                                     sx={{ width: 500 }}
-
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
                                 <TextField
                                     label="End date"
+                                    id="endDate"
                                     type="date"
                                     value={selectedDate.endDate}
                                     className={styles.calender}
@@ -109,8 +143,6 @@ const Search = (props) => {
                     </Container>
                 </Collapse>
             </Card>
-
-            {/*<h2>{status.message}</h2>*/}
         </div>
     );
 };

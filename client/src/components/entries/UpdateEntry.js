@@ -43,8 +43,7 @@ const UpdateEntry = (props) => {
                 <input
                     type="text"
                     value={selectedEntry.title}
-                    // find how to merge className and name into one
-                    className={`${styles.field} ${styles.titleField}`}
+                    className={`${styles.field} ${styles.titleField} ${'title'}`}
                     name="title"
                     onChange={e => handleChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}
                 />

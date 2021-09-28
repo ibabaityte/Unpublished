@@ -6,14 +6,18 @@ import {
 import {ENTRIES_URL} from "../../constants/apiConstants";
 import {handleRedirect} from "../../redirectUtils";
 
+const generateStatus = (result) => {
+    const statusCode = result.data.code;
+    const statusText = result.data.message;
+    localStorage.setItem('ListStatusCode', statusCode.toString());
+    localStorage.setItem('ListStatusText', statusText);
+};
+
 const createEntry = (entry, setStatus) => {
     const {title, content} = entry;
     axios.post(ENTRIES_URL, {title, content}, generateRequestConfig()).then((result) => {
         handleRedirect();
-        const statusCode = result.data.code;
-        const statusText = result.data.message;
-        localStorage.setItem('ListStatusCode', statusCode.toString());
-        localStorage.setItem('ListStatusText', statusText);
+        generateStatus(result);
         // below logic is not needed because we have init() function which already fetches all information from db
         // console.log(result.data);
         // entries.push(result.data.data);
@@ -31,11 +35,9 @@ const createEntry = (entry, setStatus) => {
 const updateEntry = (id, entry, setStatus) => {
     const {title, content} = entry;
     const url = `${ENTRIES_URL}/${id}`;
-    axios.put(url, {title, content}, generateRequestConfig()).then((result) => {handleRedirect();
-        const statusCode = result.data.code;
-        const statusText = result.data.message;
-        localStorage.setItem('ListStatusCode', statusCode.toString());
-        localStorage.setItem('ListStatusText', statusText);
+    axios.put(url, {title, content}, generateRequestConfig()).then((result) => {
+        handleRedirect();
+        generateStatus(result);
         // below logic is not needed because we have init() function which already fetches all information from db
         // const updatedEntry = result.data;
         // const entryInList = entries.find(entry => entry._id === result.data._id);

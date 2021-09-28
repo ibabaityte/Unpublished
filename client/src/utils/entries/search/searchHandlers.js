@@ -1,16 +1,21 @@
 const handleDateChange = (e, setSelectedDate) => {
     e.preventDefault();
-    e.persist()
-    if(e.currentTarget.id === "startDate") {
-        setSelectedDate((initialDate) => ({
-                ...initialDate,
+    if (e.currentTarget.id === "startDate") {
+        setSelectedDate((selectedDate) => ({
+                ...selectedDate,
                 startDate: e.target.value
             })
         );
-    } else {
-        setSelectedDate((initialDate) => ({
-                ...initialDate,
+    } else if (e.currentTarget.id === "endDate") {
+        setSelectedDate((selectedDate) => ({
+                ...selectedDate,
                 endDate: e.target.value
+            })
+        );
+    } else {
+        setSelectedDate((selectedDate) => ({
+                ...selectedDate,
+                [e.target.name]: e.target.value
             })
         );
     }
