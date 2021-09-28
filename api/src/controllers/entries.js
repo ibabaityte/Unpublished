@@ -49,13 +49,17 @@ const list = (req, res) => {
 
 //Retrieve and return all entries that match the search query
 const listSearchEntries = (req, res) => {
+    console.log(req.query.keyword);
+    if (req.query.keyword === "" && req.query.startDate === "" && req.query.endDate === "" && req.query.range === "") {
+        return res.status(400).send({
+            code: "400",
+            message: "Search parameters can not be empty"
+        });
+    }
     Entry.find(generateSearchConfig(req)).then(data => {
         res.status(200).send(data);
-    }).catch(() => {
-        res.status(500).send({
-            code: "500",
-            message: "There is no such entry"
-        });
+    }).catch((err) => {
+        res.status(500).send(err);
     });
 };
 
@@ -63,6 +67,7 @@ const listSearchEntries = (req, res) => {
 const listAllEntries = (req, res) => {
     Entry.find({authorType: "USER"}).then(data => {
         res.status(200).send(data);
+        console.log(data);
     }).catch(() => {
         res.status(500).send({
             code: "500",

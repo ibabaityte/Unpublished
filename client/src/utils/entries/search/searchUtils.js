@@ -8,22 +8,34 @@ const searchEntries = (e, setEntries, query, selectedDate, setStatus) => {
     const { startDate, endDate, range } = selectedDate;
     const url = `${ENTRIES_URL}/search`;
     axios.get(url, generateRequestConfig(query, startDate, endDate, range)).then((response) => {
+        console.log(response);
+        if(response.data.length === 0) {
+            setStatus({
+                statusCode: "500",
+                statusText: "There is no such entry"
+            });
+        }
         if (response.data.length === 0 || response.data.length < 1) {
             setEntries([]);
-            setStatus({code: "404", message: "There is no such entry"});
         } else {
             setEntries(response.data);
-            setStatus({code: "200", message: ""});
         }
     }).catch(err => {
-        console.log(err);
+        setStatus({
+            statusCode: err.response.data.code,
+            statusText: err.response.data.message
+        });
+        // console.log(err.response.data.message);
     });
 };
 
 const clearSearch = (setQuery, setEntries, setStatus) => {
     init(setEntries);
     setQuery("");
-    setStatus({code: "", message: ""});
+    setStatus({
+        statusCode: null,
+        statusText: null
+    });
 };
 
 export {

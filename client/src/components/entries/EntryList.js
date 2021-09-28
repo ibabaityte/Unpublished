@@ -39,11 +39,16 @@ const EntryList = (props) => {
         statusText: localStorage.getItem('StatusText')
     });
 
+    console.log(listStatus);
+
     const styles = EntryListStyles();
     const classes = props.classes;
 
     const interval = () => setTimeout(() => {
-        setListStatus({});
+        setListStatus({
+            statusCode: null,
+            statusText: null
+        });
         localStorage.removeItem('ListStatusCode');
         localStorage.removeItem('ListStatusText');
     }, 8000);
@@ -68,17 +73,24 @@ const EntryList = (props) => {
                     </Link>
 
                     <Search
-                        status={status}
-                        setStatus={setStatus}
+                        setListStatus={setListStatus}
                         setEntries={setEntries}
                     />
 
                     {
-                        listStatus.statusCode !== "200" ?
-                            null :
+                        listStatus.statusCode === "200" ?
                             <div className={`${styles.statusText} ${'alert'} ${'alert-success'}`} role="alert">
                                 {listStatus.statusText}
-                            </div>
+                            </div> :
+                            null
+                    }
+
+                    {
+                        listStatus.statusCode === "400" || listStatus.statusCode === "500" ?
+                            <div className={`${styles.statusText} ${'alert'} ${'alert-danger'}`} role="alert">
+                                {listStatus.statusText}
+                            </div> :
+                            null
                     }
 
                 </Container>

@@ -23,7 +23,7 @@ import Select from '@material-ui/core/Select';
 const Search = (props) => {
 
     const {
-        setStatus,
+        setListStatus,
         setEntries
     } = props;
 
@@ -59,7 +59,7 @@ const Search = (props) => {
                     </h1>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <Container className={styles.formContainer}>
-                        <form className={styles.form} onSubmit={e => searchEntries(e, setEntries, query, selectedDate, setStatus)}>
+                        <form className={styles.form} onSubmit={e => searchEntries(e, setEntries, query, selectedDate, setListStatus)}>
                             <TextField
                                 id="standard-basic"
                                 label="Search by title..."
@@ -132,7 +132,7 @@ const Search = (props) => {
                                 <Button
                                     className={classes.searchButton}
                                     value="Search"
-                                    onClick={() => clearSearch(setQuery, setEntries, setStatus)}>Clear
+                                    onClick={() => clearSearch(setQuery, setEntries, setListStatus)}>Clear
                                 </Button>
                             </div>
                         </form>
