@@ -37,14 +37,31 @@ const SearchStyles = makeStyles((theme) => ({
     },
     dateContainer: {
         width: "100%",
-        margin: "10px"
+        maxHeight: "5%",
+        margin: "30px 10px",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "flex-end"
+    },
+    dateContainer1: {
+        width: "30%",
+        marginBottom: "0"
+    },
+    dateContainer2: {
+        width: "70%"
+    },
+    or: {
+        marginRight: "50px"
     },
     calender: {
-        margin: "40px 40px 40px 0",
+        margin: "0 40px 0 0",
         width: "35%",
         "Mui-focused" : {
             backgroundColor: "red"
         }
+    },
+    filter: {
+        minWidth: "200px",
     },
     root: {
         minWidth: '60%',

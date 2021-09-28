@@ -23,7 +23,6 @@ import Select from '@material-ui/core/Select';
 const Search = (props) => {
 
     const {
-        // status,
         setStatus,
         setEntries
     } = props;
@@ -42,15 +41,6 @@ const Search = (props) => {
 
     const styles = SearchStyles();
     const classes = props.classes;
-
-    // const handleChange = (e) => {
-    //     setSelectedDate({
-    //         ...selectedDate,
-    //         [e.target.name]: e.target.value
-    //     });
-    // };
-
-    console.log(selectedDate);
 
     return (
         <div>
@@ -72,7 +62,7 @@ const Search = (props) => {
                         <form className={styles.form} onSubmit={e => searchEntries(e, setEntries, query, selectedDate, setStatus)}>
                             <TextField
                                 id="standard-basic"
-                                label="Search entries..."
+                                label="Search by title..."
                                 type="text"
                                 value={query}
                                 name="title"
@@ -83,48 +73,54 @@ const Search = (props) => {
                             />
 
                             <div className={styles.dateContainer}>
-                                <InputLabel id="demo-simple-select-label">Created since...</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={selectedDate.range}
-                                    onChange={(e) => handleDateChange(e, setSelectedDate)}
-                                    name="range"
-                                >
-                                    <MenuItem value="7days">Last 7 days</MenuItem>
-                                    <MenuItem value="thisMonth">This month</MenuItem>
-                                    <MenuItem value="lastMonth">Last month</MenuItem>
-                                    <MenuItem value="thisYear">This year</MenuItem>
-                                    <MenuItem value="lastYear">Last year</MenuItem>
-                                </Select>
-                            </div>
+                                <div className={styles.dateContainer1}>
+                                    <InputLabel id="demo-simple-select-label">Created during...</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Created since..."
+                                        id="demo-simple-select"
+                                        value={selectedDate.range}
+                                        onChange={(e) => handleDateChange(e, setSelectedDate)}
+                                        name="range"
+                                        className={styles.filter}
+                                    >
+                                        <MenuItem value="7days">Last 7 days</MenuItem>
+                                        <MenuItem value="thisMonth">This month</MenuItem>
+                                        <MenuItem value="lastMonth">Last month</MenuItem>
+                                        <MenuItem value="thisYear">This year</MenuItem>
+                                        <MenuItem value="lastYear">Last year</MenuItem>
+                                    </Select>
+                                </div>
 
-                            {/*<h4>Or select custom date...</h4>*/}
+                                <h4 className={styles.or}>OR</h4>
 
-                            <div className={styles.dateContainer}>
-                                <TextField
-                                    label="Start date"
-                                    id="startDate"
-                                    type="date"
-                                    value={selectedDate.startDate}
-                                    className={styles.calender}
-                                    onChange={(e) => handleDateChange(e, setSelectedDate)}
-                                    sx={{ width: 500 }}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                                <TextField
-                                    label="End date"
-                                    id="endDate"
-                                    type="date"
-                                    value={selectedDate.endDate}
-                                    className={styles.calender}
-                                    onChange={(e) => handleDateChange(e, setSelectedDate)}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
+                                <div className={styles.dateContainer2}>
+                                    <h6>Select custom date...</h6>
+
+                                    <TextField
+                                        label="Start date"
+                                        id="startDate"
+                                        type="date"
+                                        value={selectedDate.startDate}
+                                        className={styles.calender}
+                                        onChange={(e) => handleDateChange(e, setSelectedDate)}
+                                        sx={{ width: 500 }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                    <TextField
+                                        label="End date"
+                                        id="endDate"
+                                        type="date"
+                                        value={selectedDate.endDate}
+                                        className={styles.calender}
+                                        onChange={(e) => handleDateChange(e, setSelectedDate)}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                </div>
                             </div>
 
                             <div className={styles.searchButtonContainer}>

@@ -5,8 +5,6 @@ const generateSearchConfig = (req) => {
     let endDate = req.query.endDate;
     const authorId = req.decodedToken.userId;
 
-    console.log(range);
-
     if(req.query.startDate) {
         startDate = new Date(startDate).toISOString();
         endDate = new Date(endDate).toISOString();
