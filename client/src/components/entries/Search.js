@@ -92,9 +92,11 @@ const Search = (props) => {
                                     </Select>
                                 </div>
 
-                                <h4 className={styles.or}>OR</h4>
-
                                 <div className={styles.dateContainer2}>
+                                    <h4 className={styles.divider}>OR</h4>
+                                </div>
+
+                                <div className={styles.dateContainer3}>
                                     <h6>Select custom date...</h6>
 
                                     <TextField

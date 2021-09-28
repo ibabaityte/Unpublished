@@ -41,27 +41,48 @@ const SearchStyles = makeStyles((theme) => ({
         margin: "30px 10px",
         display: "flex",
         flexDirection: "row",
-        alignItems: "flex-end"
+        alignItems: "flex-end",
+        [theme.breakpoints.down('md')]: {
+            flexDirection: "column",
+            alignItems: "flex-start",
+        }
+    },
+    divider: {
+        textAlign: "center"
     },
     dateContainer1: {
         width: "30%",
-        marginBottom: "0"
+        marginBottom: "0",
+        [theme.breakpoints.down('md')]: {
+            paddingTop: "20px",
+            width: "50%"
+        }
     },
     dateContainer2: {
-        width: "70%"
+        width: "10%",
+        [theme.breakpoints.down('md')]: {
+            paddingTop: "20px"
+        }
     },
-    or: {
-        marginRight: "50px"
+    dateContainer3: {
+        width: "60%",
+        [theme.breakpoints.down('md')]: {
+            paddingTop: "20px",
+            width: "100%"
+        }
     },
     calender: {
         margin: "0 40px 0 0",
         width: "35%",
         "Mui-focused" : {
             backgroundColor: "red"
+        },
+        [theme.breakpoints.down('md')]: {
+            width: "30%"
         }
     },
     filter: {
-        minWidth: "200px",
+        minWidth: "100%",
     },
     root: {
         minWidth: '60%',
