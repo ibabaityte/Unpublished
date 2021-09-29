@@ -2,9 +2,9 @@ import axios from "axios";
 
 import {
     generateRequestConfig
-} from "../../users/headerUtils";
-import {ENTRIES_URL} from "../../constants/apiConstants";
-import {handleRedirect} from "../../redirectUtils";
+} from "../users/headerUtils";
+import {ENTRIES_URL} from "../constants/apiConstants";
+import {handleRedirect} from "../redirectUtils";
 
 const generateStatus = (result) => {
     const statusCode = result.data.code;

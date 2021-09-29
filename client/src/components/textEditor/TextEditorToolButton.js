@@ -1,5 +1,5 @@
 import React from "react";
-import {TextEditorStyles} from "../utils/styles/textEditorStyles";
+import {TextEditorStyles} from "../../utils/styles/textEditorStyles";
 
 const TextEditorToolButton = (props) => {
     const {

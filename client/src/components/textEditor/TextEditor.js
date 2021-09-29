@@ -3,7 +3,7 @@ import ContentEditable from "react-contenteditable";
 import sanitize from "sanitize-html";
 
 // util imports
-import {handleContentEditableChange} from "../utils/entries/entries/entryHandlers";
+import {handleContentEditableChange} from "../../utils/entries/entryHandlers";
 
 // icons
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -15,8 +15,8 @@ import {
 import TextEditorToolButton from "./TextEditorToolButton";
 
 // style imports
-import {TextEditorStyles} from "../utils/styles/textEditorStyles";
-import {EntryInputStyles} from "../utils/styles/entryInputStyles";
+import {TextEditorStyles} from "../../utils/styles/textEditorStyles";
+import {EntryInputStyles} from "../../utils/styles/entryInputStyles";
 
 const bold = <FontAwesomeIcon icon={faBold}/>;
 const italic = <FontAwesomeIcon icon={faItalic}/>;

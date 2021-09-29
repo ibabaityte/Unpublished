@@ -40,10 +40,7 @@ const EntryListStyles = makeStyles((theme) => ({
     },
     contentSpan: {
         display: "inline",
-        width: "10px",
-        // overflow: "hidden",
-        // inlineSize: "minContent",
-        // wordBreak: "break-all"
+        width: "10px"
     },
     deleteIcon: {
         verticalAlign: "middle",
@@ -103,23 +100,6 @@ const EntryListStyles = makeStyles((theme) => ({
     },
     dateContainer: {
         width: "100%"
-    },
-    "@keyframes fadeIn": {
-        "80%": {
-            opacity: 1,
-        },
-        "100%": {
-            opacity: 0,
-        }
-    },
-    statusText: {
-        marginBottom: "20px",
-        fontSize: "1.1em",
-        fontWeight: "bold",
-        width: "100%",
-        margin: "auto",
-        textAlign: "center",
-        animation: "$fadeIn 8s linear"
     }
 }));
 

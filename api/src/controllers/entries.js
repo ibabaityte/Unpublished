@@ -37,7 +37,8 @@ const create = (req, res) => {
 
 //Retrieve and return all entries which belong to logged in user from the db
 const list = (req, res) => {
-    Entry.find({'authorId': req.decodedToken.userId}).then(data => {
+    console.log(req.query.order);
+    Entry.find({'authorId': req.decodedToken.userId}).sort({'createdAt': req.query.order}).then(data => {
         res.status(200).send(data);
     }).catch(() => {
         res.status(500).send({

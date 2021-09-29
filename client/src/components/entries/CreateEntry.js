@@ -1,13 +1,13 @@
 import React from "react";
 
 // component imports
-import TextEditor from "../TextEditor";
+import TextEditor from "../textEditor/TextEditor";
 
 // util imports
 import {
     handleChange,
     handleSubmit
-} from "../../utils/entries/entries/entryHandlers";
+} from "../../utils/entries/entryHandlers";
 
 // style imports
 import {EntryInputStyles} from "../../utils/styles/entryInputStyles";

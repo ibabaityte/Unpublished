@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 
 // util imports
-import {clearSearch, searchEntries} from "../../utils/entries/search/searchUtils";
-import {handleSearchEntry} from "../../utils/entries/search/searchHandlers";
-import {handleDateChange} from "../../utils/entries/search/searchHandlers";
+import {clearSearch, searchEntries} from "../utils/search/searchUtils";
+import {handleSearchEntry} from "../utils/search/searchHandlers";
+import {handleDateChange} from "../utils/search/searchHandlers";
 
 // style imports
 import {withStyles} from "@material-ui/core/styles";
-import searchStyles, {SearchStyles} from "../../utils/styles/searchStyles";
+import searchStyles, {SearchStyles} from "../utils/styles/searchStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from '@material-ui/core/Card';
@@ -134,7 +134,7 @@ const Search = (props) => {
                                 <Button
                                     className={classes.searchButton}
                                     value="Search"
-                                    onClick={() => clearSearch(setQuery, setEntries, setListStatus)}>Clear
+                                    onClick={() => clearSearch(setQuery, setEntries, setListStatus)}>Clear and show all
                                 </Button>
                             </div>
                         </form>

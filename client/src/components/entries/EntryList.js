@@ -9,16 +9,20 @@ import Entry from "./Entry";
 import CreateEntry from "./CreateEntry";
 import UpdateEntry from "./UpdateEntry";
 import ViewEntry from "./ViewEntry";
-import Search from "./Search";
+import Search from "../Search";
+import Sort from "../Sort";
+import ListStatus from "../ListStatus";
 
 // util imports
-import {init} from "../../utils/entries/entries/initUtils";
+import {init} from "../../utils/entries/initUtils";
 
 // style imports
 import {withStyles} from '@material-ui/core/styles';
 import entryListStyles, {EntryListStyles} from "../../utils/styles/entryListStyles";
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+
+// icon imports
 import AddIcon from '@material-ui/icons/Add';
 
 const EntryList = (props) => {
@@ -39,8 +43,6 @@ const EntryList = (props) => {
         statusText: localStorage.getItem('StatusText')
     });
 
-    console.log(listStatus);
-
     const styles = EntryListStyles();
     const classes = props.classes;
 
@@ -54,12 +56,14 @@ const EntryList = (props) => {
     }, 8000);
 
     useEffect(() => {
-        init(setEntries);
-        interval();
-        return () => {
-            clearTimeout(interval());
-        };
-    }, []);
+        init(setEntries, "-1");
+        if(listStatus.statusCode === "200") {
+            interval();
+            return () => {
+                clearTimeout(interval());
+            };
+        }
+    }, [listStatus.statusCode]);
 
     return (
         <Container className={`${styles.entryList} ${classes.entryList}`}>
@@ -69,7 +73,8 @@ const EntryList = (props) => {
                     <Link className={styles.link} to="/home/entries/createEntry">
                         <Button className={`${classes.createButton}`}>
                             <AddIcon className={styles.addIcon}/>
-                            Create a new Entry</Button>
+                            Create a new Entry
+                        </Button>
                     </Link>
 
                     <Search
@@ -77,23 +82,19 @@ const EntryList = (props) => {
                         setEntries={setEntries}
                     />
 
-                    {
-                        listStatus.statusCode === "200" ?
-                            <div className={`${styles.statusText} ${'alert'} ${'alert-success'}`} role="alert">
-                                {listStatus.statusText}
-                            </div> :
-                            null
-                    }
-
-                    {
-                        listStatus.statusCode === "400" || listStatus.statusCode === "500" ?
-                            <div className={`${styles.statusText} ${'alert'} ${'alert-danger'}`} role="alert">
-                                {listStatus.statusText}
-                            </div> :
-                            null
-                    }
+                    <ListStatus
+                        listStatus={listStatus}
+                    />
 
                 </Container>
+
+                {
+                    listStatus.statusCode  ?
+                        null :
+                        <Sort
+                            setEntries={setEntries}
+                        />
+                }
 
                 {entries.map((entry) => (
                     <Entry
