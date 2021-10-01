@@ -5,21 +5,22 @@ import {Link} from "react-router-dom";
 import moment from "moment";
 
 // util imports
-import {deleteEntry} from "../../utils/entries/entryUtils";
 import sanitize from "sanitize-html";
 
 // style imports
 import {ViewEntryStyles} from "../../utils/styles/viewEntryStyles";
 import Container from "@material-ui/core/Container";
 import Button from '@material-ui/core/Button';
+import Modal from "../ModalBox";
+import {handleModalToggle} from "../../utils/modal/ModalUtils";
 
 const ViewEntry = (props) => {
     const {
         userType,
-        entries,
-        setEntries,
         selectedEntry,
-        setSelectedEntry
+        setSelectedEntry,
+        openModal,
+        setOpenModal,
     } = props;
 
     const styles = ViewEntryStyles();
@@ -41,7 +42,22 @@ const ViewEntry = (props) => {
                 </h5>
             </div>
 
-            <Button className={styles.btn} onClick={() => deleteEntry(userType, selectedEntry._id, entries, setEntries)}>Delete</Button>
+            <Button
+                className={styles.btn}
+                onClick={() => handleModalToggle(setOpenModal, setSelectedEntry, selectedEntry)}
+            >Delete</Button>
+
+            {
+                openModal ?
+                    <Modal
+                        openModal={openModal}
+                        setOpenModal={setOpenModal}
+                        action="deleteEntry"
+                        userType={userType}
+                        selectedEntry={selectedEntry}
+                        setSelectedEntry={setSelectedEntry}
+                    /> : null
+            }
 
             {
                 userType === "USER" ?
@@ -53,8 +69,8 @@ const ViewEntry = (props) => {
 
             <div className={styles.contentOverlay}>
                 <span
-                className={styles.content}
-                dangerouslySetInnerHTML={{__html: sanitize(selectedEntry.content)}}
+                    className={styles.content}
+                    dangerouslySetInnerHTML={{__html: sanitize(selectedEntry.content)}}
                 />
             </div>
 

@@ -6,7 +6,7 @@ import { handleOpenPopper } from "../../utils/users/headerUtils";
 import { handleModalToggle } from "../../utils/modal/ModalUtils";
 
 // component imports
-import Modal from "../Modal";
+import Modal from "../ModalBox";
 
 // styles imports
 import {HeaderStyles} from "../../utils/styles/headerStyles";

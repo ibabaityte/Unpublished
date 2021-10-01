@@ -150,6 +150,8 @@ const EntryList = (props) => {
                     setEntries={setEntries}
                     selectedEntry={selectedEntry}
                     setSelectedEntry={setSelectedEntry}
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
                 />
             )}/>
         </Container>

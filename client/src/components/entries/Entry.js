@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button';
 // icon imports
 import DeleteIcon from '@material-ui/icons/Delete';
 import {handleModalToggle} from "../../utils/modal/ModalUtils";
-import Modal from "../Modal";
+import Modal from "../ModalBox";
 
 const Entry = (props) => {
     const {
@@ -41,7 +41,7 @@ const Entry = (props) => {
             </h1>
 
             {
-                openModal === true ?
+                openModal ?
                     <Modal
                         openModal={openModal}
                         setOpenModal={setOpenModal}
