@@ -83,7 +83,7 @@ const automaticLogout = (ExpirationTimestamp) => {
     return () => clearTimeout(expirationTimer);
 };
 
-const deleteProfile = (e, anchorRef, setOpen) => {
+const deleteProfile = (e, anchorRef, setOpenModal, userType, entryId) => {
     const userId = localStorage.getItem('UserId');
     axios.delete(`${API_URL}/${userId}`, generateRequestConfig()).then((response) => {
         console.log(response);
@@ -92,8 +92,7 @@ const deleteProfile = (e, anchorRef, setOpen) => {
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }
-
-        setOpen(false);
+        setOpenModal(false);
     });
 }
 

@@ -9,12 +9,7 @@ let generateRequestConfig = (order) => {
     };
 };
 
-// header popper utils
-const handleToggle = (setOpen) => {
-    setOpen((prevOpen) => !prevOpen);
-};
-
-const handleListKeyDown = (e, setOpen) => {
+const handleOpenPopper = (e, setOpen) => {
     if (e.key === 'Tab') {
         e.preventDefault();
         setOpen(false);
@@ -23,6 +18,6 @@ const handleListKeyDown = (e, setOpen) => {
 
 export {
     generateRequestConfig,
-    handleToggle,
-    handleListKeyDown,
+    // handleToggle,
+    handleOpenPopper
 };

@@ -54,7 +54,7 @@ const updateEntry = (id, entry, setStatus) => {
     });
 };
 
-const deleteEntry = (userType, entryId) => {
+const deleteEntry = (e, anchorRef, setOpenModal, userType, entryId) => {
     const url = `${ENTRIES_URL}/${entryId}`;
     axios.delete(url, generateRequestConfig()).then(() => {
         // const updatedEntries = entries.filter(entry => entry._id !== entryId);

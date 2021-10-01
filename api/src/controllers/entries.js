@@ -3,7 +3,7 @@ import {generateSearchConfig} from "../utils/searchUtils";
 
 //Create and save a new entry
 const create = (req, res) => {
-    console.log(req);
+    // console.log(req);
     //Validate request
     if (!req.body.content) {
         return res.status(400).send({
@@ -37,7 +37,7 @@ const create = (req, res) => {
 
 //Retrieve and return all entries which belong to logged in user from the db
 const list = (req, res) => {
-    console.log(req.query.order);
+    // console.log(req.query.order);
     Entry.find({'authorId': req.decodedToken.userId}).sort({'createdAt': req.query.order}).then(data => {
         res.status(200).send(data);
     }).catch(() => {

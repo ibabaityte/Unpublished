@@ -42,6 +42,7 @@ const EntryList = (props) => {
         statusCode: localStorage.getItem('StatusCode'),
         statusText: localStorage.getItem('StatusText')
     });
+    const [openModal, setOpenModal] = useState(false);
 
     const styles = EntryListStyles();
     const classes = props.classes;
@@ -63,7 +64,7 @@ const EntryList = (props) => {
                 clearTimeout(interval());
             };
         }
-    }, [listStatus.statusCode]);
+    }, [listStatus.statusCode, setEntries]);
 
     return (
         <Container className={`${styles.entryList} ${classes.entryList}`}>
@@ -102,8 +103,11 @@ const EntryList = (props) => {
                         entry={entry}
                         entries={entries}
                         setEntries={setEntries}
+                        selectedEntry={selectedEntry}
                         setSelectedEntry={setSelectedEntry}
                         userType={userType}
+                        openModal={openModal}
+                        setOpenModal={setOpenModal}
                     />
                 ))}
             </Route>
