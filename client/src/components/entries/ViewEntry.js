@@ -23,6 +23,8 @@ const ViewEntry = (props) => {
         setOpenModal,
     } = props;
 
+    console.log(selectedEntry);
+
     const styles = ViewEntryStyles();
 
     return (
@@ -54,7 +56,7 @@ const ViewEntry = (props) => {
                         setOpenModal={setOpenModal}
                         action="deleteEntry"
                         userType={userType}
-                        selectedEntry={selectedEntry}
+                        entry={selectedEntry}
                         setSelectedEntry={setSelectedEntry}
                     /> : null
             }

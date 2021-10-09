@@ -21,7 +21,6 @@ const ModalBox = (props) => {
         action,
         userType,
         entry,
-        selectedEntry,
         setSelectedEntry
     } = props;
 
@@ -64,7 +63,7 @@ const ModalBox = (props) => {
                     <h2 className={styles.modalText}>{modalInfo.questionText}</h2>
                     <div className={styles.modalButtons}>
                         <Button className={styles.modalButton}
-                                onClick={e => modalInfo.modalAction(e, anchorRef, setOpenModal, userType, selectedEntry._id)}>{modalInfo.confirmText}</Button>
+                                onClick={e => modalInfo.modalAction(e, anchorRef, setOpenModal, userType, entry._id)}>{modalInfo.confirmText}</Button>
                         <Button className={styles.modalButton}
                                 onClick={() => handleModalToggle(setOpenModal, setSelectedEntry, entry)}>Cancel</Button>
                     </div>
