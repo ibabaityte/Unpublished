@@ -90,7 +90,7 @@ const EntryList = (props) => {
                 </Container>
 
                 {
-                    listStatus.statusCode  ?
+                    listStatus.statusCode !== "200" && listStatus.statusCode  ?
                         null :
                         <Sort
                             setEntries={setEntries}

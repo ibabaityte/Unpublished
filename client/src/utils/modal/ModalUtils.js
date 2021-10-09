@@ -1,6 +1,8 @@
 const handleModalToggle = (setOpenModal, setSelectedEntry, entry) => {
     setOpenModal((prevOpen) => !prevOpen);
-    setSelectedEntry(entry);
+    if(setSelectedEntry){
+        setSelectedEntry(entry);
+    }
 };
 
 export {
