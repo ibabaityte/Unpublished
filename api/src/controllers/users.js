@@ -1,4 +1,4 @@
-import User from "../models/user";
+import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -158,19 +158,6 @@ const logout = (req, res) => {
     });
 };
 
-/*
-* TODO
-* Fill with the following logic:
-* 1. If no ADMIN users exists(search in DB for users with ADMIN userType(count of such users should be 1))
-* 2. Then create an ADMIN users
-* 3. Else do nothing
-* 4. Nice to have: have a config with default ADMIN users login/password with preset values
-* 4.1 Second nice to have: Force that users to change their password upon first login to the system(should implement lastLogin date field)
-* 4.1.1 Second nice to have additional notes: Expand login functionality to store lastLogin field
-* 4.2 Based on lastLogin the system should determine if the users needs to change their password
-* 4.2.1 I.E. if lastLogin === null then force password change; else do nothing;
-* */
-
 const init = (req, res) => {
     User.findOne({userType: "ADMIN"}).then(user => {
         if (!user) {
@@ -211,6 +198,6 @@ const listAllUsers = (req, res) => {
 }
 
 
-module.exports = {
+export default {
     register, auth, get, remove, logout, init, listAllUsers
 };

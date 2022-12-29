@@ -9,7 +9,6 @@ const TextEditorToolButton = (props) => {
 
     const styles = TextEditorStyles();
 
-
     return(
         <button
             key={command}

@@ -1,4 +1,5 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
+import Schema from "mongoose/lib/schema.js";
 
 const entrySchema = new Schema({
     title: String,
@@ -14,4 +15,4 @@ const entrySchema = new Schema({
 
 const Entries = mongoose.model("Entry", entrySchema);
 
-module.exports = Entries;
+export default Entries;

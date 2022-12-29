@@ -83,7 +83,7 @@ const automaticLogout = (ExpirationTimestamp) => {
     return () => clearTimeout(expirationTimer);
 };
 
-const deleteProfile = (e, anchorRef, setOpenModal, userType, entryId) => {
+const deleteProfile = (e, anchorRef, setOpenModal) => {
     const userId = localStorage.getItem('UserId');
     axios.delete(`${API_URL}/${userId}`, generateRequestConfig()).then((response) => {
         console.log(response);

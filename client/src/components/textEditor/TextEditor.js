@@ -66,7 +66,6 @@ const TextEditor = (props) => {
                 <ContentEditable
                     className={`${styles2.field} ${styles2.contentField}`}
                     label="content"
-                    // tagName="pre"
                     html={content}
                     disabled={false}
                     onChange={e => handleContentEditableChange(e, entry, selectedEntry, setSelectedEntry, newEntry, setNewEntry)}

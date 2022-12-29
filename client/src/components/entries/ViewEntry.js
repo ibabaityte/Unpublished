@@ -1,18 +1,17 @@
 import React from "react";
 import {Link} from "react-router-dom";
-
-// data formatting import
+import sanitize from "sanitize-html";
 import moment from "moment";
 
 // util imports
-import sanitize from "sanitize-html";
+import {deleteEntry} from "../../utils/entries/entryUtils";
+import {handleModalToggle} from "../../utils/modal/ModalUtils";
 
 // style imports
 import {ViewEntryStyles} from "../../utils/styles/viewEntryStyles";
 import Container from "@material-ui/core/Container";
 import Button from '@material-ui/core/Button';
 import Modal from "../ModalBox";
-import {handleModalToggle} from "../../utils/modal/ModalUtils";
 
 const ViewEntry = (props) => {
     const {
@@ -54,7 +53,9 @@ const ViewEntry = (props) => {
                     <Modal
                         openModal={openModal}
                         setOpenModal={setOpenModal}
-                        action="deleteEntry"
+                        action={deleteEntry}
+                        actionText="Are you sure you want to delete this entry?"
+                        confirmActionText="Yes, delete entry"
                         userType={userType}
                         entry={selectedEntry}
                         setSelectedEntry={setSelectedEntry}

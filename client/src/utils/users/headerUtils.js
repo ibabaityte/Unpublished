@@ -18,6 +18,5 @@ const handleOpenPopper = (e, setOpen) => {
 
 export {
     generateRequestConfig,
-    // handleToggle,
     handleOpenPopper
 };

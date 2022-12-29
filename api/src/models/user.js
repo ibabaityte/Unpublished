@@ -1,11 +1,11 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
+import Schema from "mongoose/lib/schema.js";
 
 const userType = {
     ADMIN: 'ADMIN',
     USER: 'USER'
 }
 
-// TODO nice to have: lastLogin date field
 const userSchema = new Schema({
     username: String,
     password: String,
@@ -18,4 +18,4 @@ const userSchema = new Schema({
 
 const Users = mongoose.model("user", userSchema);
 
-module.exports = Users;
+export default Users;

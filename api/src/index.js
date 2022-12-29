@@ -1,10 +1,3 @@
-// const express = require("express");
-// const api = express();
-// const cors = require("cors");
-// const port = 8080;
-// const mongoose = require("mongoose");
-// const bodyParser = require("body-parser");
-// const entryRoutes = require("./routes/entries.js");
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -16,8 +9,8 @@ import session from 'express-session';
 
 const MongoStore = connectMongo(session);
 
-import EntryRoutes from "./routes/entries";
-import UserRoutes from "./routes/users";
+import EntryRoutes from "./routes/entries.js";
+import UserRoutes from "./routes/users.js";
 
 const api = express();
 const port = 8081;
@@ -39,7 +32,7 @@ api.use(express.json());
 api.use(EntryRoutes);
 api.use(UserRoutes);
 
-mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}, (err) => {
+mongoose.connect("mongodb://127.0.0.1:27017", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}, (err) => {
    if(err){
       console.log(err);
    } else {

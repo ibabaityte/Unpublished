@@ -1,7 +1,7 @@
 import {Router} from "express";
-import EntryController from "../controllers/entries";
-import checkAuth from "../middleware/check.auth";
-import checkAdmin from "../middleware/check.admin";
+import EntryController from "../controllers/entries.js";
+import checkAuth from "../middleware/check.auth.js";
+import checkAdmin from "../middleware/check.admin.js";
 
 const router = Router()
 
@@ -14,4 +14,4 @@ router.delete("/entries/:id", checkAuth, EntryController.remove);
 
 router.get("/admin/allEntries", checkAdmin, EntryController.listAllEntries);
 
-module.exports = router;
+export default router;

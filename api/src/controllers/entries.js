@@ -1,10 +1,7 @@
-import Entry from "../models/entry";
-import {generateSearchConfig} from "../utils/searchUtils";
+import Entry from "../models/entry.js";
+import {generateSearchConfig} from "../utils/searchUtils.js";
 
-//Create and save a new entry
 const create = (req, res) => {
-    // console.log(req);
-    //Validate request
     if (!req.body.content) {
         return res.status(400).send({
             code: "400",
@@ -12,7 +9,6 @@ const create = (req, res) => {
         });
     }
 
-    //Create an entry
     const newEntry = new Entry({
         title: req.body.title || "Untitled note",
         content: req.body.content,
@@ -20,7 +16,6 @@ const create = (req, res) => {
         authorType: req.decodedToken.userType
     });
 
-    //Save entry in the database
     newEntry.save().then(data => {
         res.status(200).send({
             code: "200",
@@ -35,9 +30,7 @@ const create = (req, res) => {
     });
 };
 
-//Retrieve and return all entries which belong to logged in user from the db
 const list = (req, res) => {
-    // console.log(req.query.order);
     Entry.find({'authorId': req.decodedToken.userId}).sort({'createdAt': req.query.order}).then(data => {
         res.status(200).send(data);
     }).catch(() => {
@@ -48,13 +41,11 @@ const list = (req, res) => {
     });
 };
 
-//Retrieve and return all entries that match the search query
 const listSearchEntries = (req, res) => {
-    console.log(req.query.keyword);
     if (req.query.keyword === "" && req.query.startDate === "" && req.query.endDate === "" && req.query.range === "") {
         return res.status(400).send({
             code: "400",
-            message: "Search parameters can not be empty"
+            message: "Search parameters can not be empty."
         });
     }
     Entry.find(generateSearchConfig(req)).then(data => {
@@ -64,7 +55,6 @@ const listSearchEntries = (req, res) => {
     });
 };
 
-//Retrieve and return all entries from the db for admin
 const listAllEntries = (req, res) => {
     Entry.find({authorType: "USER"}).then(data => {
         res.status(200).send(data);
@@ -77,7 +67,6 @@ const listAllEntries = (req, res) => {
     });
 };
 
-//Find a single entry with entryId
 const get = (req, res) => {
     Entry.findById(req.params.id).then(entry => {
         if (!entry) {
@@ -101,9 +90,7 @@ const get = (req, res) => {
     });
 };
 
-//Update a note identified by the entryId in the request
 const update = (req, res) => {
-    // validating
     if (!req.body.content) {
         return res.status(400).send({
             code: "400",
@@ -111,7 +98,6 @@ const update = (req, res) => {
         });
     }
 
-    //Find note and update it with the request body
     Entry.findByIdAndUpdate(req.params.id, {
         title: req.body.title || "Untitled",
         content: req.body.content
@@ -141,7 +127,6 @@ const update = (req, res) => {
     });
 };
 
-//Delete a note with the specified entryId in the request
 const remove = (req, res) => {
     Entry.findByIdAndRemove(req.params.id).then(entry => {
         if (!entry) {
@@ -165,7 +150,7 @@ const remove = (req, res) => {
     });
 };
 
-module.exports = {
+export default {
     create,
     list,
     listSearchEntries,

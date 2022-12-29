@@ -12,7 +12,6 @@ const EntryInputStyles = makeStyles({
         background: "none",
         fontSize: "1.2em",
         outline: "none",
-        // height: "37px",
         padding: "16px",
         borderBottom: "3px solid black",
         border: "none",

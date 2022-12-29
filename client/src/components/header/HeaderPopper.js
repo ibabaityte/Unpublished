@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import { logout } from "../../utils/users/userUtils";
 import { handleOpenPopper } from "../../utils/users/headerUtils";
 import { handleModalToggle } from "../../utils/modal/ModalUtils";
+import { deleteProfile } from "../../utils/users/userUtils";
 
 // component imports
 import Modal from "../ModalBox";
@@ -82,7 +83,9 @@ const HeaderPopper = (props) => {
                                                 setOpenPopper={setOpenPopper}
                                                 openModal={openModal}
                                                 setOpenModal={setOpenModal}
-                                                action="deleteProfile"
+                                                action={deleteProfile}
+                                                actionText="Are you sure you want to delete this profile?"
+                                                confirmActionText="Yes, delete profile"
                                             /> : null
                                     }
                                 </MenuList>

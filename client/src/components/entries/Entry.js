@@ -1,9 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import sanitize from "sanitize-html";
-
-// data formatting import
 import moment from "moment";
+
+// util imports
+import {deleteEntry} from "../../utils/entries/entryUtils";
+import {handleModalToggle} from "../../utils/modal/ModalUtils";
 
 // style imports
 import {withStyles} from '@material-ui/core/styles';
@@ -14,8 +16,10 @@ import Button from '@material-ui/core/Button';
 
 // icon imports
 import DeleteIcon from '@material-ui/icons/Delete';
-import {handleModalToggle} from "../../utils/modal/ModalUtils";
+
+// component imports
 import Modal from "../ModalBox";
+
 
 const Entry = (props) => {
     const {
@@ -45,9 +49,11 @@ const Entry = (props) => {
                     <Modal
                         openModal={openModal}
                         setOpenModal={setOpenModal}
-                        action="deleteEntry"
+                        action={deleteEntry}
+                        actionText="Are you sure you want to delete this entry?"
+                        confirmActionText="Yes, delete entry"
                         userType={userType}
-                        selectedEntry={selectedEntry}
+                        entry={selectedEntry}
                         setSelectedEntry={setSelectedEntry}
                     /> : null
             }

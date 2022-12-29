@@ -57,8 +57,6 @@ const updateEntry = (id, entry, setStatus) => {
 const deleteEntry = (e, anchorRef, setOpenModal, userType, entryId) => {
     const url = `${ENTRIES_URL}/${entryId}`;
     axios.delete(url, generateRequestConfig()).then(() => {
-        // const updatedEntries = entries.filter(entry => entry._id !== entryId);
-        // setEntries(updatedEntries);
         if (userType === "USER") {
             window.location.href = "/home/entries"
         } else {

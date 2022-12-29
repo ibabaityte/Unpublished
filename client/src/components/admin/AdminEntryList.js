@@ -1,9 +1,10 @@
 import React, {useState} from "react";
+import {Route} from "react-router-dom";
 
-// util imports
+// component imports
 import Entry from "../entries/Entry";
 import ViewEntry from "../entries/ViewEntry";
-import {Route} from "react-router-dom";
+
 
 const AdminEntryList = (props) => {
     const {userType, adminEntries, setEntries} = props;
