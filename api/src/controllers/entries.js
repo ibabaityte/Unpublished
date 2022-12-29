@@ -1,46 +1,77 @@
-import Entries from "../models/entry";
+import Entry from "../models/entry.js";
+import {generateSearchConfig} from "../utils/searchUtils.js";
 
-//Create and save a new entry
 const create = (req, res) => {
-    //Validate request
     if (!req.body.content) {
         return res.status(400).send({
+            code: "400",
             message: "Content can not be empty"
         });
     }
 
-    //Create an entry
-    const newEntry = {
-        title: req.body.title || "Untitled",
+    const newEntry = new Entry({
+        title: req.body.title || "Untitled note",
         content: req.body.content,
-    };
+        authorId: req.decodedToken.userId,
+        authorType: req.decodedToken.userType
+    });
 
-    //Save entry in the database
-    Entries.save(newEntry).then(data => {
-        res.status(200).send(data);
+    newEntry.save().then(data => {
+        res.status(200).send({
+            code: "200",
+            message: "New entry is created successfully",
+            data: data
+        });
     }).catch(err => {
         res.status(500).send({
+            code: "500",
             message: err.message || "Some error occurred while creating your entry"
         });
     });
 };
 
-//Retrieve and return all entries from the db
 const list = (req, res) => {
-    Entries.find().then(data => {
+    Entry.find({'authorId': req.decodedToken.userId}).sort({'createdAt': req.query.order}).then(data => {
         res.status(200).send(data);
-    }).catch(err => {
+    }).catch(() => {
         res.status(500).send({
-            message: err.message || "An error occurred while retrieving your entries"
+            code: "500",
+            message: "An error occurred while retrieving your entries"
         });
     });
 };
 
-//Find a single entry with entryId
+const listSearchEntries = (req, res) => {
+    if (req.query.keyword === "" && req.query.startDate === "" && req.query.endDate === "" && req.query.range === "") {
+        return res.status(400).send({
+            code: "400",
+            message: "Search parameters can not be empty."
+        });
+    }
+    Entry.find(generateSearchConfig(req)).then(data => {
+        res.status(200).send(data);
+    }).catch((err) => {
+        res.status(500).send(err);
+    });
+};
+
+const listAllEntries = (req, res) => {
+    Entry.find({authorType: "USER"}).then(data => {
+        res.status(200).send(data);
+        console.log(data);
+    }).catch(() => {
+        res.status(500).send({
+            code: "500",
+            message: "An error occurred while retrieving all entries"
+        });
+    });
+};
+
 const get = (req, res) => {
-    Entries.findById(req.params.id).then(entry => {
+    Entry.findById(req.params.id).then(entry => {
         if (!entry) {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id" + req.params.id
             });
         }
@@ -48,70 +79,82 @@ const get = (req, res) => {
     }).catch(err => {
         if (err.kind === "ObjectId") {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
         return res.status(500).send({
+            code: "500",
             message: "Error retrieving entry with id " + req.params.id
         });
     });
 };
 
-//Update a note identified by the entryId in the request
 const update = (req, res) => {
     if (!req.body.content) {
         return res.status(400).send({
+            code: "400",
             message: "Content can not be empty"
         });
     }
 
-    //Find note and update it with the request body
-    Entries.findByIdAndUpdate(req.params.id, {
+    Entry.findByIdAndUpdate(req.params.id, {
         title: req.body.title || "Untitled",
         content: req.body.content
     }, {new: true}).then(entry => {
         if (!entry) {
             return res.status(404).send({
+                code: "404",
+                message: "Entry not found with id " + req.params.id
+            });
+        }
+        res.status(200).send({
+            code: "200",
+            message: "Entry updated successfully",
+            data: entry
+        });
+    }).catch(err => {
+        if (err.kind === "ObjectId") {
+            return res.status(404).send({
+                code: "404",
+                message: "Entry not found with id " + req.params.id
+            });
+        }
+        return res.status(500).send({
+            code: "500",
+            message: "Some error occurred while updating your entry"
+        });
+    });
+};
+
+const remove = (req, res) => {
+    Entry.findByIdAndRemove(req.params.id).then(entry => {
+        if (!entry) {
+            return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
         res.status(200).send(entry);
     }).catch(err => {
-        if (err.kind === "ObjectId") {
-            return res.status(404).send({
-                message: "Entry not found with id " + req.params.id
-            });
-        }
-        return res.status(500).send({
-            message: "Error updating with entry id " + req.params.id
-        });
-    });
-};
-
-//Delete a note with the specified entryId in the request
-const remove = (req, res) => {
-    Entries.findByIdAndRemove(req.params.id).then(entry => {
-        if (!entry) {
-            return res.status(404).send({
-                message: "Entry not found with id " + req.params.id
-            });
-        }
-        res.status(200).send({message: "Entry deleted successfully"});
-    }).catch(err => {
         if (err.kind === "ObjectId" || err.name === "NotFound") {
             return res.status(404).send({
+                code: "404",
                 message: "Entry not found with id " + req.params.id
             });
         }
         return res.status(500).send({
-            message: "Could not delete your entry with id " + req.params.id
+            code: "500",
+            message: "Could not delete this entry"
         });
     });
 };
 
-module.exports = {
+export default {
     create,
     list,
+    listSearchEntries,
+    listAllEntries,
     get,
     update,
     remove
