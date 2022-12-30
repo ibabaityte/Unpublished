@@ -13,8 +13,8 @@ This app has basic CRUD operations, so while using this app users can:
 * Search entries
 
 ## Screenshots
-![img.png](img.png)
-![img_1.png](img_1.png)
+![img.png](client/public/images/img.png)
+![img_1.png](client/public/images/img_1.png)
 
 ## Technologies
 Project is created with:
