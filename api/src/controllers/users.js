@@ -158,38 +158,6 @@ const logout = (req, res) => {
     });
 };
 
-const init = (req, res) => {
-    User.findOne({userType: "ADMIN"}).then(user => {
-        if (!user) {
-            bcrypt.hash("ADMIN123", 10, (err, hash) => {
-                if (err) {
-                    return res.status(500).send({
-                        message: err.message
-                    });
-                } else {
-                    //create new users
-                    const newUser = new User({
-                        username: "ADMIN123",
-                        password: hash,
-                        userType: "ADMIN"
-                    });
-                    //save users in database
-                    newUser.save().then(data => {
-                        res.send({
-                            data,
-                            message: "Admin created"
-                        });
-                    }).catch(err => {
-                        res.send({
-                            message: err.message
-                        });
-                    });
-                }
-            });
-        }
-    });
-}
-
 const listAllUsers = (req, res) => {
     User.find({userType: "USER"}).then(user => {
         res.status(200).send(user);
@@ -202,5 +170,5 @@ const listAllUsers = (req, res) => {
 
 
 export default {
-    register, auth, get, remove, logout, init, listAllUsers
+    register, auth, get, remove, logout, listAllUsers
 };

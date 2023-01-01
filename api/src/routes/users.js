@@ -10,7 +10,6 @@ router.post("/register", UsersController.register);
 router.get("/:userId", checkAuth, UsersController.get);
 router.delete("/:userId", checkAuth, UsersController.remove);
 router.get("/:userId/logout", checkAuth, UsersController.logout);
-router.get("/admin/init", UsersController.init);
 router.get("/admin/allUsers", checkAdmin, UsersController.listAllUsers)
 
 export default router;

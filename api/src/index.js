@@ -8,7 +8,6 @@ import connectMongo from 'connect-mongo';
 import session from 'express-session';
 
 // util imports
-import {initAdmin} from "./utils/initUtils.js";
 const MongoStore = connectMongo(session);
 
 import EntryRoutes from "./routes/entries.js";
@@ -34,15 +33,14 @@ api.use(express.json());
 api.use(EntryRoutes);
 api.use(UserRoutes);
 
-mongoose.connect("mongodb://127.0.0.1:27017", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}, (err) => {
+mongoose.connect("mongodb://127.0.0.1:27017/unpublished", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}, (err) => {
    if(err){
       console.log(err);
    } else {
-      console.log("Successfully connected to database");
+      console.log("Successfully connected to database unpublished");
    }
 });
 
 api.listen(port, () => {
    console.log("API running on port " + port);
-   initAdmin();
 });

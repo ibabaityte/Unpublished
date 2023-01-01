@@ -38,25 +38,29 @@ git clone https://github.com/ibabaityte/Unpublished.git
 ```
 cd api
 ```
-3. Install dependencies:
+3. Seed database by creating an administrator account
+```
+node initAdmin.js
+```
+4. Install dependencies:
 ```
 npm i
 ```
-4. Start server:
+5. Start server:
 ```
 npm start
 ```
 
 ### Install client
-5. Get in the client folder:
+6. Get in the client folder:
 ```
 cd client
 ```
-6. Install dependencies:
+7. Install dependencies:
 ```
 npm i
 ```
-7. Start server:
+8. Start server:
 ```
 npm start
 ```
