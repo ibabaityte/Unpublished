@@ -7,6 +7,8 @@ dotenv.config();
 import connectMongo from 'connect-mongo';
 import session from 'express-session';
 
+// util imports
+import {initAdmin} from "./utils/initUtils.js";
 const MongoStore = connectMongo(session);
 
 import EntryRoutes from "./routes/entries.js";
@@ -42,4 +44,5 @@ mongoose.connect("mongodb://127.0.0.1:27017", {useNewUrlParser: true, useUnified
 
 api.listen(port, () => {
    console.log("API running on port " + port);
+   initAdmin();
 });

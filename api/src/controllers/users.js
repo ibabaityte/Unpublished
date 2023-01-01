@@ -175,7 +175,10 @@ const init = (req, res) => {
                     });
                     //save users in database
                     newUser.save().then(data => {
-                        res.send(data);
+                        res.send({
+                            data,
+                            message: "Admin created"
+                        });
                     }).catch(err => {
                         res.send({
                             message: err.message

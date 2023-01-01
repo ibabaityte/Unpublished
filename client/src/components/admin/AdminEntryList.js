@@ -5,7 +5,6 @@ import {Route} from "react-router-dom";
 import Entry from "../entries/Entry";
 import ViewEntry from "../entries/ViewEntry";
 
-
 const AdminEntryList = (props) => {
     const {userType, adminEntries, setEntries} = props;
     const [selectedEntry, setSelectedEntry] = useState({});
